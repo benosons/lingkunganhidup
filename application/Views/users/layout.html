@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		  <meta name="author" content="Epic-Themes">
+		  <meta name="keywords" content="landing page, click-through, lead gen, marketing campaign, mobile app launch, one page template, product launch, products, responsive, saas, startup, html template, html5, css3, bootstrap, creative, designer, freelancer">
+		  <meta name="description" content="Landing Page Template for Creative Agencies, Apps, Portfolio Websites and Small Businesses">
+	  
+		  <title>Smart - Creative HTML Landing Page Template</title>
+		  
+		  <!-- Loading Bootstrap -->
+		  <link href="{{baseURL}}/assets/tf-smart/v2/css/bootstrap.min.css" rel="stylesheet">
+	  
+		  <!-- Loading Template CSS -->
+		  <link href="{{baseURL}}/assets/tf-smart/v2/css/style.css" rel="stylesheet">
+		  <link href="{{baseURL}}/assets/tf-smart/v2/css/bootstrap-icons.css" rel="stylesheet">
+		  <link href="{{baseURL}}/assets/tf-smart/v2/css/animate.css" rel="stylesheet">
+		  <link href="{{baseURL}}/assets/tf-smart/v2/css/style-magnific-popup.css" rel="stylesheet">
+	  
+		  <!-- Fonts -->
+		  <link rel="preconnect" href="https://fonts.gstatic.com">
+		  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Open+Sans:ital@0;1&display=swap" rel="stylesheet">
+	  
+		  <!-- Font Favicon -->
+		  <link rel="shortcut icon" href="{{baseURL}}/assets/tf-smart/v2/images/favicon.ico">
+	  
+	  </head>
+	<input type="hidden" id="baseURL" value="{{baseURL}}">
+	<body>
+		{% include "users/header.html" %}
+		<main>
+			{% block content %} {% endblock %}
+			{% include "users/footer.html" %}
+		</main>
+	
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/jquery-3.6.0.min.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/bootstrap.min.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/jquery.scrollTo-min.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/jquery.magnific-popup.min.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/jquery.nav.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/wow.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/plugins.js"></script>
+		<script src="{{baseURL}}/assets/tf-smart/v2/js/custom.js"></script>
+
+	</body>
+</html>

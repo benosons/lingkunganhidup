@@ -1,0 +1,177 @@
+{% extends "admin/layout.html" %} {% block content %}
+
+<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+  <script type="text/javascript">
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  </script>
+
+  <ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Home</a>
+		</li>
+		<li class="">Biodata</li>
+		<li class="active">Add Biodata</li>
+	</ul><!-- /.breadcrumb -->
+
+  <!-- #section:basics/content.searchbox -->
+  <div class="nav-search" id="nav-search">
+    <form class="form-search">
+      <span class="input-icon">
+        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+      </span>
+    </form>
+  </div><!-- /.nav-search -->
+
+</div>
+
+<div class="page-content">
+  <input hidden id="userid" value="{{userid}}">
+  <input hidden id="role" value="{{role}}">
+  <div class="page-header">
+    <h1>
+      BIODATA FORM
+      <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        overview &amp; stats
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class="col-xs-12 widget-container-col ui-sortable" >
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <form class="form-horizontal" role="form">
+      				<!-- #section:elements.form -->
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+          					<label class="col-sm-5 control-label no-padding-right" for="form-field-1"> PD / Biro </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="PD / Biro" class="col-xs-12 col-sm-12" />
+          					</div>
+          				</div>
+          			</div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran PD / Biro (APBD Murni) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran PD / Biro (APBD Perubahan) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      				<div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> UPTD/Bidang </label>
+          					<div class="col-sm-7">
+                      <select class="chosen-select form-control" id="user_role" data-placeholder="Select Bidang...">
+      						  		<option value="">  </option>
+      						  		<option value="10">admin</option>
+      						  		<option value="20">operator</option>
+      						  		<option value="30">ppk</option>
+      						  		<option value="40">pptk</option>
+
+      						  	</select>
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Lokasi </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Lokasi" class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Kode Program  </label>
+          					<div class="col-sm-7">
+                      <select class="chosen-select form-control" id="user_role" data-placeholder="Select Program...">
+      						  		<option value="">  </option>
+      						  		<option value="10">admin</option>
+      						  		<option value="20">operator</option>
+      						  		<option value="30">ppk</option>
+      						  		<option value="40">pptk</option>
+
+      						  	</select>
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Nama Program </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      			</form>
+          </div>
+          <div class="widget-toolbox padding-8 clearfix">
+						<button class="btn btn-xs btn-danger pull-left" onclick="window.location.href = 'biodata'">
+              <i class="ace-icon fa fa-arrow-left icon-on-right"></i>
+							<span class="bigger-110">Kembali</span>
+						</button>
+
+						<button class="btn btn-xs btn-success pull-right">
+							<span class="bigger-110">Simpan</span>
+
+							<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+						</button>
+					</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<!-- <script src="{{baseURL}}/assets/action-js/admin/datapengaduan.js"></script> -->
+{% endblock %}

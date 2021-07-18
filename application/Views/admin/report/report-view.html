@@ -1,0 +1,1073 @@
+{% extends "admin/layout.html" %} {% block content %}
+
+<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+  <script type="text/javascript">
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  </script>
+
+  <ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Home</a>
+		</li>
+		<li class="">Laporan / Realisasi</li>
+		<li class="active">Lihat Realisasi</li>
+	</ul><!-- /.breadcrumb -->
+
+  <!-- #section:basics/content.searchbox -->
+  <div class="nav-search" id="nav-search">
+    <form class="form-search">
+      <span class="input-icon">
+        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+      </span>
+    </form>
+  </div><!-- /.nav-search -->
+
+</div>
+
+<div class="page-content">
+  <input hidden id="userid" value="{{userid}}">
+  <input hidden id="role" value="{{role}}">
+  <input hidden id="ids" value="{{ids}}">
+  <div class="page-header">
+    <h1>
+      LAPORAN / REALISASI FORM
+      <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        overview &amp; stats
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class="col-xs-12 widget-container-col ui-sortable" >
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <div class="row">
+              <div class="col-xs-12 widget-container-col ui-sortable" >
+                <div class="widget-box">
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <form class="form-horizontal" role="form">
+                				<!-- #section:elements.form -->
+                        <div class="form-group" >
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Program </label>
+                    					<div class="col-sm-4">
+                                <input type="text" id="kode_program" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="space-4"></div>
+
+                				<div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12" >
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Program </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_program" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group" >
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Kegiatan </label>
+                    					<div class="col-sm-4">
+                                <input type="text" id="kode_kegiatan" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="form-group" >
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Kegiatan </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_kegiatan" placeholder="Nama Kegiatan" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group" >
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode sub Kegiatan </label>
+                    					<div class="col-sm-4">
+                                <input type="text" id="kode_subkegiatan" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Sub Kegiatan </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_subkegiatan" placeholder="Nama Sub Kegiatan" class="col-xs-12 col-sm-12" disabled / >
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Paket </label>
+                    					<div class="col-sm-9">
+                                <input type="text" id="paket" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                                <input type="hidden" id="id_paket"/>
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Bidang </label>
+                    					<div class="col-sm-9">
+                                <input type="text" id="bidang" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Seksi </label>
+                    					<div class="col-sm-9">
+                                <input type="text" id="seksi" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="space-4"></div>
+
+                				<div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Pagu Kegiatan (Rp.) </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="pagu_kegiatan" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group" hidden>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Pilih Bulan </label>
+                              <div class="col-sm-9">
+                                <select class="chosen-select form-control" id="pilih_bulan" data-placeholder="Pilih Program...">
+                                  <option value="">  </option>
+                                </select>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> NIP </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nip" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama PPK </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="ppk" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <!-- <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Progres Bulan Lalu </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="progres_bulan_lalu" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Total Progres </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="total_progres" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div> -->
+
+                			</form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 widget-container-col" >
+                <div class="widget-box">
+                  <div class="widget-header">
+                    <h4 class="widget-title lighter">Keuangan (Kumulasi)</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="center">
+                              <label class="position-relative">
+                                #
+                              </label>
+                            </th>
+                            <th>Bulan</th>
+                            <th>Target</th>
+                            <th>Realisasi</th>
+                            <th>Koordinat</th>
+                            <th>LatarBelakang</th>
+                            <th>Uraian</th>
+                            <th>Permasalahan</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                1
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Januari</h5>
+                            </td>
+                            <td>
+                              <h6 id="k1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_1"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                2
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Februari</h5>
+                            </td>
+                            <td>
+                              <h6 id="k2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_2"></h6>
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                3
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Maret</h5>
+                            </td>
+                            <td>
+                              <h6 id="k3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_3"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                4
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>April</h5>
+                            </td>
+                            <td>
+                              <h6 id="k4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_4"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                5
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Mei</h5>
+                            </td>
+                            <td>
+                              <h6 id="k5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_5"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                6
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Juni</h5>
+                            </td>
+                            <td>
+                              <h6 id="k6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_6"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                7
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Juli</h5>
+                            </td>
+                            <td>
+                              <h6 id="k7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_7"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                8
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Agustus</h5>
+                            </td>
+                            <td>
+                              <h6 id="k8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_8"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                9
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>September</h5>
+                            </td>
+                            <td>
+                              <h6 id="k9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_9"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                10
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Oktober</h5>
+                            </td>
+                            <td>
+                              <h6" id="k10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_10"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                11
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>November</h5>
+                            </td>
+                            <td>
+                              <h6 id="k11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_11"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                12
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Desember</h5>
+                            </td>
+                            <td>
+                              <h6 id="k12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="kr12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_koor_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_latar_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_uraian_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="k_masalah_12"></h6>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 widget-container-col" >
+                <div class="widget-box">
+                  <div class="widget-header">
+                    <h4 class="widget-title lighter">Fisik (Kumulasi)</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="center">
+                              <label class="position-relative">
+                                #
+                              </label>
+                            </th>
+                            <th>Bulan</th>
+                            <th>Target</th>
+                            <th>Realisasi</th>
+                            <th>Koordinat</th>
+                            <th>LatarBelakang</th>
+                            <th>Uraian</th>
+                            <th>Permasalahan</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                1
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Januari</h5>
+                            </td>
+                            <td>
+                              <h6 id="f1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_1"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_1"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                2
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Februari</h5>
+                            </td>
+                            <td>
+                              <h6 id="f2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_2"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_2"></h6>
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                3
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Maret</h5>
+                            </td>
+                            <td>
+                              <h6 id="f3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_3"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_3"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                4
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>April</h5>
+                            </td>
+                            <td>
+                              <h6 id="f4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_4"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_4"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                5
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Mei</h5>
+                            </td>
+                            <td>
+                              <h6 id="f5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_5"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_5"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                6
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Juni</h5>
+                            </td>
+                            <td>
+                              <h6 id="f6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_6"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_6"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                7
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Juli</h5>
+                            </td>
+                            <td>
+                              <h6 id="f7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_7"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_7"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                8
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Agustus</h5>
+                            </td>
+                            <td>
+                              <h6 id="f8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_8"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_8"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                9
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>September</h5>
+                            </td>
+                            <td>
+                              <h6 id="f9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_9"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_9"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                10
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Oktober</h5>
+                            </td>
+                            <td>
+                              <h6 id="f10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_10"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_10"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                11
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>November</h5>
+                            </td>
+                            <td>
+                              <h6 id="f11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_11"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_11"></h6>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                12
+                              </label>
+                            </td>
+
+                            <td>
+                              <h5>Desember</h5>
+                            </td>
+                            <td>
+                              <h6 id="f12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="fr12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_koor_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_latar_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_uraian_12"></h6>
+                            </td>
+                            <td>
+                              <h6 id="f_masalah_12"></h6>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="widget-toolbox padding-8 clearfix">
+						<button class="btn btn-xs btn-danger pull-left" onclick="window.location.href = 'rencana'">
+              <i class="ace-icon fa fa-arrow-left icon-on-right"></i>
+							<span class="bigger-110">Kembali</span>
+						</button>
+
+						<!-- <button id="save_target" class="btn btn-xs btn-success pull-right">
+							<span class="bigger-110">Simpan</span>
+
+							<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+						</button> -->
+					</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<!-- <script src="{{baseURL}}/assets/action-js/admin/datapengaduan.js"></script> -->
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "users/layout.html" %} {% block content %}
+<input id="baseUrl" value="{{baseURL}}" hidden>
+	<div class="page_header clearfix page_margin_top">
+		<div class="page_header_left">
+			<h2 class="page_title">STRUKTUR ORGANISASI</h2>
+		</div>
+		<div class="page_header_right">
+			<ul class="bread_crumb">
+				<li>
+					<a title="Home" href="index.html@page=home.html">
+						Home
+					</a>
+				</li>
+				<li class="separator icon_small_arrow right_gray">
+					&nbsp;
+				</li>
+        <li>
+          Profile
+        </li>
+				<li class="separator icon_small_arrow right_gray">
+					&nbsp;
+				</li>
+				<li>
+					Struktur organisasi
+				</li>
+				<li>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="page_layout clearfix">
+		<div class="divider_block clearfix">
+			<hr class="divider first">
+			<hr class="divider subheader_arrow">
+			<hr class="divider last">
+		</div>
+    <div id="page-kapolres">
+			<h1 class="about_title center_align page_margin_top">Struktur Organisasi</h1>
+			<h2 class="about_subtitle center_align">POLRES SUMEDANG</h2>
+			<br/>
+			<div class="row">
+				<img src="{{baseURL}}/assets/users/images/STRUKTUR_ORGANISASI_POLRES.jpg" alt="img" style="display: block;">
+			</div>
+  	</div>
+	</div>
+{% endblock %}

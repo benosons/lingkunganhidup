@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Dashboard - Ace Admin</title>
+
+		<meta name="description" content="overview &amp; stats" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/bootstrap.css" />
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/font-awesome.css" />
+
+		<!-- page specific plugin styles -->
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/ace-skins.css" class="ace-main-stylesheet"/>
+		<link rel="stylesheet" href="{{baseURL}}/assets/distro/css/chosen.css" class="ace-main-stylesheet"/>
+
+		<link rel="stylesheet" href="{{baseURL}}/assets/swal/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
+
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css" href="{{baseURL}}/assets/admin/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="{{baseURL}}/assets/admin/pages/data-table/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{baseURL}}/assets/admin/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{baseURL}}/assets/admin/bower_components/switchery/dist/switchery.min.css">
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="../assets/css/ace-part2.css" nxxnxnxclass="ace-main-stylesheet" />
+		<![endif]-->
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="{{baseURL}}/assets/distro/js/ace-extra.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="../assets/js/html5shiv.js"></script>
+		<script src="../assets/js/respond.js"></script>
+		<![endif]-->
+	</head>
+	<style>
+	.chosen-container-single .chosen-search:after {
+		content: none;
+	}
+
+	.chosen-container-single .chosen-single {
+		border-radius: 0px;
+		height: 34px;
+	}
+
+	.chosen-container-single .chosen-single span {
+		margin-top: 5px;
+	}
+
+
+.switch {
+    display: block;
+	  margin: 12px auto;
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		width: 150px;
+		height: 30px;
+		padding: 3px;
+		background-color: white;
+		-moz-border-radius: 18px;
+		-webkit-border-radius: 18px;
+		border-radius: 18px;
+		cursor: pointer;
+	}
+
+	.switch-input {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  opacity: 0;
+	}
+
+	.switch-label {
+		position: relative;
+		display: block;
+		height: inherit;
+		font-size: 10px;
+		text-transform: uppercase;
+		background:#658fab;
+		-moz-border-radius: inherit;
+		-webkit-border-radius: inherit;
+		border-radius: inherit;
+		-webkit-transition: 0.15s ease-out;
+		-moz-transition: 0.15s ease-out;
+		-o-transition: 0.15s ease-out;
+		transition: 0.15s ease-out;
+		-webkit-transition-property: opacity background border;
+		-moz-transition-property: opacity background border;
+		-o-transition-property: opacity background border;
+		transition-property: opacity background border;
+	}
+	.switch-label:before, .switch-label:after {
+	  position: absolute;
+	  top: 50%;
+	  margin-top: -.5em;
+	  line-height: 1;
+	  -webkit-transition: inherit;
+	  -moz-transition: inherit;
+	  -o-transition: inherit;
+	  transition: inherit;
+	  font-size:14px;
+	}
+	.switch-label:before {
+	  content: attr(data-off);
+	  right: 11px;
+	  color: #000;
+	}
+	.switch-label:after {
+	  content: attr(data-on);
+	  left: 11px;
+	  color: white;
+	  opacity: 0;
+	}
+	.switch-input:checked ~ .switch-label {
+		background: #34495E;
+	}
+	.switch-input:checked ~ .switch-label:before {
+	  opacity: 0;
+	}
+	.switch-input:checked ~ .switch-label:after {
+	  opacity: 1;
+	}
+
+	.switch-handle {
+		position: absolute;
+		top: 9px;
+		left: 10px;
+		width: 18px;
+		height: 18px;
+		background: #1abc9c;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		-webkit-transition: left 0.15s ease-out;
+		-moz-transition: left 0.15s ease-out;
+		-o-transition: left 0.15s ease-out;
+		transition: left 0.15s ease-out;
+	}
+		.switch-handle:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -6px 0 0 -6px;
+			width: 12px;
+			height: 12px;
+			background: #1abc9c;
+			-moz-border-radius: 6px;
+			-webkit-border-radius: 6px;
+			border-radius: 6px;
+			-moz-box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+			-webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+			box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+		}
+
+
+	.switch-input:checked ~ .switch-handle {
+		background:#1abc9c;
+		left: 120px;
+		-moz-box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+		box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+	}
+
+	.switch-input:checked ~	.switch-handle:before{
+		background:#1abc9c;
+	}
+	.switch-green > .switch-input:checked ~ .switch-label {
+	  background: #1abc9c;
+	}
+	</style>
+
+  <body class="skin-1">
+    <input type="hidden" id="session_satuan" value="{{satuan}}">
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div></div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <!-- Menu header start -->
+    {% include "admin/navbar.html" %}
+    <div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+      {% include "admin/sidebar.html" %}
+
+      <!-- /section:basics/sidebar -->
+			<div class="main-content">
+        <div class="main-content-inner">
+
+        {% block content %} {% endblock %}
+
+        </div>
+      </div>
+      {% include "admin/footer.html" %}
+      <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+    </div>
+
+    <!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{{baseURL}}/assets/distro/js/jquery.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+    <!--[if IE]>
+    <script type="text/javascript">
+     window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+    </script>
+    <![endif]-->
+    		<script type="text/javascript">
+    			if('ontouchstart' in document.documentElement) document.write("<script src='{{baseURL}}/assets/distro/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+    		</script>
+    		<script src="{{baseURL}}/assets/distro/js/bootstrap.js"></script>
+
+    		<!-- page specific plugin scripts -->
+
+    		<!--[if lte IE 8]>
+    		  <script src="../assets/js/excanvas.js"></script>
+    		<![endif]-->
+    		<script src="{{baseURL}}/assets/distro/js/jquery-ui.custom.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/jquery.ui.touch-punch.js"></script>
+
+    		<!-- ace scri{{baseURL}}s -->
+        <script src="{{baseURL}}/assets/distro/js/ace/elements.scroller.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.colorpicker.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.fileinput.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.typeahead.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.wysiwyg.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.spinner.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.treeview.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.wizard.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/elements.aside.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.ajax-content.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.touch-drag.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.sidebar.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.sidebar-scroll-1.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.submenu-hover.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.widget-box.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.settings.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.settings-rtl.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.settings-skin.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.widget-on-reload.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/ace/ace.searchbox-autocomplete.js"></script>
+    		<script src="{{baseURL}}/assets/distro/js/chosen.jquery.js"></script>
+
+				<script src="{{baseURL}}/assets/swal/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
+
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+
+        <!-- data-table js -->
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/pages/data-table/js/jszip.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/pages/data-table/js/pdfmake.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/pages/data-table/js/vfs_fonts.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+           <script src="{{baseURL}}/assets/admin/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+           <script type="text/javascript" src="{{baseURL}}/assets/admin/bower_components/switchery/dist/switchery.min.js"></script>
+
+					 <script src="{{baseURL}}/assets/distro/js/bootbox.js"></script>
+
+        <script src="{{baseURL}}/action-js/global-admin.js"></script>
+
+        <script type="text/javascript">
+			jQuery(function($) {
+
+
+			  //pie chart tooltip example
+			  var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
+			  var previousPoint = null;
+
+				/////////////////////////////////////
+				$(document).one('ajaxloadstart.page', function(e) {
+					$tooltip.remove();
+				});
+
+
+
+
+				var d1 = [];
+				for (var i = 0; i < Math.PI * 2; i += 0.5) {
+					d1.push([i, Math.sin(i)]);
+				}
+
+				var d2 = [];
+				for (var i = 0; i < Math.PI * 2; i += 0.5) {
+					d2.push([i, Math.cos(i)]);
+				}
+
+				var d3 = [];
+				for (var i = 0; i < Math.PI * 2; i += 0.2) {
+					d3.push([i, Math.tan(i)]);
+				}
+
+
+				var sales_charts = $('#sales-charts').css({'width':'100%' , 'height':'220px'});
+
+
+
+				$('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('.tab-content')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+
+					var off2 = $source.offset();
+					//var w2 = $source.width();
+
+					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+					return 'left';
+				}
+
+
+				$('.dialogs,.comments').ace_scroll({
+					size: 300
+			    });
+
+
+				//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
+				//so disable dragging when clicking on label
+				var agent = navigator.userAgent.toLowerCase();
+				if("ontouchstart" in document && /applewebkit/.test(agent) && /android/.test(agent))
+				  $('#tasks').on('touchstart', function(e){
+					var li = $(e.target).closest('#tasks li');
+					if(li.length == 0)return;
+					var label = li.find('label.inline').get(0);
+					if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
+				});
+
+				$('#tasks').sortable({
+					opacity:0.8,
+					revert:true,
+					forceHelperSize:true,
+					placeholder: 'draggable-placeholder',
+					forcePlaceholderSize:true,
+					tolerance:'pointer',
+					stop: function( event, ui ) {
+						//just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
+						$(ui.item).css('z-index', 'auto');
+					}
+					}
+				);
+				$('#tasks').disableSelection();
+				$('#tasks input:checkbox').removeAttr('checked').on('click', function(){
+					if(this.checked) $(this).closest('li').addClass('selected');
+					else $(this).closest('li').removeClass('selected');
+				});
+
+
+				//show the dropdowns on top or bottom depending on window height and menu position
+				$('#task-tab .dropdown-hover').on('mouseenter', function(e) {
+					var offset = $(this).offset();
+
+					var $w = $(window)
+					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100)
+						$(this).addClass('dropup');
+					else $(this).removeClass('dropup');
+				});
+
+			})
+		</script>
+{% if script %}
+<script src = "{{script}}"></script>
+{% endif %}
+</body>
+
+</html>

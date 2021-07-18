@@ -1,0 +1,822 @@
+{% extends "admin/layout.html" %} {% block content %}
+
+<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+  <script type="text/javascript">
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  </script>
+
+  <ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Home</a>
+		</li>
+		<li class="">Target</li>
+		<li class="active">Add Target</li>
+	</ul><!-- /.breadcrumb -->
+
+  <!-- #section:basics/content.searchbox -->
+  <div class="nav-search" id="nav-search">
+    <form class="form-search">
+      <span class="input-icon">
+        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+      </span>
+    </form>
+  </div><!-- /.nav-search -->
+
+</div>
+
+<div class="page-content">
+  <input hidden id="userid" value="{{userid}}">
+  <input hidden id="role" value="{{role}}">
+  <div class="page-header">
+    <h1>
+      TARGET FORM
+      <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        overview &amp; stats
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class="col-xs-12 widget-container-col" >
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <form class="form-horizontal" role="form">
+      				<!-- #section:elements.form -->
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+          					<label class="col-sm-5 control-label no-padding-right" for="form-field-1"> PD / Biro </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="PD / Biro" class="col-xs-12 col-sm-12" />
+          					</div>
+          				</div>
+          			</div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran PD / Biro (APBD Murni) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran PD / Biro (APBD Perubahan) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      				<div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> UPTD/Bidang </label>
+          					<div class="col-sm-7">
+                      <select class="chosen-select form-control" id="user_role" data-placeholder="Select Bidang...">
+      						  		<option value="">  </option>
+      						  		<option value="10">admin</option>
+      						  		<option value="20">operator</option>
+      						  		<option value="30">ppk</option>
+      						  		<option value="40">pptk</option>
+
+      						  	</select>
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Lokasi </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Lokasi" class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Kode Program  </label>
+          					<div class="col-sm-7">
+                      <select class="chosen-select form-control" id="user_role" data-placeholder="Select Program...">
+      						  		<option value="">  </option>
+      						  		<option value="10">admin</option>
+      						  		<option value="20">operator</option>
+      						  		<option value="30">ppk</option>
+      						  		<option value="40">pptk</option>
+
+      						  	</select>
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Nama Program </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12" disabled/>
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      			</form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 widget-container-col" >
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <form class="form-horizontal" role="form">
+      				<!-- #section:elements.form -->
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+          					<label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Kode Kegiatan </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="PD / Biro" class="col-xs-12 col-sm-12" />
+          					</div>
+          				</div>
+          			</div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+          					<label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Nama Kegiatan </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="PD / Biro" class="col-xs-12 col-sm-12" />
+          					</div>
+          				</div>
+          			</div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran Kegiatan (APBD Murni) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Anggaran Kegiatan (APBD Perubahan) </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      				<div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Sumber Dana </label>
+          					<div class="col-sm-7">
+                      <input type="text" id="form-field-1" placeholder="Rp." class="col-xs-12 col-sm-12" />
+
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Tagging </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="Lokasi" class="col-xs-12 col-sm-12" />
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> Nama PPTK  </label>
+          					<div class="col-sm-7">
+                      <input type="text" id="form-field-1" placeholder="Lokasi" class="col-xs-12 col-sm-12" />
+
+          					</div>
+                  </div>
+
+                </div>
+      				</div>
+
+              <div class="space-4"></div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> NIP </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      				<div class="form-group">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1"> No. HP </label>
+          					<div class="col-sm-7">
+          						<input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+          					</div>
+                  </div>
+                </div>
+      				</div>
+
+      			</form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-6 widget-container-col" >
+      <div class="widget-box">
+        <div class="widget-header">
+					<h4 class="widget-title lighter">Keuangan (Kumulasi)</h4>
+				</div>
+        <div class="widget-body">
+          <div class="widget-main">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="center">
+                    <label class="position-relative">
+                      #
+                    </label>
+                  </th>
+                  <th>Bulan</th>
+                  <th>Target</th>
+                  <th>Realisasi</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      1
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Januari</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      2
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Februari</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      3
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Maret</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      4
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">April</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      5
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Mei</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      6
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Juni</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      7
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Juli</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      8
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Agustus</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      9
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">September</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      10
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Oktober</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      11
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">November</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      12
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Desember</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-6 widget-container-col" >
+      <div class="widget-box">
+        <div class="widget-header">
+					<h4 class="widget-title lighter">Fisik (Kumulasi)</h4>
+				</div>
+        <div class="widget-body">
+          <div class="widget-main">
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="center">
+                    <label class="position-relative">
+                      #
+                    </label>
+                  </th>
+                  <th>Bulan</th>
+                  <th>Target</th>
+                  <th>Realisasi</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      1
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Januari</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      2
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Februari</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      3
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Maret</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      4
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">April</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      5
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Mei</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      6
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Juni</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      7
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Juli</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      8
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Agustus</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      9
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">September</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      10
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Oktober</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      11
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">November</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="center">
+                    <label class="position-relative">
+                      12
+                    </label>
+                  </td>
+
+                  <td>
+                    <a href="#">Desember</a>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                  <td>
+                    <input type="text" id="form-field-1" placeholder="" class="col-xs-12 col-sm-12"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div id="modal_program" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Program</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+					<!-- #section:elements.form -->
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="kode_program"> Kode Program </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="kode_program" placeholder="Kode Program" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nama Program </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="nama_program" placeholder="Nama Program" class="form-control">
+						</div>
+					</div>
+
+				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-xs btn-danger" data-dismiss="modal"><i class="ace-icon fa fa-close"></i>close</button>
+        <button type="button" id="save_program" class="btn btn-xs btn-success" data-dismiss="modal"><i class="ace-icon fa fa-check"></i>submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</div>
+<!-- <script src="{{baseURL}}/assets/action-js/admin/datapengaduan.js"></script> -->
+{% endblock %}

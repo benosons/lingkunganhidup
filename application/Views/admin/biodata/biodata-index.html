@@ -1,0 +1,118 @@
+{% extends "admin/layout.html" %} {% block content %}
+
+<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+  <script type="text/javascript">
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  </script>
+
+  <ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Home</a>
+		</li>
+		<li class="active">Biodata</li>
+	</ul><!-- /.breadcrumb -->
+
+  <!-- #section:basics/content.searchbox -->
+  <div class="nav-search" id="nav-search">
+    <form class="form-search">
+      <span class="input-icon">
+        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+      </span>
+    </form>
+  </div><!-- /.nav-search -->
+
+</div>
+
+<div class="page-content">
+  <input hidden id="userid" value="{{userid}}">
+  <input hidden id="role" value="{{role}}">
+  <div class="page-header">
+    <h1>
+      LIST BIODATA
+      <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        overview &amp; stats
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class="col-xs-12 widget-container-col" >
+      <div class="widget-box">
+        <div class="widget-header">
+					<div class="widget-toolbar no-border">
+						<button class="btn btn-xs btn-primary bigger" onclick="window.location.href = 'biodata?param=insert'" >
+							<i class="ace-icon fa fa-plus"></i>
+							Add
+						</button>
+					</div>
+				</div>
+        <div class="widget-body">
+          <div class="widget-main">
+            <div class="table-responsive">
+            <table id="all-biodata" class="table table-striped table-bordered nowrap table-responsive">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>PD/Biro</th>
+                        <th>UPTD/Bidang</th>
+                        <th>Lokasi</th>
+                        <th>Program</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div id="modal_program" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Program</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+					<!-- #section:elements.form -->
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="kode_program"> Kode Program </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="kode_program" placeholder="Kode Program" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nama Program </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="nama_program" placeholder="Nama Program" class="form-control">
+						</div>
+					</div>
+
+				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-xs btn-danger" data-dismiss="modal"><i class="ace-icon fa fa-close"></i>close</button>
+        <button type="button" id="save_program" class="btn btn-xs btn-success" data-dismiss="modal"><i class="ace-icon fa fa-check"></i>submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</div>
+<!-- <script src="{{baseURL}}/assets/action-js/admin/datapengaduan.js"></script> -->
+{% endblock %}

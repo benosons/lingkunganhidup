@@ -1,0 +1,630 @@
+{% extends "admin/layout.html" %} {% block content %}
+
+<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+  <script type="text/javascript">
+    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+  </script>
+
+  <ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Home</a>
+		</li>
+		<li class="">Rencana</li>
+		<li class="active">Add Rencana</li>
+	</ul><!-- /.breadcrumb -->
+
+  <!-- #section:basics/content.searchbox -->
+  <div class="nav-search" id="nav-search">
+    <form class="form-search">
+      <span class="input-icon">
+        <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+        <i class="ace-icon fa fa-search nav-search-icon"></i>
+      </span>
+    </form>
+  </div><!-- /.nav-search -->
+
+</div>
+
+<div class="page-content">
+  <input hidden id="userid" value="{{userid}}">
+  <input hidden id="role" value="{{role}}">
+  <div class="page-header">
+    <h1>
+      RENCANA / TARGET FORM
+      <small>
+        <i class="ace-icon fa fa-angle-double-right"></i>
+        overview &amp; stats
+      </small>
+    </h1>
+  </div><!-- /.page-header -->
+
+  <div class="row">
+    <div class="col-xs-12 widget-container-col ui-sortable" >
+      <div class="widget-box">
+        <div class="widget-body">
+          <div class="widget-main">
+            <div class="row">
+              <div class="col-xs-12 widget-container-col ui-sortable" >
+                <div class="widget-box">
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <form class="form-horizontal" role="form">
+                				<!-- #section:elements.form -->
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Program </label>
+                    					<div class="col-sm-4">
+                                <select class="chosen-select form-control" id="kode_program" data-placeholder="Pilih Program...">
+                						  		<option value="">  </option>
+                						  	</select>
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="space-4"></div>
+
+                				<div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Program </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_program" placeholder="Nama Program" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode Kegiatan </label>
+                    					<div class="col-sm-4">
+                                <select class="chosen-select form-control" id="kode_kegiatan" data-placeholder="Pilih Kegiatan...">
+                						  		<option value="">  </option>
+                						  	</select>
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Kegiatan </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_kegiatan" placeholder="Nama Kegiatan" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Kode sub Kegiatan </label>
+                    					<div class="col-sm-4">
+                                <select class="chosen-select form-control" id="kode_subkegiatan" data-placeholder="Pilih Sub Kegiatan...">
+                						  		<option value="">  </option>
+                						  	</select>
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nama Sub Kegiatan </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="nama_subkegiatan" placeholder="Nama Sub Kegiatan" class="col-xs-12 col-sm-12" disabled />
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Paket </label>
+                    					<div class="col-sm-9">
+                                <select class="chosen-select form-control" id="paket" data-placeholder="Pilih Paket...">
+                						  		<option value="">  </option>
+                						  	</select>
+                    					</div>
+                            </div>
+
+                          </div>
+                				</div>
+
+                        <div class="space-4"></div>
+
+                				<div class="form-group">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Pagu Kegiatan (Rp.) </label>
+                    					<div class="col-sm-9">
+                    						<input type="text" id="pagu_kegiatan" placeholder="" class="col-xs-12 col-sm-12"/>
+                    					</div>
+                            </div>
+                          </div>
+                				</div>
+
+                        <div class="space-4"></div>
+
+
+                			</form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 widget-container-col" >
+                <div class="widget-box">
+                  <div class="widget-header">
+                    <h4 class="widget-title lighter">Keuangan (Kumulasi)</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="center">
+                              <label class="position-relative">
+                                #
+                              </label>
+                            </th>
+                            <th>Bulan</th>
+                            <th>Target</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                1
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Januari</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k1" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                2
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Februari</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k2" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                3
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Maret</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k3" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                4
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">April</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k4" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                5
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Mei</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k5" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                6
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Juni</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k6" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                7
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Juli</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k7" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                8
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Agustus</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k8" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                9
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">September</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k9" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                10
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Oktober</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k10" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                11
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">November</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k11" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                12
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Desember</a>
+                            </td>
+                            <td>
+                              <input type="text" id="k12" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-xs-6 widget-container-col" >
+                <div class="widget-box">
+                  <div class="widget-header">
+                    <h4 class="widget-title lighter">Fisik (Kumulasi)</h4>
+                  </div>
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th class="center">
+                              <label class="position-relative">
+                                #
+                              </label>
+                            </th>
+                            <th>Bulan</th>
+                            <th>Target</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                1
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Januari</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f1" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                2
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Februari</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f2" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                3
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Maret</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f3" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                4
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">April</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f4" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                5
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Mei</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f5" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                6
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Juni</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f6" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                7
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Juli</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f7" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                8
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Agustus</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f8" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                9
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">September</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f9" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                10
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Oktober</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f10" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                11
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">November</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f11" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+
+                          <tr>
+                            <td class="center">
+                              <label class="position-relative">
+                                12
+                              </label>
+                            </td>
+
+                            <td>
+                              <a href="#">Desember</a>
+                            </td>
+                            <td>
+                              <input type="text" id="f12" placeholder="" class="col-xs-12 col-sm-12"/>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="widget-toolbox padding-8 clearfix">
+						<button class="btn btn-xs btn-danger pull-left" onclick="window.location.href = 'rencana'">
+              <i class="ace-icon fa fa-arrow-left icon-on-right"></i>
+							<span class="bigger-110">Kembali</span>
+						</button>
+
+						<button id="save_target" class="btn btn-xs btn-success pull-right">
+							<span class="bigger-110">Simpan</span>
+
+							<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+						</button>
+					</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<!-- <script src="{{baseURL}}/assets/action-js/admin/datapengaduan.js"></script> -->
+{% endblock %}
