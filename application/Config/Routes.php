@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 /**
  * --------------------------------------------------------------------
@@ -23,9 +25,8 @@ $routes = Services::routes(true);
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(BASEPATH.'Config/Routes.php'))
-{
-	require BASEPATH.'Config/Routes.php';
+if (file_exists(BASEPATH . 'Config/Routes.php')) {
+	require BASEPATH . 'Config/Routes.php';
 }
 
 /**
@@ -78,6 +79,9 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'View::index');
 $routes->add('home', 'View::home');
+$routes->add('contact', 'View::contact');
+$routes->add('kegiatanUser', 'View::kegiatanUser');
+$routes->add('eco_concept', 'View::eco_concept');
 $routes->add('dashboard', 'View::dashboard');
 $routes->add('login', 'View::login');
 $routes->add('register', 'View::register');
@@ -135,7 +139,6 @@ $routes->post('addRealisasi', 'Jsondata::addRealisasi');
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH.'Config/'.ENVIRONMENT.'/Routes.php'))
-{
-	require APPPATH.'Config/'.ENVIRONMENT.'/Routes.php';
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

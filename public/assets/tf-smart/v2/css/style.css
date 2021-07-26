@@ -153,12 +153,20 @@ h6 {
 	color: #0d6efd;
 }
 
+.navy{
+	color: #01046f;
+}
+
 .red{
 	color: #e52f37;
 }
 
 .green {
     color: #27b36a;
+}
+
+.orange{
+	color : #f8511f
 }
 
 .section-white {
@@ -168,7 +176,7 @@ h6 {
 
 .section-grey{
 	background: #f5f7fc;
-	padding: 90px 0 90px 0;
+	padding: 50px 0 90px 0;
 }
 
 .section-blue{
@@ -521,21 +529,19 @@ iframe {
     vertical-align: middle;
 }
 
-.navbar-fixed-top {
-	position: absolute!important;
-	background-color: #fff;
-	border-bottom: none;
-	transition: background-color 0.25s ease 0s;
+
+.outline {
+	border: 1px solid green;
 }
 
 .navbar-fixed-top.opaque {
-	position: fixed!important;
+	position: fixed !important;
 	top: 0;
 	margin-top: 0;
 	background-color: #fff!important;
 	border-bottom: 1px solid #efefef;
 	box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.04)!important;
-	transition: all 0.25s ease-in-out 0s;
+	transition: all 0.50s ease-in-out 0s;
 }
 
 .navbar-fixed-top.opaque .navbar-nav > li{
@@ -543,10 +549,10 @@ iframe {
 }
 
 .navbar-fixed-top .navbar-nav > li > a{
-	color:#595959;
-	font-size: 17px !important;
+	color:#fff;
+	font-size: 16px !important;
 	line-height: 30px !important;
-	padding: 10px 15px!important;
+	padding: 10px 12px!important;
 	font-family: 'Nunito', sans-serif;
 	font-weight: 600;
 }
@@ -556,7 +562,7 @@ iframe {
 }
 
 .navbar-fixed-top .navbar-nav > li > a:hover{
-	color: #0d6efd!important;
+	color: #0e3f26!important;
 	-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -711,9 +717,10 @@ ul.footer_social li a i:hover {
 .home-section {
 	width: 100%;
 	position: relative;
-  	padding-top: 155px;
-  	padding-bottom: 70px;
-	background-color: #1e90ff;
+  	padding-top: 0px;
+  	padding-bottom: 0px;
+	  height: auto;
+	/* background-color: #1e90ff; */
 }
 
 .home-section h1{
@@ -729,6 +736,43 @@ ul.footer_social li a i:hover {
 	font-weight: 400;
 	color: #fff;
 }
+
+
+
+/* dropdown */
+.dropdown-menu {
+	border: 0px solid rgba(0, 0, 0, 0.15) !important;
+	background-color: #fafafa;
+  }
+  
+  /* line 94, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
+  .dropdown .dropdown-menu {
+	transition: all 0.5s;
+	overflow: hidden;
+	transform-origin: top center;
+	transform: scale(1, 0);
+	display: block;
+	margin-top: -1px;
+  }
+  
+  /* line 101, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
+  .dropdown .dropdown-menu .dropdown-item {
+	font-size: 14px;
+	padding: 9px 18px !important;
+	color: #000 !important;
+	text-transform: capitalize;
+  }
+  
+  /* line 106, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
+  .dropdown .dropdown-menu .dropdown-item:hover {
+	color: #fff!important;
+	background-color: #198754;
+  }
+  
+  /* line 113, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
+  .dropdown:hover .dropdown-menu {
+	transform: scale(1);
+  }
 
 /* -----  Hero Video PopUp ----- */
 .popup-gallery-wrapper{
@@ -1001,7 +1045,7 @@ ul.team-icon li a.dribble{
 .testim-inner h6 span{
 	text-transform: none;
 }
-}
+
 
 .testim-inner p{
 	margin-bottom: 15px;
@@ -1603,6 +1647,7 @@ ul.benefits-together li {
 .popup-gallery{
 	display:inline-block;
 	position:relative;
+	height: 400px;
 }
 
 .popup-gallery img {
@@ -1776,9 +1821,202 @@ ul.benefits-together li {
 	color: #071e55;
 }
 
+.owl-carousel{
+	padding: 0 !important;
+}
+
+.owl-item.active .item img{
+	height: 80vh;
+	width: 100%;
+}
+
+.item::after{
+	content: '';
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color:rgba(0, 0, 0, 0.5);
+	bottom: 0;
+}
+
+.owl-nav{
+	position: absolute;
+	right: 47%;
+	bottom: 15%;
+}
+
+button.owl-prev{
+	width: 50px;
+	height: 50px;
+	background: #fff !important;
+	margin-right: 10px;
+}
+button.owl-prev span{
+	font-size: 20px;
+}
+button.owl-next{
+	width: 50px;
+	height: 50px;
+	background: #fff !important;
+	margin-right: 10px;
+}
+button.owl-next span{
+	font-size: 20px;
+}
+
+.content-slider{
+	position: absolute;
+	left: 20%;
+	top: 25%;
+	color: #fff;
+	z-index: 1;
+}
+
+
+.content-text{
+	margin-left: 20px;
+	opacity: 0;
+	transition: 0.9s all ease;
+	z-index: 999;
+}
+
+.owl-item.active .content-text{
+	margin-left: 0px;
+	opacity: 1;
+	transition: 0.9s all ease;
+}
+.content-text h3{
+	color : white;
+	text-transform: uppercase;
+	font-size: 30px;
+	font-weight: 700;
+}
+.content-text .list-inline{
+	margin-top: -18px;
+}
+.content-text .list-inline .list-inline-item{
+	color: white;
+	font-size: 15px;
+}
+
+.content-text p{
+	line-height: 30px;
+}
+
+#hr-content{
+	margin-top: -10px;
+	margin-bottom: 20px;
+	width: 250px;
+	height: 8px;
+	background-color: #198754;
+	border-radius: 10px;
+	box-shadow: 1px rgba(0, 0, 0, 0.5);
+}
+
+.content-text .btn{
+	border-radius: 200px;
+	padding: 10px 30px !important;
+	font-size: 12px;
+}
+
+
 /* ========================================================== */
 /* 			               12. OTHER ELEMENTS                 */
 /* ========================================================== */
+
+
+/*---------------------
+  Instagram Photo
+-----------------------*/
+
+.image-cards{
+	position: relative;
+	width: auto;
+	height: auto;
+	background-size: cover;
+}
+
+.div-image-logo{
+	width: auto;
+	height: 600px !important;
+	padding: 10px;
+	background-color: #198754;
+	border-radius: 10px !important;
+	box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.2);
+}
+
+.div-image-logo img{
+	margin-top: 200px;
+}
+
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+.instagram-photo {
+    overflow: hidden;
+}
+
+.instagram-photo .insta-item {
+    float: left;
+    width: 16.66%;
+    height: 320px;
+    text-align: center;
+    position: relative;
+}
+
+.instagram-photo .insta-item:hover:before {
+    opacity: 1;
+}
+
+.instagram-photo .insta-item:hover .inside-text {
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+}
+
+.instagram-photo .insta-item:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    content: "";
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.instagram-photo .insta-item .inside-text {
+    padding-top: 130px;
+    opacity: 0;
+    visibility: hidden;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.instagram-photo .insta-item .inside-text i {
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.instagram-photo .insta-item .inside-text h5 {
+    margin-top: 14px;
+}
+
+.instagram-photo .insta-item .inside-text h5 a {
+    color: #ffffff;
+}
+
 
 @media (max-width: 991px) {
 
