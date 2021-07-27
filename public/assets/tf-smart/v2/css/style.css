@@ -774,6 +774,19 @@ ul.footer_social li a i:hover {
 	transform: scale(1);
   }
 
+/* HERO */
+
+.hero{
+	width: auto;
+	height: 650px;
+	background-image: url(../../../front/104770.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* -----  Hero Video PopUp ----- */
 .popup-gallery-wrapper{
 	position: relative;
@@ -1912,6 +1925,16 @@ button.owl-next span{
 	background-color: #198754;
 	border-radius: 10px;
 	box-shadow: 1px rgba(0, 0, 0, 0.5);
+}
+#hr-vm{
+	margin-top: -10px;
+	margin-bottom: 20px;
+	width: 60px;
+	height: 8px;
+	background-color: #198754;
+	border-radius: 10px;
+	opacity: 1 !important;
+	/* box-shadow: 1px rgba(0, 0, 0, 0.5); */
 }
 
 .content-text .btn{

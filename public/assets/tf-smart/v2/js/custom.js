@@ -8,7 +8,7 @@ $(window).on('load', function(){
 	/* ========================================================== */
 	
 	$(window).on('scroll', function() {
-		if($(this).scrollTop() > 200) {
+		if($(this).scrollTop() > 70) {
 			$('.navbar-fixed-top').addClass('opaque');
 		} else {
 			$('.navbar-fixed-top').removeClass('opaque');

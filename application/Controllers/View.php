@@ -40,7 +40,7 @@ class View extends \CodeIgniter\Controller
 		helper('form');
 		$this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
 		$this->data['page'] = 'home';
-		return \Twig::instance()->display('users/index.html', $this->data);
+		return \Twig::instance()->display('users/backupindex.html', $this->data);
 	}
 
 
@@ -50,6 +50,30 @@ class View extends \CodeIgniter\Controller
 		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
 		$this->data['page'] = 'contact';
 		return \Twig::instance()->display('users/contact.html', $this->data);
+	}
+
+	public function profil()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'contact';
+		return \Twig::instance()->display('users/profil.html', $this->data);
+	}
+
+	public function visimisi()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'visi misi';
+		return \Twig::instance()->display('users/visimisi.html', $this->data);
+	}
+
+	public function struktur()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'struktur';
+		return \Twig::instance()->display('users/struktur.html', $this->data);
 	}
 
 	public function kegiatanUser()

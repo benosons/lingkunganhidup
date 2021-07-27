@@ -1,63 +1,22 @@
 {% extends "users/layout.html" %} {% block content %}
-<!--begin home section -->
-<section class="home-section" id="home">
+<section class="home-section" id="home" data-aos="fade-up" data-aos-duration="3000"
+    data-aos-anchor-placement="center-bottom">
 
     <!--begin container -->
     <div class="container">
-
+        <div class="hero">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{baseURL}}/assets/front/logo.png" alt="" class="img-fluid mt-5">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--begin row -->
         <div class="row align-items-center">
-            <div class="owl-carousel owl-theme">
-                <div class="item">
-                    <img src="{{base_URL}}assets/tf-smart/v2/images/testimonials1.jpg" alt="">
-                </div>
-                <div class="item">
-                    <img src="{{base_URL}}assets/tf-smart/v2/images/testimonials1.jpg" alt="">
-                </div>
-                <div class="item">
-                    <img src="{{base_URL}}assets/tf-smart/v2/images/testimonials1.jpg" alt="">
-                </div>
-            </div>
-            <!--begin col-md-6-->
-            <div class="col-md-6">
-
-                <h1>Discover The Wold's Most Advanced Online Tool </h1>
-
-                <p class="hero-text">Track and analyze all your data in one central location nisledis qui officia
-                    deserunt
-                    etimus quis autem netsum loremisat entimus velis netsad.</p>
-
-                <!--begin popup-video-wrapper-->
-                <div class="popup-gallery-wrapper">
-
-                    <!--begin popup-video-->
-                    <div class="popup-gallery hero-gallery">
-
-                        <a class="popup4 video-icon" href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
-                            <i class="bi bi-play-fill"></i>
-                        </a>
-
-                    </div>
-                    <!--end popup-video-->
-
-                    <!-- <p class="popup-video-text">Watch Presentation</p> -->
-
-                </div>
-                <!--end popup-video-wrapper-->
-
-            </div>
-            <!--end col-md-6-->
-
-            <!--begin col-md-5-->
-            <!-- <div class="col-md-6">
-
-        <img src="{{baseURL}}/assets/tf-smart/v2/images/digital-marketing.png" class="hero-image width-100" alt="pic">
-
-      </div> -->
-            <!--end col-md-5-->
 
         </div>
-        <!--end row -->
 
     </div>
     <!--end container -->
@@ -65,8 +24,9 @@
 </section>
 <!--end home section -->
 
+
 <!--begin section-white -->
-<section class="section-white" id="about">
+<section class="section-white" id="about" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 
     <!--begin container -->
     <div class="container">
@@ -77,7 +37,7 @@
             <!--begin col-md-12 -->
             <div class="col-md-12 text-center">
 
-                <h2>How It Works</h2>
+                <!-- <h2>How It Works</h2> -->
 
             </div>
             <!--end col-md-12 -->
@@ -87,27 +47,11 @@
 
                 <div class="main-services">
 
-                    <i class="bi bi-megaphone green"></i>
+                    <i class="bi bi-journal-check blue"></i>
 
-                    <h4>Search Oportunities</h4>
+                    <h4><a href="#" class="text-dark">Perizinan & UKL - UPL</a></h4>
 
-                    <p>Curabitur quamtis etsum lacus etsumis nulatis iaculis etsum vitae etsum ets nisle varius.</p>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4 -->
-            <div class="col-md-4">
-
-                <div class="main-services">
-
-                    <i class="bi bi-gem red"></i>
-
-                    <h4>Reach Clients</h4>
-
-                    <p>Curabitur quamtis etsum lacus etsumis nulatis iaculis etsum vitae etsum ets nisle varius.</p>
+                    <p>Temukan gambaran umum terkait penerbitan perizinan lingkungan dan UKL-UPL.</p>
 
                 </div>
 
@@ -119,11 +63,30 @@
 
                 <div class="main-services">
 
-                    <i class="bi bi-speedometer2 blue"></i>
+                    <i class="bi bi-calendar-event-fill orange"></i>
 
-                    <h4>Get Rewarded</h4>
+                    <h4><a href="#" class="text-dark">Kegiatan</a></h4>
 
-                    <p>Curabitur quamtis etsum lacus etsumis nulatis iaculis etsum vitae etsum ets nisle varius.</p>
+                    <p>Temukan kontribusi BPLH dalam meningkatkan kualitas lingkungan hidup di Kota Bandung tercinta.
+                    </p>
+
+                </div>
+
+            </div>
+            <!--end col-md-4 -->
+
+            <!--begin col-md-4 -->
+            <div class="col-md-4">
+
+                <div class="main-services">
+
+                    <i class="bi bi-megaphone navy"></i>
+
+                    <h4><a href="https://lapor.go.id" class="text-dark">Sampaikan Aspirasimu</a></h4>
+
+                    <p>LAPOR! adalah sebuah sarana aspirasi dan pengaduan berbasis media sosial yang mudah diakses dan
+                        terpadu.
+                    </p>
 
                 </div>
 
@@ -139,8 +102,57 @@
 </section>
 <!--end section-white -->
 
+<!--begin section-white -->
+<section class="section-white">
+
+    <!--begin container-->
+    <div class="container">
+
+        <!--begin row-->
+        <div class="row align-items-center">
+
+            <!--begin col-md-6-->
+            <div class="col-md-6" data-aos="fade-right" data-aos-duration="2200">
+
+                <h3>Dinas Lingkungan Hidup dan Kebersihan</h3>
+
+                <p>Temukan profil lengkap DLHK Kota Bandung, Meliputi : </p>
+
+                <ul class="benefits">
+                    <li><i class="bi bi-check green"></i>Visi dan Misi</li>
+                    <li><i class="bi bi-check green"></i>Tugas Pokok</li>
+                    <li><i class="bi bi-check green"></i>Fungsi DLHK</li>
+                </ul>
+
+                <a href="index.html#" class="scrool"><button type="button" class="btn btn-lg btn-success">Lihat
+                        Profil</button></a>
+
+            </div>
+            <!--end col-md-6-->
+
+            <!--begin col-md-6-->
+            <div class="col-md-6" data-aos="fade-left" data-aos-duration="2000">
+
+                <div class="div-image-logo">
+                    <img src="{{baseURL}}/assets/front/logo.png" class="width-100 responsive-top-margins"
+                        alt="logo.png">
+                </div>
+
+            </div>
+            <!--end col-sm-6-->
+
+        </div>
+        <!--end row-->
+
+    </div>
+    <!--end container-->
+
+</section>
+<!--end section-white-->
+
+
 <!--begin testimonials section -->
-<section class="section-grey small-padding-bottom">
+<section class="section-grey" data-aos="fade-up" data-aos-duration="2000" data-aos-anchor-placement="center-bottom">
 
     <!--begin container -->
     <div class="container" style="overflow: hidden">
@@ -149,7 +161,9 @@
         <div class="row">
 
             <!--begin col md 12 -->
-            <div class="col-md-12 mx-auto padding-top-10 padding-bottom-30">
+            <div class="col-md-12 mx-auto padding-top-10 padding-bottom-10">
+
+                <h2 class="text-center mb-5">Kegiatan DLHK Terbaru</h2>
 
                 <!--begin testimonials carousel -->
                 <div id="carouselTestimonials" class="carousel slide" data-bs-ride="carousel">
@@ -160,8 +174,8 @@
                             aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="1"
                             aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
+                        <!-- <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="2"
+              aria-label="Slide 3"></button> -->
                     </div>
                     <!--end carousel-indicators -->
 
@@ -183,14 +197,13 @@
                                         <!--begin popup-gallery-->
                                         <div class="popup-gallery">
 
-                                            <img src="{{baseURL}}/assets/tf-smart/v2/images/testimonials3.jpg"
+                                            <img src="{{baseURL}}/assets/front/galeri/Pelatihan-Penanggulangan-kebakaran-4.jpg"
                                                 alt="testimonials"
                                                 class="width-100 image-shadow video-popup-image responsive-bottom-margins">
 
-                                            <a class="popup4 video-play-icon"
-                                                href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
-                                                <i class="bi bi-caret-right-fill"></i>
-                                            </a>
+                                            <!-- <a class="popup4 video-play-icon" href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
+                        <i class="bi bi-caret-right-fill"></i>
+                      </a> -->
 
                                         </div>
                                         <!--end popup-gallery-->
@@ -204,13 +217,16 @@
                                 <!--begin col-md-6 -->
                                 <div class="col-md-6 testim-info">
 
-                                    <i class="bi bi-chat-left-quote green"></i>
+                                    <!-- <i class="bi bi-chat-left-quote green"></i> -->
+                                    <h3>Pelatihan Penanggulangan Kebakaran</h3>
+                                    <p>BPLH Kota Bandung bekerja sama dengan Dinas Penanggulangan dan Penanganan
+                                        Kebakaran (DPPK) Kota
+                                        Bandung mengadakan Sosialisasi Penanggulangan dan Penanganan Kebakaran pada hari
+                                        Jumat (14/11/2014)
+                                        bertempat di kantor BPLH Kota Bandung</p>
 
-                                    <p>Nemo enimat ipsam voluptatem quia voluptas situm ets aspernatis netsum loris
-                                        fugit, sed quia
-                                        magnitus honoratis quis ratione sequi etum nets.</p>
-
-                                    <h6>Jennifer Smith<span> — Designer <span class="red">@EpicThemes</span></span></h6>
+                                    <h6><span class="bi bi-person mr-2"> Admin <span class="bi bi-stopwatch red mr-2">
+                                                {{NOW|date('d F Y')}}</span></span></h6>
 
                                 </div>
                                 <!--end col-md-5 -->
@@ -220,7 +236,6 @@
 
                         </div>
                         <!--end carousel-item -->
-
                         <!--begin carousel-item -->
                         <div class="carousel-item">
 
@@ -236,14 +251,12 @@
                                         <!--begin popup-gallery-->
                                         <div class="popup-gallery">
 
-                                            <img src="{{baseURL}}/assets/tf-smart/v2/images/testimonials2.jpg"
-                                                alt="testimonials"
+                                            <img src="{{baseURL}}/assets/front/galeri/Prabu-2.jpg" alt="testimonials"
                                                 class="width-100 image-shadow video-popup-image responsive-bottom-margins">
 
-                                            <a class="popup4 video-play-icon"
-                                                href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
-                                                <i class="bi bi-caret-right-fill"></i>
-                                            </a>
+                                            <!-- <a class="popup4 video-play-icon" href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
+                        <i class="bi bi-caret-right-fill"></i>
+                      </a> -->
 
                                         </div>
                                         <!--end popup-gallery-->
@@ -257,67 +270,14 @@
                                 <!--begin col-md-6 -->
                                 <div class="col-md-6 testim-info">
 
-                                    <i class="bi bi-chat-left-quote green"></i>
+                                    <!-- <i class="bi bi-chat-left-quote green"></i> -->
+                                    <h3>Ridwan Kamil meluncurkan sosok “Prabu” (Pahlawan Urang Bandung) </h3>
+                                    <p>Wali Kota Bandung Ridwan Kamil kini meluncurkan sosok “Prabu” (Pahlawan Urang
+                                        Bandung) sebagai
+                                        relawan yang ikut berperan langsung untuk menegakan Perda K3 di Kota Bandung</p>
 
-                                    <p>Nemo enimat ipsam voluptatem quia voluptas situm ets aspernatis netsum loris
-                                        fugit, sed quia
-                                        magnitus honoratis quis ratione sequi etum nets.</p>
-
-                                    <h6>John Doe<span> — General Manager <span class="red">@BeSmart</span></span></h6>
-
-                                </div>
-                                <!--end col-md-5 -->
-
-                            </div>
-                            <!--end row -->
-
-                        </div>
-                        <!--end carousel-item -->
-
-                        <!--begin carousel-item -->
-                        <div class="carousel-item">
-
-                            <!--begin row -->
-                            <div class="row align-items-center testim-inner">
-
-                                <!--begin col-md-6 -->
-                                <div class="col-md-6">
-
-                                    <!--begin video-popup-wrapper-->
-                                    <div class="video-popup-wrapper margin-right-25">
-
-                                        <!--begin popup-gallery-->
-                                        <div class="popup-gallery">
-
-                                            <img src="{{baseURL}}/assets/tf-smart/v2/images/testimonials1.jpg"
-                                                alt="testimonials"
-                                                class="width-100 image-shadow video-popup-image responsive-bottom-margins">
-
-                                            <a class="popup4 video-play-icon"
-                                                href="https://www.youtube.com/watch?v=FPfQMVf4vwQ">
-                                                <i class="bi bi-caret-right-fill"></i>
-                                            </a>
-
-                                        </div>
-                                        <!--end popup-gallery-->
-
-                                    </div>
-                                    <!--end video-popup-wrapper-->
-
-                                </div>
-                                <!--end col-md-6 -->
-
-                                <!--begin col-md-6 -->
-                                <div class="col-md-6 testim-info">
-
-                                    <i class="bi bi-chat-left-quote green"></i>
-
-                                    <p>Nemo enimat ipsam voluptatem quia voluptas situm ets aspernatis netsum loris
-                                        fugit, sed quia
-                                        magnitus honoratis quis ratione sequi etum nets.</p>
-
-                                    <h6>Emily Richards<span> — Copywriter <span class="red">@Books-Online</span></span>
-                                    </h6>
+                                    <h6><span class="bi bi-person mr-2"> Admin <span class="bi bi-stopwatch red mr-2">
+                                                {{NOW|date('d F Y')}}</span></span></h6>
 
                                 </div>
                                 <!--end col-md-5 -->
@@ -346,904 +306,8 @@
 </section>
 <!--end testimonials section -->
 
-<!--begin section-grey -->
-<section class="section-grey small-padding-top">
-
-    <!--begin container -->
-    <div class="container">
-
-        <!--begin row -->
-        <div class="row">
-
-            <!--begin col-md-12 -->
-            <div class="col-md-12 text-center padding-bottom-20">
-
-                <h3>Trusted By Over 9,000+ Businesses</h3>
-
-            </div>
-            <!--end col-md-12 -->
-
-        </div>
-        <!--end row -->
-
-        <!--begin row -->
-        <div class="row justify-content-center">
-
-            <!--begin col-md-1 -->
-            <div class="col-md-1"></div>
-            <!--end col-md-1 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner1.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner2.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner3.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner4.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner5.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-1 -->
-            <div class="col-md-1 d-none d-md-block"></div>
-            <!--end col-md-1 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner6.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner7.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner9.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-            <!--begin col-md-2 -->
-            <div class="col-md-2 col-xs-6">
-
-                <div class="our-partners">
-
-                    <img src="{{baseURL}}/assets/tf-smart/v2/images/partner8.png" class="width-100" alt="pic">
-
-                </div>
-
-            </div>
-            <!--end col-md-2 -->
-
-        </div>
-        <!--end row -->
-
-    </div>
-    <!--end container -->
-
-</section>
-<!--end section-grey -->
-
-<!--begin section-white -->
-<section class="section-white">
-
-    <!--begin container-->
-    <div class="container">
-
-        <!--begin row-->
-        <div class="row align-items-center">
-
-            <!--begin col-md-6-->
-            <div class="col-md-6">
-
-                <h3>Discover how we can help you to grow your business fast.</h3>
-
-                <p>Anticas quia voluptas sit aspernatur netsum demo ets ipsam voluptatem lorem fugit, seditum netis
-                    velas net
-                    nesciunt.</p>
-
-                <ul class="benefits">
-                    <li><i class="bi bi-check blue"></i>Quias netus magni netsum qui ratione sequi.</li>
-                    <li><i class="bi bi-check blue"></i>Venis ratione sequi netus enim tempor magni.</li>
-                    <li><i class="bi bi-check blue"></i>Enim ipsam netus voluptatem voluptas.</li>
-                </ul>
-
-                <a href="index.html#" class="scrool"><button type="button" class="btn btn-lg btn-primary">Discover
-                        More</button></a>
-
-            </div>
-            <!--end col-md-6-->
-
-            <!--begin col-md-6-->
-            <div class="col-md-6">
-
-                <img src="{{baseURL}}/assets/tf-smart/v2/images/digital-marketing.png"
-                    class="width-100 responsive-top-margins" alt="pic">
-
-            </div>
-            <!--end col-sm-6-->
-
-        </div>
-        <!--end row-->
-
-    </div>
-    <!--end container-->
-
-</section>
-<!--end section-white-->
-
-<!--begin fun-facts -->
-<section class="section-grey medium-padding-bottom">
-
-    <!--begin container-->
-    <div class="container">
-
-        <!--begin row-->
-        <div class="row">
-
-            <!--begin col md 7 -->
-            <div class="col-md-7 mx-auto margin-bottom-10 text-center">
-
-                <h3>Fun Facts About Our Agency</h3>
-
-            </div>
-            <!--end col md 7-->
-
-        </div>
-        <!--end row-->
-
-        <!--begin row-->
-        <div class="row">
-
-            <!--begin fun-facts-box -->
-            <div class="col-md-2 offset-md-1 fun-facts-box blue text-center">
-
-                <i class="bi bi-gift-fill"></i>
-
-                <p class="fun-facts-title"><span class="facts-numbers">1050+</span><br>Projects Completed</p>
-
-            </div>
-            <!--end fun-facts-box -->
-
-            <!--begin fun-facts-box -->
-            <div class="col-md-2 fun-facts-box red text-center">
-
-                <i class="bi bi-heart-fill"></i>
-
-                <p class="fun-facts-title"><span class="facts-numbers">217k</span><br>Happy Clients</p>
-
-            </div>
-            <!--end fun-facts-box -->
-
-            <!--begin fun-facts-box -->
-            <div class="col-md-2 fun-facts-box green text-center">
-
-                <i class="bi bi-award-fill"></i>
-
-                <p class="fun-facts-title"><span class="facts-numbers">1210</span><br>Design Awards</p>
-
-            </div>
-            <!--end fun-facts-box -->
-
-            <!--begin fun-facts-box -->
-            <div class="col-md-2 fun-facts-box red text-center">
-
-                <i class="bi bi-basket3-fill"></i>
-
-                <p class="fun-facts-title"><span class="facts-numbers">217k</span><br>Happy Clients</p>
-
-            </div>
-            <!--end fun-facts-box -->
-
-            <!--begin fun-facts-box -->
-            <div class="col-md-2 fun-facts-box yellow text-center">
-
-                <i class="bi bi-bell-fill"></i>
-
-                <p class="fun-facts-title"><span class="facts-numbers">2137</span><br>Line Of Codes</p>
-
-            </div>
-            <!--end fun-facts-box -->
-
-        </div>
-        <!--end row-->
-
-    </div>
-    <!--end container-->
-
-</section>
-<!--end fun-facts -->
-
-<!--begin team section -->
-<section class="section-white medium-padding-bottom" id="team">
-
-    <!--begin container-->
-    <div class="container">
-
-        <!--begin row-->
-        <div class="row">
-
-            <!--begin col-md-12 -->
-            <div class="col-md-12 text-center">
-
-                <h2>Meet Our Team</h2>
-
-            </div>
-            <!--end col-md-12 -->
-
-            <!--begin team-item -->
-            <div class="col-sm-12 col-md-4 margin-top-30">
-
-                <img src="{{baseURL}}/assets/tf-smart/v2/images/team001.jpg" class="team-img width-100" alt="pic">
-
-                <div class="team-item">
-
-                    <h4>Christina Hawkings</h4>
-
-                    <div class="team-info">
-                        <p>Head of SEO</p>
-                    </div>
-
-                    <p>Johnathan is our co-founder and has developed search strategies for a variety of clients for over
-                        5 years.
-                    </p>
-
-                    <ul class="team-icon">
-
-                        <li><a href="index.html#" class="twitter"><i class="bi bi-twitter"></i></a></li>
-
-                        <li><a href="index.html#" class="pinterest"><i class="bi bi-instagram"></i></a></li>
-
-                        <li><a href="index.html#" class="facebook"><i class="bi bi-mic"></i></a></li>
-
-                        <li><a href="index.html#" class="dribble"><i class="bi bi-envelope-open"></i></a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end team-item -->
-
-            <!--begin team-item -->
-            <div class="col-sm-12 col-md-4 margin-top-30">
-
-                <img src="{{baseURL}}/assets/tf-smart/v2/images/team002.jpg" class="team-img width-100" alt="pic">
-
-                <div class="team-item">
-
-                    <h4>Andreas Johansons</h4>
-
-                    <div class="team-info geen">
-                        <p>Marketing Manager</p>
-                    </div>
-
-                    <p>Andres fell in love with marketing at the school and looks forward to being part of the industry
-                        for years.
-                    </p>
-
-                    <ul class="team-icon">
-
-                        <li><a href="index.html#" class="twitter"><i class="bi bi-twitter"></i></a></li>
-
-                        <li><a href="index.html#" class="pinterest"><i class="bi bi-instagram"></i></a></li>
-
-                        <li><a href="index.html#" class="facebook"><i class="bi bi-mic"></i></a></li>
-
-                        <li><a href="index.html#" class="dribble"><i class="bi bi-envelope-open"></i></a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end team-item -->
-
-            <!--begin team-item -->
-            <div class="col-sm-12 col-md-4 margin-top-30">
-
-                <img src="{{baseURL}}/assets/tf-smart/v2/images/team003.jpg" class="team-img width-100" alt="pic">
-
-                <div class="team-item">
-
-                    <h4>Alexandra Smiths</h4>
-
-                    <div class="team-info green">
-                        <p>SEO Specialist</p>
-                    </div>
-
-                    <p>Graduating with a degree in Spanish, English and French, she has always loved writing.</p>
-
-                    <ul class="team-icon">
-
-                        <li><a href="index.html#" class="twitter"><i class="bi bi-twitter"></i></a></li>
-
-                        <li><a href="index.html#" class="pinterest"><i class="bi bi-instagram"></i></a></li>
-
-                        <li><a href="index.html#" class="facebook"><i class="bi bi-mic"></i></a></li>
-
-                        <li><a href="index.html#" class="dribble"><i class="bi bi-envelope-open"></i></a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end team-item -->
-
-        </div>
-        <!--end row-->
-
-    </div>
-    <!--end container-->
-
-</section>
-<!--end team section-->
-
-<!--begin how-it-works section -->
-<section class="section-grey" id="how-it-works">
-
-    <!--begin container -->
-    <div class="container">
-
-        <!--begin row -->
-        <div class="row align-items-center">
-
-            <!--begin col-md-5 -->
-            <div class="col-md-5 col-sm-12">
-
-                <h2>How It Works.</h2>
-
-                <p>Quis autem velis ets reprehender net etid quiste netsum voluptate. Utise wisi enim minim veniam, quis
-                    etsad
-                    ets aspernatis netsum stationes nets qualitats.</p>
-
-                <!--begin row-->
-                <div class="row">
-
-                    <!--begin col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-
-                        <!--begin testim-platform-->
-                        <div class="testim-platform first">
-
-                            <p>LinkedIn</p>
-
-                            <div class="testim-rating">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                            </div>
-
-                        </div>
-                        <!--end testim-platform-->
-
-                    </div>
-                    <!--end col-sm-4-->
-
-                    <!--begin col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-
-                        <!--begin testim-platform-->
-                        <div class="testim-platform">
-
-                            <p>Upwork</p>
-
-                            <div class="testim-rating">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star"></i>
-                            </div>
-
-                        </div>
-                        <!--end testim-platform-->
-
-                    </div>
-                    <!--end col-sm-4-->
-
-                </div>
-                <!--end row-->
-
-            </div>
-            <!--end col-md-5 -->
-
-            <!--begin col-md-1 -->
-            <div class="col-md-1"></div>
-            <!--end col-md-1 -->
-
-            <!--begin col-md-6-->
-            <div class="col-md-6">
-
-                <!--begin accordion -->
-                <div class="accordion accordion-flush" id="accordionOne">
-
-                    <div class="accordion-item">
-
-                        <h2 class="accordion-header" id="headingOne">
-
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="bi bi-pencil-fill"></i> Create Account
-                            </button>
-
-                        </h2>
-
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionOne">
-
-                            <div class="accordion-body">
-                                This is the first item's accordion body. It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the style.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="accordion-item">
-
-                        <h2 class="accordion-header" id="headingTwo">
-
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="bi bi-bar-chart-line-fill"></i> Choose Package
-                            </button>
-
-                        </h2>
-
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionOne">
-
-                            <div class="accordion-body">
-                                This is the first item's accordion body. It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the style.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="accordion-item">
-
-                        <h2 class="accordion-header" id="headingThree">
-
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="bi bi-hand-thumbs-up-fill"></i> Enjoy Smart
-                            </button>
-
-                        </h2>
-
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                            data-bs-parent="#accordionOne">
-
-                            <div class="accordion-body">
-                                This is the first item's accordion body. It is hidden by default, until the collapse
-                                plugin adds the
-                                appropriate classes that we use to style each element. These classes control the style.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <!--end accordion -->
-
-            </div>
-            <!--end col-md-6-->
-
-        </div>
-        <!--end row -->
-
-    </div>
-    <!--end container -->
-
-</section>
-<!--end how-it-works section -->
-
-<!--begin pricing section -->
-<section class="section-white" id="pricing">
-
-    <!--begin container -->
-    <div class="container">
-
-        <!--begin row -->
-        <div class="row">
-
-            <!--begin col-md-12 -->
-            <div class="col-md-12 text-center padding-bottom-40">
-
-                <h2>Pricing for every business, at any stage</h2>
-
-            </div>
-            <!--end col-md-12 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="price-box">
-
-                    <ul class="pricing-list">
-
-                        <li class="price-title">BASIC</li>
-
-                        <li class="price-value">$25</li>
-
-                        <li class="price-subtitle">Per Month</li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Custom Charts</li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>5 Mailboxes, 10 Gb Storage
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Unlimited Free Dashboards
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Access to all APIs</li>
-
-                        <li class="price-tag-line"><a href="index.html#">FREE 15-DAY TRIAL</a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="price-box">
-
-                    <div class="ribbon blue"><span>Popular</span></div>
-
-                    <ul class="pricing-list">
-
-                        <li class="price-title">STANDARD</li>
-
-                        <li class="price-value">$99</li>
-
-                        <li class="price-subtitle">Per Month</li>
-
-                        <li class="price-text strong"><i class="bi bi-check-circle-fill blue"></i><strong>All Basic
-                                features</strong></li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>15 Mailboxes, 50 Gb Storage
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Interactive Screen Sharing
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Full Reports History</li>
-
-                        <li class="price-tag"><a href="index.html#">FREE 15-DAY TRIAL</a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="price-box">
-
-                    <ul class="pricing-list">
-
-                        <li class="price-title white-text">PRO</li>
-
-                        <li class="price-value white-text">$199</li>
-
-                        <li class="price-subtitle white-text">Per Month</li>
-
-                        <li class="price-text white-text"><i class="bi bi-check-circle-fill blue"></i><strong>All
-                                Standard
-                                Features</strong></li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>50 Mailboxes, 90 Gb Storage
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>Dedicated Account Manager
-                        </li>
-
-                        <li class="price-text"><i class="bi bi-check-circle-fill blue"></i>24/7 Priority Support</li>
-
-                        <li class="price-tag-line"><a href="index.html#">FREE 15-DAY TRIAL</a></li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-        </div>
-        <!--end row -->
-
-    </div>
-    <!--end container -->
-
-</section>
-<!--end pricing section -->
-
-<!--begin features section -->
-<section class="section-grey medium-padding-bottom" id="features">
-
-    <!--begin container -->
-    <div class="container">
-
-        <!--begin row -->
-        <div class="row">
-
-            <!--begin col-md-12-->
-            <div class="col-md-12 text-center">
-
-                <h2>Amazing Features</h2>
-
-            </div>
-            <!--end col-md-12 -->
-
-        </div>
-        <!--end row -->
-
-        <!--begin row -->
-        <div class="row">
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="feature-box light-green">
-
-                    <i class="bi bi-gem"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>Support 24/7</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="feature-box light-blue">
-
-                    <i class="bi bi-people"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>User Friendly</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md 4-->
-            <div class="col-md-4">
-
-                <div class="feature-box orange">
-
-                    <i class="bi bi-bell"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>Notifications</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-        </div>
-        <!--end row -->
-
-        <!--begin row -->
-        <div class="row">
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="feature-box dark-blue">
-
-                    <i class="bi bi-gear"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>Accesibility</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="feature-box light-red">
-
-                    <i class="bi bi-cash-stack"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>Cost Control</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-            <!--begin col-md-4-->
-            <div class="col-md-4">
-
-                <div class="feature-box dark-green">
-
-                    <i class="bi bi-chat-left-text"></i>
-
-                    <div class="feature-box-text">
-
-                        <h4>Chat With Friends</h4>
-
-                        <p>Utise wisi enim nets venias, quis tation ullamcorper nets lobotis nisle consequat.</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-            <!--end col-md-4 -->
-
-        </div>
-        <!--end row -->
-
-    </div>
-    <!--end container -->
-
-</section>
-<!--end features section -->
-
-<!--begin section-white -->
-<section class="section-white no-padding-bottom">
-
-    <!--begin container -->
-    <div class="container">
-
-        <!--begin row -->
-        <div class="row align-items-center">
-
-            <!--begin col-md-6-->
-            <div class="col-md-6 text-center">
-
-                <p class="testimonial-single">“People who succeed in business aren't afraid to hear feedback from their
-                    customers - they actually thrive from it.”</p>
-
-                <h5 class="margin-bottom-5">Johanna S. Richardson</h5>
-
-                <p class="blue">CEO Essentials</p>
-
-            </div>
-            <!--end col-md-6-->
-
-            <!--begin col-md-6-->
-            <div class="col-md-6">
-
-                <img src="{{baseURL}}/assets/tf-smart/v2/images/testimonials-woman.jpg" class="width-100" alt="pic">
-
-            </div>
-            <!--end col-md-6-->
-
-        </div>
-        <!--end row -->
-
-    </div>
-    <!--end container -->
-
-</section>
-<!--end section-white -->
-
 <!--begin blog -->
-<section class="section-grey medium-padding-bottom" id="blog">
+<section class="section-grey" id="blog" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1500">
 
     <!--begin container-->
     <div class="container">
@@ -1254,7 +318,7 @@
             <!--begin col-md-12-->
             <div class="col-md-12 text-center">
 
-                <h2>Our Blog</h2>
+                <h2>Eco Concept</h2>
 
             </div>
             <!--end col-md-12-->
@@ -1275,7 +339,7 @@
                     <div class="popup-wrapper">
                         <div class="popup-gallery">
                             <a href="index.html#">
-                                <img src="{{baseURL}}/assets/tf-smart/v2/images/blog4.jpg" class="width-100" alt="pic">
+                                <img src="{{baseURL}}/assets/front/eco/limbah-b3.jpg" class="width-100" alt="pic">
                                 <span class="eye-wrapper2"><i class="bi bi-link-45deg"></i></span>
                             </a>
                         </div>
@@ -1285,14 +349,55 @@
                     <!--begin blog-item_inner -->
                     <div class="blog-item-inner">
 
-                        <h3 class="blog-title"><a href="index.html#">The Guide To LinkedIn Ads</a></h3>
+                        <h3 class="blog-title"><a href="index.html#">Sekilas Limbah B3</a></h3>
 
-                        <a href="index.html#" class="blog-icons last"><i class="bi bi-card-text"></i> Marketing &amp;
-                            Design &#8212;
-                            11 Min Read</a>
+                        <i class="bi bi-person-circle"></i> Admin
+                        <i class="bi bi-stopwatch"></i> {{NOW|date('d F Y')}}
 
-                        <p>Quis autem velis reprehender nets quiste voluptate velite estum quants etsamis sedit varias
-                            nets.</p>
+                        <p class="text-justify mb-3">Karakteristik B3 dan Limbah B3 Mudah meledak Mudah terbakar Reaktif
+                            Beracun
+                            Infeksius Korosif Kewenangan
+                            pengelolaan limbah B3 di Kota Bandung ...</p>
+                        <a href="#" class="link-dark green">Read More <i class="bi bi-chevron-double-right"></i></a>
+                    </div>
+                    <!--end blog-item-inner -->
+
+                </div>
+                <!--end blog-item -->
+
+            </div>
+            <!--end col-sm-4-->
+
+            <!--begin col-sm-4 -->
+            <div class="col-md-4">
+
+                <!--begin blog-item -->
+                <div class="blog-item">
+
+                    <!--begin popup image -->
+                    <div class="popup-wrapper">
+                        <div class="popup-gallery">
+                            <a href="index.html#">
+                                <img src="{{baseURL}}/assets/front/eco/Adiwiyata.png" class="width-100" alt="pic">
+                                <span class="eye-wrapper2"><i class="bi bi-link-45deg"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--end popup image -->
+
+                    <!--begin blog-item_inner -->
+                    <div class="blog-item-inner">
+
+                        <h3 class="blog-title"><a href="index.html#">Sekolah Adiwiyata</a></h3>
+
+                        <i class="bi bi-person-circle"></i> Admin
+                        <i class="bi bi-stopwatch"></i> {{NOW|date('d F Y')}}
+
+                        <p class="mb-3">Definisi Adiwiyata : Tempat yang baik dan ideal dimana dapat diperoleh segala
+                            ilmu
+                            pengetahuan dan
+                            berbagai norma serta etika yang dapat menjadi dasar manusia ...</p>
+                        <a href="#" class="link-dark green">Read More <i class="bi bi-chevron-double-right"></i></a>
 
                     </div>
                     <!--end blog-item-inner -->
@@ -1313,7 +418,7 @@
                     <div class="popup-wrapper">
                         <div class="popup-gallery">
                             <a href="index.html#">
-                                <img src="{{baseURL}}/assets/tf-smart/v2/images/blog2.jpg" class="width-100" alt="pic">
+                                <img src="{{baseURL}}/assets/front/eco/limbah-organik.jpg" class="width-100" alt="pic">
                                 <span class="eye-wrapper2"><i class="bi bi-link-45deg"></i></span>
                             </a>
                         </div>
@@ -1323,53 +428,16 @@
                     <!--begin blog-item_inner -->
                     <div class="blog-item-inner">
 
-                        <h3 class="blog-title"><a href="index.html#">Affinity Designer Quick Start</a></h3>
+                        <h3 class="blog-title"><a href="index.html#">Limbah Organik</a></h3>
 
-                        <a href="index.html#" class="blog-icons last"><i class="bi bi-play-circle"></i> SaaS Solutions
-                            &#8212; 25
-                            Min Watch</a>
+                        <i class="bi bi-person-circle"></i> Admin
+                        <i class="bi bi-stopwatch"></i> {{NOW|date('d F Y')}}
 
-                        <p>Quis autem velis reprehender nets quiste voluptate velite estum quants etsamis sedit varias
-                            nets.</p>
-
-                    </div>
-                    <!--end blog-item-inner -->
-
-                </div>
-                <!--end blog-item -->
-
-            </div>
-            <!--end col-sm-4-->
-
-            <!--begin col-sm-4 -->
-            <div class="col-md-4">
-
-                <!--begin blog-item -->
-                <div class="blog-item">
-
-                    <!--begin popup image -->
-                    <div class="popup-wrapper">
-                        <div class="popup-gallery">
-                            <a href="index.html#">
-                                <img src="{{baseURL}}/assets/tf-smart/v2/images/blog3.jpg" class="width-100" alt="pic">
-                                <span class="eye-wrapper2"><i class="bi bi-link-45deg"></i></span>
-                            </a>
-                        </div>
-                    </div>
-                    <!--end popup image -->
-
-                    <!--begin blog-item_inner -->
-                    <div class="blog-item-inner">
-
-                        <h3 class="blog-title"><a href="index.html#">Our Happy Team</a></h3>
-
-                        <a href="index.html#" class="blog-icons last"><i class="bi bi-mic"></i> Product Launch &#8212;
-                            19 Min
-                            Listen</a>
-
-                        <p>Quis autem velis reprehender nets quiste voluptate velite estum quants etsamis sedit varias
-                            nets.</p>
-
+                        <p class="mb-3">Limbah organik memiliki ciri-ciri yang bisa memudahkan kita dalam mengenalinya.
+                            Ciri umum
+                            dari limbah
+                            jenis organik diantaranya yaitu ...</p>
+                        <a href="#" class="link-dark green">Read More <i class="bi bi-chevron-double-right"></i></a>
                     </div>
                     <!--end blog-item-inner -->
 
@@ -1388,78 +456,51 @@
 </section>
 <!--end blog -->
 
-<!--begin contact -->
-<section class="section-white" id="contact">
-
-    <!--begin container-->
-    <div class="container">
-
-        <!--begin row-->
-        <div class="row">
-
-            <!--begin col-md-6 -->
-            <div class="col-md-6">
-
-                <h3>Get in touch</h3>
-
-                <!--begin success message -->
-                <p class="contact_success_box" style="display:none;">We received your message and you'll hear from us
-                    soon.
-                    Thank You!</p>
-                <!--end success message -->
-
-                <!--begin contact form -->
-                <form id="contact-form" class="contact"
-                    action="http://demo.epic-webdesign.com/tf-smart/v2/php/contact.php" method="post">
-
-                    <input class="contact-input white-input" required="" name="contact_names" placeholder="Full Name*"
-                        type="text">
-
-                    <input class="contact-input white-input" required="" name="contact_email"
-                        placeholder="Email Adress*" type="email">
-
-                    <input class="contact-input white-input" required="" name="contact_phone"
-                        placeholder="Phone Number*" type="text">
-
-                    <textarea class="contact-commnent white-input" rows="2" cols="20" name="contact_message"
-                        placeholder="Your Message..."></textarea>
-
-                    <input value="Send Message" id="submit-button" class="contact-submit" type="submit">
-
-                </form>
-                <!--end contact form -->
-
-            </div>
-            <!--end col-md-6 -->
-
-            <!--begin col-md-6 -->
-            <div class="col-md-6 responsive-top-margins">
-
-                <h3>How to find us</h3>
-
-                <iframe class="contact-maps"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.9050207912896!2d-0.14675028449633118!3d51.514958479636384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ad554c335c1%3A0xda2164b934c67c1a!2sOxford+St%2C+London%2C+UK!5e0!3m2!1sen!2sro!4v1485889312335"
-                    width="600" height="270" style="border:0" allowfullscreen></iframe>
-
-                <h5>Head Office</h5>
-
-                <p class="contact-info"><i class="bi bi-geo-alt-fill"></i> 10 Oxford Street, London, UK, E1 1EC</p>
-
-                <p class="contact-info"><i class="bi bi-envelope-open-fill"></i> <a
-                        href="mailto:contact@youremail.com">office@smart.co.uk</a></p>
-
-                <p class="contact-info"><i class="bi bi-telephone-fill"></i> +44 987 654 321</p>
-
-            </div>
-            <!--end col-md-6 -->
-
+<!-- Instagram Section Begin -->
+<div class="instagram-photo">
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/4-slider.jpg" data-aos="zoom-out"
+        data-aos-duration="3000">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
         </div>
-        <!--end row-->
-
     </div>
-    <!--end container-->
-
-</section>
-<!--end contact-->
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/2-slider-.jpg" data-aos="zoom-out"
+        data-aos-duration="3500">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
+        </div>
+    </div>
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/1-slider.jpg" data-aos="zoom-out"
+        data-aos-duration="2000">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
+        </div>
+    </div>
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/6-slider.jpg" data-aos="zoom-out"
+        data-aos-duration="4000">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
+        </div>
+    </div>
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/PRABU-1.jpg" data-aos="zoom-out"
+        data-aos-duration="2500">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
+        </div>
+    </div>
+    <div class="insta-item set-bg" data-setbg="{{baseURL}}/assets/front/galeri/Prabu-2.jpg" data-aos="zoom-out"
+        data-aos-duration="3000">
+        <div class="inside-text">
+            <i class="ti-instagram"></i>
+            <h5><a href="#">See More</a></h5>
+        </div>
+    </div>
+</div>
+<!-- Instagram Section End -->
 
 {% endblock %}

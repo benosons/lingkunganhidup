@@ -1,5 +1,6 @@
 console.log('You are running jQuery version: ' + $.fn.jquery);
 $(document).ready(function(){
+	AOS.init();
   $('ul.sf-menu > li.selected').removeClass('selected');
   $('#menu-home').addClass('selected');
   loadberitaAll('','');
@@ -7,6 +8,7 @@ $(document).ready(function(){
   loadberita('','');
 
 });
+
 
 function loadberitaAll(param, id){
 

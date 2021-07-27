@@ -79,6 +79,9 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->add('/', 'View::index');
 $routes->add('home', 'View::home');
+$routes->add('profil', 'View::profil');
+$routes->add('visimisi', 'View::visimisi');
+$routes->add('struktur', 'View::struktur');
 $routes->add('contact', 'View::contact');
 $routes->add('kegiatanUser', 'View::kegiatanUser');
 $routes->add('eco_concept', 'View::eco_concept');
