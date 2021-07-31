@@ -1,0 +1,48 @@
+{% extends "users/layout.html" %} {% block content %}
+
+<!--begin contact -->
+<section class="section-white">
+
+    <!--begin container-->
+    <div class="container">
+        <!-- {{baseURL}}/assets/front/eco/Adiwiyata.png -->
+        <!--begin row-->
+        <div class="row">
+            <h1 class="text-center">Registrasi Perizinan</h1>
+            <div class="offset-md-3 col-md-1">
+                <div class="card border-light" style="width: 35rem;">
+                    <div class="card-body">
+                        <form class="contact" action="#" method="post">
+
+                            <input class="contact-input white-input" required="" name="username" placeholder="Username*"
+                                type="text">
+                            <input class="contact-input white-input" required="" name="nama" placeholder="Nama*"
+                                type="text">
+                            <input class="contact-input white-input" required="" name="tgl_lahir"
+                                placeholder="Tanggal Lahir*" type="date">
+                            <input class="contact-input white-input" required="" name="alamat" placeholder="Alamat*"
+                                type="text">
+                            <input class="contact-input white-input" required="" name="no_telepon"
+                                placeholder="No Telepon*" type="text">
+
+                            <div class="text-end">
+                                <input value="Registrasi" id="submit-button" class="btn btn-success btn-sm"
+                                    type="submit">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer padding-top-10">
+                        <p>Sudah punya akun ? Login <a href=" #" class="bnt btn-link"> Disini </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+
+    </div>
+    <!--end container-->
+
+</section>
+<!--end contact-->
+
+{% endblock %}

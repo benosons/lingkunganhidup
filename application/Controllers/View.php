@@ -52,6 +52,22 @@ class View extends \CodeIgniter\Controller
 		return \Twig::instance()->display('users/contact.html', $this->data);
 	}
 
+	public function login_perizinan()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'login perizinan';
+		return \Twig::instance()->display('users/perizinan/login_perizinan.html', $this->data);
+	}
+
+	public function registrasi_perizinan()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'registrasi perizinan';
+		return \Twig::instance()->display('users/perizinan/registrasi_perizinan.html', $this->data);
+	}
+
 	public function profil()
 	{
 		helper('form');
@@ -76,6 +92,29 @@ class View extends \CodeIgniter\Controller
 		return \Twig::instance()->display('users/struktur.html', $this->data);
 	}
 
+	public function regulasi()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'regulasi';
+		return \Twig::instance()->display('users/regulasi.html', $this->data);
+	}
+
+	public function info_perizinan()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'info_perizinan';
+		return \Twig::instance()->display('users/perizinan/info_perizinan.html', $this->data);
+	}
+	public function prosedur_perizinan()
+	{
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'prosedur';
+		return \Twig::instance()->display('users/perizinan/prosedur_perizinan.html', $this->data);
+	}
+
 	public function kegiatanUser()
 	{
 
@@ -92,6 +131,24 @@ class View extends \CodeIgniter\Controller
 		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
 		$this->data['page'] = 'eco_concept';
 		return \Twig::instance()->display('users/eco_concept.html', $this->data);
+	}
+
+	public function laporan_rth()
+	{
+
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'laporan rth';
+		return \Twig::instance()->display('users/publikasi/laporan_rth.html', $this->data);
+	}
+
+	public function laporan_ozon()
+	{
+
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'laporan ozon';
+		return \Twig::instance()->display('users/publikasi/laporan_ozon.html', $this->data);
 	}
 
 	public function login()

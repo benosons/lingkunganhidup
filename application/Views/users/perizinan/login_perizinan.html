@@ -1,0 +1,50 @@
+{% extends "users/layout.html" %} {% block content %}
+
+<!--begin contact -->
+<section class="section-white">
+
+    <!--begin container-->
+    <div class="container">
+        <!-- {{baseURL}}/assets/front/eco/Adiwiyata.png -->
+        <!--begin row-->
+        <div class="row">
+            <h1 class="text-center">Login Perizinan</h1>
+            <div class="offset-md-3 col-md-1">
+                <div class="card border-light" style="width: 35rem;">
+                    <div class="card-body">
+                        <form class="contact" action="http://demo.epic-webdesign.com/tf-smart/v2/php/contact.php"
+                            method="post">
+
+                            <input class="contact-input white-input" required="" name="username" placeholder="Username*"
+                                type="text">
+
+                            <input class="contact-input border-success" required="" name="password"
+                                placeholder="Password*" type="password">
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label text-secondary" for="flexCheckDefault">
+                                    Remember Me
+                                </label>
+                            </div>
+
+                            <div class="text-end">
+                                <input value="Login" id="submit-button" class="btn btn-success btn-sm" type="submit">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer padding-top-10">
+                        <p>Belum punya akun ? Registrasi <a href=" #" class="bnt btn-link"> Disini </a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+
+    </div>
+    <!--end container-->
+
+</section>
+<!--end contact-->
+
+{% endblock %}
