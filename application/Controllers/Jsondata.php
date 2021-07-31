@@ -346,7 +346,7 @@ class Jsondata extends \CodeIgniter\Controller
 		}
 	}
 
-	public function loadprogram()
+	public function loadpermohonan()
 	{
 		try
 		{
@@ -359,9 +359,9 @@ class Jsondata extends \CodeIgniter\Controller
 					$model = new \App\Models\ProgramModel();
 					$modelparam = new \App\Models\ParamModel();
 					$modelfiles = new \App\Models\FilesModel();
-
+			
 						$fulldata = [];
-						$dataprogram = $model->getProgram($role);
+						$dataprogram = $model->getpermohonan($role,$userid);
 
 
 					if($dataprogram){
@@ -1459,21 +1459,24 @@ class Jsondata extends \CodeIgniter\Controller
 
 	}
 
-	public function addProgram(){
+	public function addpermohonan(){
 
 		$request  = $this->request;
 		$param 	  = $request->getVar('param');
 		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
 
 		$model 	  = new \App\Models\ProgramModel();
 
-		$data = [
-						'kode_program' => $request->getVar('kode_program'),
-						'nama_program' => $request->getVar('nama_program'),
-						'created_by'	 => $role,
-						'created_date' => $this->now,
-						'updated_date' => $this->now,
-        ];
+		$data = [];
+
+		for ($i=1; $i <= 8 ; $i++) { 
+			$data['input_'.$i] = $request->getVar('input_'.$i);
+		}
+
+		$data['created_by']	 	= $userid;
+		$data['created_date'] 	= $this->now;
+		$data['updated_date'] 	= $this->now;
 
 		$res = $model->saveParam($param, $data);
 		$id  = $model->insertID();
@@ -1481,7 +1484,7 @@ class Jsondata extends \CodeIgniter\Controller
 		$response = [
 				'status'   => 'sukses',
 				'code'     => '0',
-				'data' 		 => 'terkirim'
+				'data' 	   => 'terkirim'
 		];
 		header('Content-Type: application/json');
 		echo json_encode($response);
@@ -2214,8 +2217,7 @@ class Jsondata extends \CodeIgniter\Controller
 
 						foreach ($datauser as $keyuser => $valueuser) {
 							$datafiles = $modelfiles->getWhere(['id_parent' => $valueuser['user_id']])->getRow();
-							$datasatuan= $model->getSatuanByCode($valueuser['user_satuan']);
-							$obj_merged = (object) array_merge((array) $valueuser, (array) $datafiles, (array) $datasatuan);
+							$obj_merged = (object) array_merge((array) $valueuser, (array) $datafiles);
 							array_push($fulldata, $obj_merged);
 						}
 						$users = $fulldata;

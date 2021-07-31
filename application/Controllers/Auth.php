@@ -28,7 +28,6 @@ class Auth extends \CodeIgniter\Controller
 									'user_email'    => $data->user_email,
 									'logged_in'     => TRUE,
 									'user_role'     => $data->user_role,
-									'nip'   				=> $data->nip
 							];
 							$session->set($ses_data);
 

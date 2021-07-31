@@ -22,6 +22,20 @@ class ProgramModel extends Model{
           return  $query->getResult();
     }
 
+    public function getpermohonan($role=null,$userid=null)
+    { 
+
+          if($role == '10'){ 
+            $builder = $this->db->table('data_permohonan');
+            $query   = $builder->getWhere(['created_by' => $userid]);
+            return  $query->getResult();
+          }
+          
+          $builder = $this->db->table('data_permohonan');
+          $query   = $builder->get();
+          return  $query->getResult();
+    }
+
     public function saveParam($table = null, $data = null)
     {
         return  $this->db->table($table)->insert($data);

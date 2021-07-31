@@ -89,43 +89,22 @@ $routes->add('dashboard', 'View::dashboard');
 $routes->add('login', 'View::login');
 $routes->add('register', 'View::register');
 $routes->add('users', 'View::users');
-$routes->add('program', 'View::program');
-$routes->add('kegiatan', 'View::kegiatan');
-$routes->add('subkegiatan', 'View::subkegiatan');
-$routes->add('paket', 'View::paket');
-$routes->add('target', 'View::target');
-$routes->add('fisik', 'View::fisik');
-$routes->add('biodata', 'View::biodata');
-$routes->add('rencana', 'View::rencana');
-$routes->add('laporan', 'View::laporan');
-$routes->add('rekap', 'View::rekap');
-$routes->add('report', 'View::report');
+$routes->add('menusatu', 'View::menusatu');
 
 $routes->add('auth', 'Auth::auth');
 $routes->add('reg', 'Auth::reg');
 $routes->add('logout', 'Auth::logout');
 
-// sievalapor new
 $routes->post('loadusers', 'Jsondata::loadusers');
-$routes->post('loadppk', 'Jsondata::loadppk');
-$routes->post('loadprogram', 'Jsondata::loadprogram');
-$routes->post('loadkegiatan', 'Jsondata::loadkegiatan');
-$routes->post('loadsubkegiatan', 'Jsondata::loadsubkegiatan');
-$routes->post('loadpaket', 'Jsondata::loadpaket');
-$routes->post('loadtarget', 'Jsondata::loadtarget');
-$routes->post('loadtargetNip', 'Jsondata::loadtargetNip');
-$routes->post('loadrealisasi', 'Jsondata::loadrealisasi');
-$routes->post('loadminggu', 'Jsondata::loadminggu');
-$routes->post('loadnip', 'Jsondata::loadnip');
-$routes->post('loadrekap', 'Jsondata::loadrekap');
 $routes->post('loadall', 'Jsondata::loadall');
+$routes->post('loadpermohonan', 'Jsondata::loadpermohonan');
 
 $routes->post('actionUsers', 'Jsondata::actionUsers');
 $routes->post('addUser', 'Jsondata::addUser');
-$routes->post('addProgram', 'Jsondata::addProgram');
-$routes->post('addKegiatan', 'Jsondata::addKegiatan');
-$routes->post('addTarget', 'Jsondata::addTarget');
-$routes->post('addRealisasi', 'Jsondata::addRealisasi');
+$routes->post('addpermohonan', 'Jsondata::addpermohonan');
+
+
+
 
 
 

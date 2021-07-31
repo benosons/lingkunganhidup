@@ -94,7 +94,6 @@ function loadusers(param){
                 { 'mDataProp': 'user_id', 'width':'10%'},
                 { 'mDataProp': 'user_name'},
                 { 'mDataProp': 'user_fullname'},
-                { 'mDataProp': 'nip'},
                 { 'mDataProp': 'role_name'},
                 { 'mDataProp': 'user_status'},
                 { 'mDataProp': 'user_status'},
@@ -110,7 +109,7 @@ function loadusers(param){
                       }
                       return data;
                   },
-                  aTargets: [ 4 ]
+                  aTargets: [ 3 ]
               },
               {
                   mRender: function ( data, type, row ) {
@@ -125,7 +124,7 @@ function loadusers(param){
 
                       return el;
                   },
-                  aTargets: [ 5 ]
+                  aTargets: [ 4 ]
               },
               {
                   mRender: function ( data, type, row ) {
@@ -139,7 +138,7 @@ function loadusers(param){
 
                       return el;
                   },
-                  aTargets: [ 6 ]
+                  aTargets: [ 5 ]
               },
               {
                   mRender: function ( data, type, row ) {
@@ -150,7 +149,7 @@ function loadusers(param){
 
                       return el;
                   },
-                  aTargets: [ 7 ]
+                  aTargets: [ 6 ]
               },
             ],
             fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
