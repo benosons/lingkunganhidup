@@ -45,25 +45,27 @@
 
 						<b class="arrow"></b>
 					</li>
-
-					<li id="menu-1" class="">
-						<a href="menusatu">
+					{% if role == 1 %}
+					<li id="menu-teknis" class="">
+						<a href="teknis">
 							<i class="menu-icon fa fa-folder"></i>
-							<span class="menu-text"> Menu 1 </span>
+							<span class="menu-text"> Persetujuan Teknis </span>
 						</a>
 
 						<b class="arrow"></b>
 					</li>
-					<li id="menu-2" class="">
-						<a href="menu_2">
+					{% else %}
+					<li id="menu-operasi" class="">
+						<a href="operasi">
 							<i class="menu-icon fa fa-folder"></i>
-							<span class="menu-text"> Menu 2 </span>
+							<span class="menu-text"> SLO </span>
 						</a>
 
 						<b class="arrow"></b>
 					</li>
-					
+					{% endif %}
 
+					{% if role == 100 or role == 10 %}
           			<li id="menu-users" class="">
 						<a href="users">
 							<i class="menu-icon fa fa-users"></i>
@@ -72,6 +74,7 @@
 
 						<b class="arrow"></b>
 					</li>
+					{% endif %}
 
 				</ul><!-- /.nav-list -->
 

@@ -89,7 +89,8 @@ $routes->add('dashboard', 'View::dashboard');
 $routes->add('login', 'View::login');
 $routes->add('register', 'View::register');
 $routes->add('users', 'View::users');
-$routes->add('menusatu', 'View::menusatu');
+$routes->add('teknis', 'View::teknis');
+$routes->add('operasi', 'View::operasi');
 
 $routes->add('auth', 'Auth::auth');
 $routes->add('reg', 'Auth::reg');

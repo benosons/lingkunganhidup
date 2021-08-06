@@ -3,7 +3,7 @@ console.log('You are running jQuery version: ' + $.fn.jquery);
 $(document).ready(function(){
   $('#nav-menu li').removeClass();
   // $('#nav-menu li#menu-data').addClass('open');
-  $('#nav-menu li#menu-1').addClass('active');
+  $('#nav-menu li#menu-teknis').addClass('active');
 
   $('#all-permohonan').DataTable();
 

@@ -101,8 +101,19 @@ class View extends \CodeIgniter\Controller
 			return redirect('dashboard');
 		} else {
 			helper('form');
-			$message = $this->session->getFlashdata('msg');
+			helper('url');
 
+			$uri = current_url(true);
+
+			$message = $this->session->getFlashdata('msg');
+			
+			if($_SERVER['QUERY_STRING']){
+				$st = 1;
+			}else{
+				$st = 0;
+			}
+			$this->data['register'] = $st;
+			
 			if ($message) {
 				$this->data['message'] = $message;
 			}
@@ -143,12 +154,23 @@ class View extends \CodeIgniter\Controller
 		}
 	}
 
-	public function menusatu()
+	public function teknis()
 	{
 		if ($this->logged) {
 			helper('form');
-			$this->data['script'] = $this->data['baseURL'] . '/action-js/admin/menu/menu-index.js';
-			return \Twig::instance()->display('admin/menu/menu-index-1.html', $this->data);
+			$this->data['script'] = $this->data['baseURL'] . '/action-js/admin/menu/menu-index-teknis.js';
+			return \Twig::instance()->display('admin/menu/menu-index-teknis.html', $this->data);
+		} else {
+			return redirect('home');
+		}
+	}
+
+	public function operasi()
+	{
+		if ($this->logged) {
+			helper('form');
+			$this->data['script'] = $this->data['baseURL'] . '/action-js/admin/menu/menu-index-operasi.js';
+			return \Twig::instance()->display('admin/menu/menu-index-operasi.html', $this->data);
 		} else {
 			return redirect('home');
 		}

@@ -49,22 +49,22 @@ class Auth extends \CodeIgniter\Controller
 		helper('form');
 		//set rules validation form
 		$rules = [
-			'name' 			=> 'required|min_length[3]|max_length[20]',
 			'email' 		=> 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.user_email]',
+			'username'		=> 'required|min_length[3]|max_length[20]',
 			'password' 		=> 'required|min_length[6]|max_length[200]',
 			'confpassword' 	=> 'matches[password]'
 		];
-
+		
 		// if($this->validate($rules)){
 			$model = new UserModel();
 			$data = [
-				'user_name' 	=> $this->request->getVar('name'),
-				'user_email' 	=> $this->request->getVar('email'),
-				'user_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-				'user_role' => 200,
-				'user_fullname' => $this->request->getVar('name')
+				'user_name' 	=> $this->request->getVar('register_username'),
+				'user_email' 	=> $this->request->getVar('register_email'),
+				'user_password' => password_hash($this->request->getVar('register_password'), PASSWORD_DEFAULT),
+				'user_role' 	=> $this->request->getVar('register_tipe'),
+				'user_fullname' => $this->request->getVar('register_badan_usaha')
 			];
-			// print_r($this->request->getVar('password'));die;
+			
 			$model->save($data);
 			return redirect('login');
 		// }else{
