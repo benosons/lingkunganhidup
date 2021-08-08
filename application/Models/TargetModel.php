@@ -362,4 +362,13 @@ class TargetModel extends Model{
       return  $query->getResult();
     }
 
+    public function getparam($table = null, $id = null, $type = null)
+    {
+          $builder = $this->db->table($table);
+          $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type ]);
+          // echo $this->db->getLastQuery();die;
+          return  $query->getResult();
+    }
+
+
 }

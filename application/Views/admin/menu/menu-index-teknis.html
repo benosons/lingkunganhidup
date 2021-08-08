@@ -156,7 +156,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen Kajian Teknis </label>
 
             <div class="col-xs-9">
-              <input multiple="" type="file" name="id-input-file-3" />
+              <input type="file" name="id-input-file-3" id="doc_kajian" />
 
               <!-- /section:custom/file-input -->
             </div>
@@ -166,7 +166,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen Standar Teknis </label>
 
             <div class="col-xs-9">
-              <input multiple="" type="file" name="id-input-file-3" />
+              <input type="file" name="id-input-file-3"  id="doc_standar" />
 
               <!-- /section:custom/file-input -->
             </div>
@@ -177,6 +177,65 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-xs btn-danger" data-dismiss="modal"><i class="ace-icon fa fa-close"></i>close</button>
         <button type="button" id="mohon_save" class="btn btn-xs btn-success" data-dismiss="modal"><i class="ace-icon fa fa-check"></i>submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="modal_file" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+          <center><i class="ace-icon fa fa-file green "></i>
+            Dokumen Unggahan</center>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+					<!-- #section:elements.form -->
+          
+
+          <div class="profile-user-info profile-user-info-striped">
+            <div class="profile-info-row">
+              <div class="profile-info-name" style="width: 35%;"> Tanggal Upload </div>
+  
+              <div class="profile-info-value">
+                <span class="editable editable-click" id="create_date">2010/06/20</span>
+              </div>
+            </div>
+
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Dokumen Kajian Teknis </div>
+
+              <div class="profile-info-value">
+                <i class="fa fa-file light-orange bigger-110"></i>
+                <a class="editable editable-click" id="file_name_kajian" download>Netherlands</a>
+                <span class="text-danger " id="file_size_kajian">Amsterdam</span>
+              </div>
+            </div>
+
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Dokumen Standar Teknis </div>
+
+              <div class="profile-info-value">
+                <i class="fa fa-file light-orange bigger-110"></i>
+                <a class="editable editable-click" id="file_name_standar" download>Netherlands</a>
+                <span class="text-danger " id="file_size_standar">Amsterdam</span>
+              </div>
+            </div>
+
+            
+          </div>
+				</form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-xs btn-danger" data-dismiss="modal"><i class="ace-icon fa fa-close"></i>close</button>
       </div>
     </div>
 

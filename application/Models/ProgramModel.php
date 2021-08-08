@@ -25,7 +25,7 @@ class ProgramModel extends Model{
     public function getpermohonan($role=null,$userid=null)
     { 
 
-          if($role == '10'){ 
+          if($role != '100'){ 
             $builder = $this->db->table('data_permohonan');
             $query   = $builder->getWhere(['created_by' => $userid]);
             return  $query->getResult();
