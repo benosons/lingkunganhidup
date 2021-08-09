@@ -44,7 +44,7 @@ $RECYCLE.BIN/
 .env
 application/.env
 application/cache/*
-public/uploads/users/*
+public/uploads/*
 
 #-------------------------
 # Temporary Files

@@ -22,17 +22,17 @@ class ProgramModel extends Model{
           return  $query->getResult();
     }
 
-    public function getpermohonan($role=null,$userid=null)
+    public function getpermohonan($role=null,$userid=null,$type=null)
     { 
 
-          if($role != '100'){ 
+          if($role == '1' || $role == '2'){ 
             $builder = $this->db->table('data_permohonan');
             $query   = $builder->getWhere(['created_by' => $userid]);
             return  $query->getResult();
           }
-          
           $builder = $this->db->table('data_permohonan');
-          $query   = $builder->get();
+          $query   = $builder->getWhere(['type' => $type]);
+          // echo $this->db->getLastQuery();die;
           return  $query->getResult();
     }
 

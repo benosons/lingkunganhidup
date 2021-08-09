@@ -353,6 +353,7 @@ class Jsondata extends \CodeIgniter\Controller
 				$request  = $this->request;
 				$param 	  = $request->getVar('param');
 				$id		 	  = $request->getVar('id');
+				$type		 	  = $request->getVar('type');
 				$role 		= $this->data['role'];
 				$userid		= $this->data['userid'];
 
@@ -361,7 +362,7 @@ class Jsondata extends \CodeIgniter\Controller
 					$modelfiles = new \App\Models\FilesModel();
 			
 						$fulldata = [];
-						$dataprogram = $model->getpermohonan($role, $userid);
+						$dataprogram = $model->getpermohonan($role, $userid, $param);
 
 
 					if($dataprogram){
@@ -2543,6 +2544,79 @@ class Jsondata extends \CodeIgniter\Controller
 							'status'   => 'sukses',
 							'code'     => '1',
 							'data' 		 => $data
+						];
+					}else{
+						$response = [
+						    'status'   => 'gagal',
+						    'code'     => '0',
+						    'data'     => 'tidak ada data',
+						];
+					}
+
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function updatestatus(){
+
+		$request  = $this->request;
+		$table 	  = $request->getVar('table');
+		$id 	  = $request->getVar('id');
+		$stat 	  = $request->getVar('type');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\TargetModel();
+
+		$data = [
+						'updated_date'	=> $this->now,
+						'updated_by' 	=> $userid,
+						'status' 		=> $stat,
+        ];
+
+		$res = $model->updatestatus($table, $id, $data);
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terupdate'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function loadstatus()
+	{
+		try
+		{
+				$request  = $this->request;
+				$param 	  = $request->getVar('param');
+				$id		 	  = $request->getVar('id');
+				$type		 	  = $request->getVar('type');
+				$role 		= $this->data['role'];
+				$userid		= $this->data['userid'];
+
+					$model = new \App\Models\TargetModel();
+					$modelparam = new \App\Models\ParamModel();
+					$modelfiles = new \App\Models\FilesModel();
+			
+						$fulldata = [];
+						$dataprogram = $model->getstatus($id);
+
+
+					if($dataprogram){
+						$response = [
+							'status'   => 'sukses',
+							'code'     => '1',
+							'data' 		 => $dataprogram
 						];
 					}else{
 						$response = [

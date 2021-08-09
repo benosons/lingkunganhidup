@@ -43,10 +43,12 @@
       <div class="widget-box widget-color-orange">
         <div class="widget-header">
 					<div class="widget-toolbar no-border">
+            {% if role == 2%}
 						<button class="btn btn-xs btn-inverse bigger" data-toggle="modal" data-target="#modal_program">
 							<i class="ace-icon fa fa-plus"></i>
 							Tambah Permohonan
 						</button>
+            {% endif %}
 					</div>
 				</div>
         <div class="widget-body">
@@ -233,6 +235,7 @@
         <h4 class="modal-title">
           <center><i class="ace-icon fa fa-file green "></i>
             Dokumen Unggahan</center>
+            <input type="hidden" id="ini-ID">
         </h4>
       </div>
       <div class="modal-body">
@@ -308,7 +311,83 @@
                 <span class="text-danger " id="file_size_doc_sertifikat_registrasi">Amsterdam</span>
               </div>
             </div>
-            
+            {% if role == 100 or role == 10%}
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Status </div>
+
+              <div class="profile-info-value">
+                <ul class="steps" id="data-step">
+                  <li data-step="1" id="step-proses-1" class="">
+                    <span class="step">
+                      <a id="btn-proses-admin" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
+                      <i class="ace-icon fa fa-check-square-o"></i>
+                      </a>
+                    </span>
+                    <span class="title">proses pemeriksaan administrasi</span>
+                  </li>
+
+                  <li data-step="2" id="step-selesai-1">
+                    <span class="step">
+                      <a disabled id="btn-selesai-admin" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
+                      <i class="ace-icon fa fa-check-square-o"></i>
+                      </a>
+                    </span>
+                    <span class="title">selesai Pemeriksaan administrasi</span>
+                  </li>
+
+                  <li data-step="3" id="step-proses-2">
+                    <span class="step">
+                      <a disabled id="btn-proses-subtan" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
+                      <i class="ace-icon fa fa-check-square-o"></i>
+                      </a>
+                    </span>
+                    <span class="title">proses penilaian substansi</span>
+                  </li>
+
+                  <li data-step="4" id="step-selesai-2">
+                    <span class="step">
+                      <a disabled id="btn-selesai-subtan" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
+                      <i class="ace-icon fa fa-check-square-o"></i>
+                      </a>
+                    </span>
+                    <span class="title">selesai penilaian substansi</span>
+                  </li>
+                </ul>
+
+                
+              </div>
+            </div>
+            {% endif %}
+
+            {% if role == 1 or role == 2 %}
+            <div class="profile-info-row"></div>
+              <div class="profile-info-name"> Status </div>
+
+              <div class="profile-info-value">
+                <ul class="steps">
+                  <li data-step="1" id="step-proses-1" class="">
+                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
+                    <span class="title">proses pemeriksaan administrasi</span>
+                  </li>
+              
+                  <li data-step="2" id="step-selesai-1">
+                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
+                    <span class="title">selesai Pemeriksaan administrasi</span>
+                  </li>
+              
+                  <li data-step="3" id="step-proses-2">
+                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
+                    <span class="title">proses penilaian substansi</span>
+                  </li>
+              
+                  <li data-step="4" id="step-selesai-2">
+                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
+                    <span class="title">selesai penilaian substansi</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {% endif %}
           </div>
 				</form>
       </div>

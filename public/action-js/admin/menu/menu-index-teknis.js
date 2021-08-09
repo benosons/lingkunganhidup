@@ -38,7 +38,7 @@ $(document).ready(function(){
 
   $('#all-permohonan').DataTable();
 
-  loadpermohonan('');
+  loadpermohonan('1');
 
   $('#mohon_save').on('click', function(){
 
@@ -54,6 +54,78 @@ $(document).ready(function(){
       
       save(formData);
   });
+
+  $('#btn-proses-admin').on('click', function(e){
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+      $('#step-proses-1').removeClass('active');
+      $('#btn-selesai-admin').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 0);
+    } else {
+      
+      $('#step-proses-1').addClass('active');
+      $('#btn-selesai-admin').removeAttr('disabled');
+      action('update', $('#ini-ID').val(), 1);
+
+    }
+    $(this).data("clicks", !clicks);
+    
+
+  })
+
+  $('#btn-selesai-admin').on('click', function(e){
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+      $('#step-selesai-1').removeClass('active');
+      $('#btn-proses-admin').removeAttr('disabled');
+      $('#btn-proses-subtan').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 1);
+    }else{
+      $('#step-selesai-1').addClass('active');
+      $('#btn-proses-subtan').removeAttr('disabled');
+
+      $('#btn-proses-admin').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 2);
+    }
+    $(this).data("clicks", !clicks);
+    
+
+  })
+
+  $('#btn-proses-subtan').on('click', function(e){
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+      $('#step-proses-2').removeClass('active');
+      $('#btn-selesai-admin').removeAttr('disabled');
+      $('#btn-selesai-subtan').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 2);
+    }else{
+      $('#step-proses-2').addClass('active');
+      $('#btn-selesai-subtan').removeAttr('disabled');
+
+      $('#btn-selesai-admin').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 3);
+    }
+    $(this).data("clicks", !clicks);
+    
+  })
+
+  $('#btn-selesai-subtan').on('click', function(e){
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+      $('#step-selesai-2').removeClass('active');
+      $('#btn-proses-subtan').removeAttr('disabled');
+      action('update', $('#ini-ID').val(), 3);
+
+    }else{
+      $('#step-selesai-2').addClass('active');
+
+      $('#btn-proses-subtan').attr('disabled', 'disabled');
+      action('update', $('#ini-ID').val(), 4);
+    }
+    $(this).data("clicks", !clicks);
+    
+  })
 
 
 });
@@ -176,7 +248,9 @@ function save(formData){
               type      : type,
           },
           success: function(result){
+            loadstatus(id);
             let data = result.data;
+            $('#ini-ID').val(id);
             $('#create_date').html(data[0]['created_date']);
             for (let index = 0; index < data.length; index++) {
               if(data[index]['jenis'] == 'doc_kajian'){
@@ -193,7 +267,85 @@ function save(formData){
             }
           }
         })
+      }else if(mode == 'update'){
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'updatestatus',
+          data : {
+              table     : 'data_permohonan',
+              id        : id,
+              type      : type,
+          },
+          success: function(result){
+            let data = result.data;
+            loadstatus(id);
+          }
+        })
       }
+    }
+
+    function loadstatus(id){
+      $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'loadstatus',
+        data : {
+            id        : id,
+        },
+        success: function(result){
+          let data = result.data;
+          
+          switch (data[0]['status']) {
+            case '1':
+                $('#step-proses-1').addClass('active');
+                $('#btn-proses-admin').removeAttr('disabled');
+                $('#btn-selesai-admin').removeAttr('disabled');
+                var clicks = $('#btn-proses-admin').data('clicks');
+                $('#btn-proses-admin').data("clicks", !clicks);
+
+                
+              break;
+            case '2':
+                $('#step-proses-1').addClass('active');
+                $('#step-selesai-1').addClass('active');
+
+                $('#btn-proses-admin').attr('disabled', 'disabled');
+                $('#btn-selesai-admin').removeAttr('disabled');
+                $('#btn-proses-subtan').removeAttr('disabled');
+                var clicks = $('#btn-selesai-admin').data('clicks');
+                $('#btn-selesai-admin').data("clicks", !clicks);
+              break;
+            case '3':
+                $('#step-proses-1').addClass('active');
+                $('#step-selesai-1').addClass('active');
+                $('#step-proses-2').addClass('active');
+
+                $('#btn-proses-admin').attr('disabled', 'disabled');
+                $('#btn-selesai-admin').attr('disabled', 'disabled');
+                $('#btn-proses-subtan').removeAttr('disabled');
+                var clicks = $('#btn-proses-subtan').data('clicks');
+                $('#btn-proses-subtan').data("clicks", !clicks);
+
+              break;
+            case '4':
+                $('#step-proses-1').addClass('active');
+                $('#step-selesai-1').addClass('active');
+                $('#step-proses-2').addClass('active');
+                $('#step-selesai-2').addClass('active');
+
+                $('#btn-proses-admin').attr('disabled', 'disabled');
+                $('#btn-selesai-admin').attr('disabled', 'disabled');
+                $('#btn-proses-subtan').attr('disabled', 'disabled');
+                $('#btn-selesai-subtan').removeAttr('disabled');
+                var clicks = $('#btn-selesai-subtan').data('clicks');
+                $('#btn-selesai-subtan').data("clicks", !clicks);
+
+              break;
+
+          }
+        }
+      })
     }
 
     function bytesToSize(bytes) {

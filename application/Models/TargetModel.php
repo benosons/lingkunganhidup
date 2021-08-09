@@ -370,5 +370,24 @@ class TargetModel extends Model{
           return  $query->getResult();
     }
 
+    public function updatestatus($table = null, $id = null, $data = null)
+    {
+
+      $builder = $this->db->table($table);
+      $query   = $builder->where('id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();die;
+      return true;
+    }
+
+    public function getstatus($id){
+
+      $builder = $this->db->table('data_permohonan');
+      $query   = $builder->getWhere(['id' => $id]);
+
+      return  $query->getResult();
+    }
+    
+
 
 }

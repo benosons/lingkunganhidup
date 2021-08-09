@@ -45,7 +45,7 @@
 
 						<b class="arrow"></b>
 					</li>
-					{% if role == 1 %}
+					{% if role == 1 or role == 100 or role == 10 %}
 					<li id="menu-teknis" class="">
 						<a href="teknis">
 							<i class="menu-icon fa fa-folder"></i>
@@ -54,7 +54,8 @@
 
 						<b class="arrow"></b>
 					</li>
-					{% else %}
+					{% endif %}
+					{% if role == 2 or role == 100 or role == 10 %}
 					<li id="menu-operasi" class="">
 						<a href="operasi">
 							<i class="menu-icon fa fa-folder"></i>
