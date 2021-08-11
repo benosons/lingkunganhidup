@@ -207,7 +207,7 @@ function save(formData){
           },
           success: function(result){
             let data = result.data;
-            
+            console.log(data);
             $('#ini-ID').val(id);
             if(data.length){
               var dt = $('#data-file-doc').DataTable({

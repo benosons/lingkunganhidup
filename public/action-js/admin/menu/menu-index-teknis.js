@@ -85,7 +85,9 @@ function loadpermohonan(param){
       },
       success: function(result){
           let data = result.data;
-          if(data.length){
+          let code = result.code;
+
+          if(code != '0'){
             var dt = $('#all-permohonan').DataTable({
                 destroy: true,
                 paging: true,
@@ -150,6 +152,9 @@ function loadpermohonan(param){
                     });
                 }
             });
+          }else{
+            var tb = $('#all-permohonan').DataTable()
+            tb.clear().draw();
           }
 
         }
@@ -210,8 +215,8 @@ function save(formData){
           success: function(result){
             loadstatus(id, 1, 'doc_kajian' );
             let data = result.data;
-            
-            if(data.length){
+            let code = result.code;
+            if(code != '0'){
               var dt = $('#data-file-kajian').DataTable({
                 destroy: true,
                 paging: true,
@@ -266,7 +271,13 @@ function save(formData){
                                   <option `+done+` value="0"> Selesai </option>
                                 </select>`;
                         }else{
-                          var el = data;
+                          if(data == '1'){
+                            var el = '<span class="label label-danger arrowed">Revisi</span>';
+                          }else if(data == '0'){
+                            var el = '<span class="label label-primary arrowed">Selesai</span>';
+                          }else{
+                            var el = '-'
+                          }
                         }
   
                         return el;
@@ -297,9 +308,12 @@ function save(formData){
                                 </a>`;
 
                       if($('#role').val() == '1' || $('#role').val() == '2') {
-                        el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                        if(row.status == '1'){
+                          el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>`;
+                        }
+                        
                       }else{
                         el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
                                   <i class="ace-icon fa fa-check-square-o bigger-120"></i>
@@ -328,7 +342,10 @@ function save(formData){
                         tr = this;
                     });
                 }
-            });
+              });
+            }else{
+              var table = $('#data-file-kajian').DataTable();
+              table.clear().draw();
             }
             // $('#create_date').html(data[0]['created_date']);
             // for (let index = 0; index < data.length; index++) {
@@ -358,8 +375,8 @@ function save(formData){
         success: function(result){
           loadstatus(id, 1, 'doc_standar');
           let data = result.data;
-          
-          if(data.length){
+          let code = result.code;
+          if(code != '0'){
             var dt = $('#data-file-standar').DataTable({
               destroy: true,
               paging: true,
@@ -414,7 +431,13 @@ function save(formData){
                               <option `+done+` value="0"> Selesai </option>
                             </select>`;
                     }else{
-                        var el = data;
+                        if(data == '1'){
+                          var el = '<span class="label label-danger arrowed">Revisi</span>';
+                        }else if(data == '0'){
+                          var el = '<span class="label label-primary arrowed">Selesai</span>';
+                        }else{
+                          var el = '-'
+                        }
                       }
 
                       return el;
@@ -445,9 +468,11 @@ function save(formData){
                                 </a>`;
 
                       if($('#role').val() == '1' || $('#role').val() == '2') {
-                        el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                        if(row.status == '1'){
+                          el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                </button>`;
+                                 </button>`;
+                        }
                       }else{
                         el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
                                   <i class="ace-icon fa fa-check-square-o bigger-120"></i>
@@ -476,7 +501,10 @@ function save(formData){
                       tr = this;
                   });
               }
-          });
+            });
+          }else{
+            var table = $('#data-file-standar').DataTable();
+            table.clear().draw();
           }
           // $('#create_date').html(data[0]['created_date']);
           // for (let index = 0; index < data.length; index++) {
@@ -494,6 +522,7 @@ function save(formData){
           // }
         }
       })
+
       }else if(mode == 'update'){
         
         let stat = $('#status_'+type+'_'+id).val();
@@ -530,18 +559,20 @@ function save(formData){
         },
         success: function(result){
           let data = result.data;
-          
-          if(jenis == 'doc_kajian'){
-            for (let i = 0; i < data.length; i++) {
-              $('#bab_kajian option[value="'+data[i]['bab']+'"]').prop('disabled',true);
-              $('#bab_kajian').trigger("chosen:updated");
-              
-            }
-          }else if(jenis == 'doc_standar'){
-            for (let i = 0; i < data.length; i++) {
-              $('#bab_standar option[value="'+data[i]['bab']+'"]').prop('disabled',true);
-              $('#bab_standar').trigger("chosen:updated");
-              
+          let code = result.code;
+          if(code){
+            if(jenis == 'doc_kajian'){
+              for (let i = 0; i < data.length; i++) {
+                $('#bab_kajian option[value="'+data[i]['bab']+'"]').prop('disabled',true);
+                $('#bab_kajian').trigger("chosen:updated");
+                
+              }
+            }else if(jenis == 'doc_standar'){
+              for (let i = 0; i < data.length; i++) {
+                $('#bab_standar option[value="'+data[i]['bab']+'"]').prop('disabled',true);
+                $('#bab_standar').trigger("chosen:updated");
+                
+              }
             }
           }
         }
