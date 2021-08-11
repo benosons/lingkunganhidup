@@ -154,13 +154,12 @@
 						</div>
 					</div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Perizinan Berusaha </label>
 
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_izin_usaha" />
 
-              <!-- /section:custom/file-input -->
             </div>
           </div>
 
@@ -170,7 +169,6 @@
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_persetujauan_lingkungan" />
 
-              <!-- /section:custom/file-input -->
             </div>
           </div>
 
@@ -180,7 +178,6 @@
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_persetujuan_teknis" />
 
-              <!-- /section:custom/file-input -->
             </div>
           </div>
 
@@ -190,7 +187,6 @@
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_hasil_pemantauan" />
 
-              <!-- /section:custom/file-input -->
             </div>
           </div>
 
@@ -200,7 +196,6 @@
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_kontrol_jaminan" />
 
-              <!-- /section:custom/file-input -->
             </div>
           </div>
 
@@ -210,9 +205,8 @@
             <div class="col-xs-9">
               <input type="file" name="id-input-file-3" id="doc_sertifikat_registrasi" />
 
-              <!-- /section:custom/file-input -->
             </div>
-          </div>
+          </div> -->
 
 				</form>
       </div>
@@ -226,7 +220,7 @@
 </div>
 
 <div id="modal_file" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-lg">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -239,157 +233,58 @@
         </h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" role="form">
-					<!-- #section:elements.form -->
+        {% if role == 1 or role == 2 %}
+
+              <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                  <a data-toggle="tab" href="#kajian" aria-expanded="true">Verifikasi Lapangan</a>
+                </li>
+
+              </ul>
+              <div class="tab-content">
+                <div id="kajian" class="tab-pane active">
+                  
+                    <div class="form-group row">
+                      <label class="col-sm-1 control-label no-padding-right" for="nama_program"> Dokumen </label>
           
+                      <div class="col-xs-5">
+                        <select class="chosen-select form-control" id="jenis_doc"  data-placeholder="Pilih Dokumen ...">
+                          <option value=""> </option>
+                          <option value="doc_izin_usaha">Perizinan Berusaha</option>
+                          <option value="doc_persetujauan_lingkungan">Persetujuan Lingkungan</option>
+                          <option value="doc_persetujuan_teknis">Persetujuan Teknis</option>
+                          <option value="doc_hasil_pemantauan">Hasil pemantauan Air Limbah </option>
+                          <option value="doc_kontrol_jaminan">Dokumen kontrol jaminan/jaminan kualitas </option>
+                          <option value="doc_sertifikat_registrasi">Sertifikat registrasi laboratorium lingkungan</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-4">
+                        <input type="file" name="id-input-file-3" id="doc_" />
+                      </div>
+                      <div class="col-xs-2">
+                        <button type="button" class="btn btn-xs btn-success" id="submit_doc"><i class="ace-icon fa fa-check-square-o"></i>Submit</button>
+                      </div>
+                    </div>
+                  
+                  <table id="data-file-doc" class="table table-striped table-bordered nowrap table-responsive">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <!-- <th>BAB</th> -->
+                            <th>Nama File</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                            <th>Tanggal Input</th>
+                            <th>Keterangan</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                  </table>
+                </div>
 
-          <div class="profile-user-info profile-user-info-striped">
-            <div class="profile-info-row">
-              <div class="profile-info-name" style="width: 35%;"> Tanggal Upload </div>
-  
-              <div class="profile-info-value">
-                <span class="editable editable-click" id="create_date">2010/06/20</span>
               </div>
-            </div>
 
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Perizinan Berusaha </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_izin_usaha" download>Netherlands</a>
-                <span class="text-danger " id="file_sizedoc_izin_usaha">Amsterdam</span>
-              </div>
-            </div>
-
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Persetujuan Lingkungan </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_persetujauan_lingkungan" download>Netherlands</a>
-                <span class="text-danger " id="file_size_doc_persetujauan_lingkungan">Amsterdam</span>
-              </div>
-            </div>
-
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Persetujuan Teknis </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_persetujuan_teknis" download>Netherlands</a>
-                <span class="text-danger " id="file_size_doc_persetujuan_teknis">Amsterdam</span>
-              </div>
-            </div>
-
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Hasil pemantauan Air Limbah </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_hasil_pemantauan" download>Netherlands</a>
-                <span class="text-danger " id="file_size_doc_hasil_pemantauan">Amsterdam</span>
-              </div>
-            </div>
-
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Dokumen kontrol jaminan/jaminan kualitas  </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_kontrol_jaminan" download>Netherlands</a>
-                <span class="text-danger " id="file_size_doc_kontrol_jaminan">Amsterdam</span>
-              </div>
-            </div>
-
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Sertifikat registrasi laboratorium lingkungan  </div>
-
-              <div class="profile-info-value">
-                <i class="fa fa-file light-orange bigger-110"></i>
-                <a class="editable editable-click" id="file_name_doc_sertifikat_registrasi" download>Netherlands</a>
-                <span class="text-danger " id="file_size_doc_sertifikat_registrasi">Amsterdam</span>
-              </div>
-            </div>
-            {% if role == 100 or role == 10%}
-            <div class="profile-info-row">
-              <div class="profile-info-name"> Status </div>
-
-              <div class="profile-info-value">
-                <ul class="steps" id="data-step">
-                  <li data-step="1" id="step-proses-1" class="">
-                    <span class="step">
-                      <a id="btn-proses-admin" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
-                      <i class="ace-icon fa fa-check-square-o"></i>
-                      </a>
-                    </span>
-                    <span class="title">proses pemeriksaan administrasi</span>
-                  </li>
-
-                  <li data-step="2" id="step-selesai-1">
-                    <span class="step">
-                      <a disabled id="btn-selesai-admin" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
-                      <i class="ace-icon fa fa-check-square-o"></i>
-                      </a>
-                    </span>
-                    <span class="title">selesai Pemeriksaan administrasi</span>
-                  </li>
-
-                  <li data-step="3" id="step-proses-2">
-                    <span class="step">
-                      <a disabled id="btn-proses-subtan" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
-                      <i class="ace-icon fa fa-check-square-o"></i>
-                      </a>
-                    </span>
-                    <span class="title">proses penilaian substansi</span>
-                  </li>
-
-                  <li data-step="4" id="step-selesai-2">
-                    <span class="step">
-                      <a disabled id="btn-selesai-subtan" class="btn btn-primary btn-xs" style="border-radius: 100%;height: 100%; width: 100%;margin-top: -3px;padding-left: 8px; padding-top: 4px;">
-                      <i class="ace-icon fa fa-check-square-o"></i>
-                      </a>
-                    </span>
-                    <span class="title">selesai penilaian substansi</span>
-                  </li>
-                </ul>
-
-                
-              </div>
-            </div>
             {% endif %}
-
-            {% if role == 1 or role == 2 %}
-            <div class="profile-info-row"></div>
-              <div class="profile-info-name"> Status </div>
-
-              <div class="profile-info-value">
-                <ul class="steps">
-                  <li data-step="1" id="step-proses-1" class="">
-                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
-                    <span class="title">proses pemeriksaan administrasi</span>
-                  </li>
-              
-                  <li data-step="2" id="step-selesai-1">
-                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
-                    <span class="title">selesai Pemeriksaan administrasi</span>
-                  </li>
-              
-                  <li data-step="3" id="step-proses-2">
-                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
-                    <span class="title">proses penilaian substansi</span>
-                  </li>
-              
-                  <li data-step="4" id="step-selesai-2">
-                    <span class="step"><i class="ace-icon fa fa-check-square-o"></i></span>
-                    <span class="title">selesai penilaian substansi</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            {% endif %}
-          </div>
-				</form>
       </div>
       
       <div class="modal-footer">

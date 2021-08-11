@@ -1484,6 +1484,72 @@ class Jsondata extends \CodeIgniter\Controller
 		$res = $model->saveParam($param, $data);
 		$id  = $model->insertID();
 
+		// if(!empty($_FILES)){
+
+		// 	$files	 	= $request->getFiles()['file'];
+		// 	$path		= FCPATH.'public';
+		// 	$tipe		= 'uploads/permohonan';
+		// 	$date 		= date('Y/m/d');
+		// 	$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
+
+		// 	if (!is_dir($folder)) {
+		// 		mkdir($folder, 0777, TRUE);
+		// 	}
+			
+		// 	foreach ($files as $key => $value) {
+				
+		// 		$stat = $files[$key]->move($folder, $files[$key]->getName());
+		// 		if($key == 'doc_kajian'){
+		// 			$bab = $request->getVar('bab_kajian');
+		// 		}else if($key == 'doc_standar'){
+		// 			$bab = $request->getVar('bab_standar');
+		// 		}
+				
+				
+				
+		// 		$data_file = [
+		// 			'id_parent'			=> $id,
+		// 			'type'				=> $request->getVar('type'),
+		// 			'jenis'				=> $key,
+		// 			'filename'			=> $files[$key]->getName(),
+		// 			'ext'				=> null,
+		// 			'size'				=> $files[$key]->getSize('kb'),
+		// 			'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid,
+		// 			'created_date'		=> $this->now,
+		// 			'updated_date'		=> $this->now,
+		// 			'create_by'			=> $userid,
+		// 			'bab'				=> $bab,
+		// 		];
+		// 		$resfile = $modelfile->saveParam('param_file', $data_file);
+		// 	}
+
+		// }
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function uploadfile(){
+
+		$request  = $this->request;
+		$param 	  	= $request->getVar('param');
+		$id 	  	= $request->getVar('id');
+		$type 		= $request->getVar('type');
+		$bab		= $request->getVar('bab');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\ProgramModel();
+		$modelfile 	  = new \App\Models\TargetModel();
+
 		if(!empty($_FILES)){
 
 			$files	 	= $request->getFiles()['file'];
@@ -1499,7 +1565,7 @@ class Jsondata extends \CodeIgniter\Controller
 			foreach ($files as $key => $value) {
 				
 				$stat = $files[$key]->move($folder, $files[$key]->getName());
-					
+				
 				$data_file = [
 					'id_parent'			=> $id,
 					'type'				=> $request->getVar('type'),
@@ -1511,6 +1577,7 @@ class Jsondata extends \CodeIgniter\Controller
 					'created_date'		=> $this->now,
 					'updated_date'		=> $this->now,
 					'create_by'			=> $userid,
+					'bab'				=> $bab,
 				];
 				$resfile = $modelfile->saveParam('param_file', $data_file);
 			}
@@ -2533,11 +2600,12 @@ class Jsondata extends \CodeIgniter\Controller
 				$request  	= $this->request;
 				$id		 	= $request->getVar('id');
 				$param 	 	= $request->getVar('type');
+				$jenis 	 	= $request->getVar('jenis');
 				$role 		= $this->data['role'];
 				$userid		= $this->data['userid'];
 
 				$modelfiles = new \App\Models\TargetModel();
-				$data = $modelfiles->getparam('param_file', $id, $param);
+				$data = $modelfiles->getparam('param_file', $id, $param, $jenis);
 
 					if($data){
 						$response = [
@@ -2598,9 +2666,9 @@ class Jsondata extends \CodeIgniter\Controller
 		try
 		{
 				$request  = $this->request;
-				$param 	  = $request->getVar('param');
-				$id		 	  = $request->getVar('id');
+				$id 	  = $request->getVar('id');
 				$type		 	  = $request->getVar('type');
+				$jenis		 	  = $request->getVar('jenis');
 				$role 		= $this->data['role'];
 				$userid		= $this->data['userid'];
 
@@ -2609,7 +2677,7 @@ class Jsondata extends \CodeIgniter\Controller
 					$modelfiles = new \App\Models\FilesModel();
 			
 						$fulldata = [];
-						$dataprogram = $model->getstatus($id);
+						$dataprogram = $model->getstatus($id, $type, $jenis, $userid);
 
 
 					if($dataprogram){

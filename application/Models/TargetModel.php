@@ -362,10 +362,16 @@ class TargetModel extends Model{
       return  $query->getResult();
     }
 
-    public function getparam($table = null, $id = null, $type = null)
+    public function getparam($table = null, $id = null, $type = null, $jenis = null)
     {
           $builder = $this->db->table($table);
-          $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type ]);
+          if($type == '1'){
+            $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
+
+          }else if($type == '2'){
+            $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type ]);
+
+          }
           // echo $this->db->getLastQuery();die;
           return  $query->getResult();
     }
@@ -380,11 +386,17 @@ class TargetModel extends Model{
       return true;
     }
 
-    public function getstatus($id){
+    public function getstatus($id, $type, $jenis, $userid){
 
-      $builder = $this->db->table('data_permohonan');
-      $query   = $builder->getWhere(['id' => $id]);
+      $builder = $this->db->table('param_file');
+      if($type == '1'){
+        $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis, 'create_by' => $userid]);
+        
+      }else if($type == '2'){
+        $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'create_by' => $userid]);
 
+      }
+      // echo $this->db->getLastQuery();die;
       return  $query->getResult();
     }
     

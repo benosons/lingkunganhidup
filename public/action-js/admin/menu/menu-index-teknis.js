@@ -6,37 +6,25 @@ $(document).ready(function(){
   $('#nav-menu li#menu-teknis').addClass('active');
 
   $('[name="id-input-file-3"]').ace_file_input({
-    style:'well',
-    btn_choose:'Drop files here or click to choose',
-    btn_change:null,
-    no_icon:'ace-icon fa fa-cloud-upload',
-    droppable:true,
-    thumbnail:'small'//large | fit
-    //,icon_remove:null//set null, to hide remove/reset button
-    /**,before_change:function(files, dropped) {
-      //Check an example below
-      //or examples/file-upload.html
-      return true;
-    }*/
-    /**,before_remove : function() {
-      return true;
-    }*/
-    ,
-    preview_error : function(filename, error_code) {
-      //name of the file that failed
-      //error_code values
-      //1 = 'FILE_LOAD_FAILED',
-      //2 = 'IMAGE_LOAD_FAILED',
-      //3 = 'THUMBNAIL_FAILED'
-      //alert(error_code);
-    }
-
-  }).on('change', function(){
-    //console.log($(this).data('ace_input_files'));
-    //console.log($(this).data('ace_input_method'));
+    no_file:'tidak ada file ...',
+    btn_choose:'Pilih File',
+    btn_change:'Ganti',
+    droppable:false,
+    onchange:null,
+    thumbnail:false //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
   });
 
+  $('#modal_program').on('shown.bs.modal', function () {
+
+
+  })
+
   $('#all-permohonan').DataTable();
+  $('#data-file').DataTable();
 
   loadpermohonan('1');
 
@@ -49,83 +37,39 @@ $(document).ready(function(){
         formData.append('input_'+index, $('#input_'+index).val());
       }
 
-      formData.append("file[doc_kajian]", $('#doc_kajian')[0].files[0]);
-      formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
+      // formData.append("file[doc_kajian]", $('#doc_kajian')[0].files[0]);
+      // formData.append("bab_kajian", $('#bab_kajian').val());
+      // formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
+      // formData.append("bab_standar", $('#bab_standar').val());
       
       save(formData);
   });
 
-  $('#btn-proses-admin').on('click', function(e){
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-      $('#step-proses-1').removeClass('active');
-      $('#btn-selesai-admin').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 0);
-    } else {
-      
-      $('#step-proses-1').addClass('active');
-      $('#btn-selesai-admin').removeAttr('disabled');
-      action('update', $('#ini-ID').val(), 1);
+  $('#submit_kajian').on('click', function(){
 
-    }
-    $(this).data("clicks", !clicks);
+    var formData = new FormData();
+    formData.append('id', $('#ini-ID').val());
+    formData.append('param', 'param_file');
+    formData.append('type', '1');
+
+    formData.append("file[doc_kajian]", $('#doc_kajian')[0].files[0]);
+    formData.append("bab", $('#bab_kajian').val());
     
+    upload(formData);
+});
 
-  })
+$('#submit_standar').on('click', function(){
 
-  $('#btn-selesai-admin').on('click', function(e){
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-      $('#step-selesai-1').removeClass('active');
-      $('#btn-proses-admin').removeAttr('disabled');
-      $('#btn-proses-subtan').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 1);
-    }else{
-      $('#step-selesai-1').addClass('active');
-      $('#btn-proses-subtan').removeAttr('disabled');
+  var formData = new FormData();
+  formData.append('id', $('#ini-ID').val());
+  formData.append('param', 'param_file');
+  formData.append('type', '1');
 
-      $('#btn-proses-admin').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 2);
-    }
-    $(this).data("clicks", !clicks);
-    
-
-  })
-
-  $('#btn-proses-subtan').on('click', function(e){
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-      $('#step-proses-2').removeClass('active');
-      $('#btn-selesai-admin').removeAttr('disabled');
-      $('#btn-selesai-subtan').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 2);
-    }else{
-      $('#step-proses-2').addClass('active');
-      $('#btn-selesai-subtan').removeAttr('disabled');
-
-      $('#btn-selesai-admin').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 3);
-    }
-    $(this).data("clicks", !clicks);
-    
-  })
-
-  $('#btn-selesai-subtan').on('click', function(e){
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-      $('#step-selesai-2').removeClass('active');
-      $('#btn-proses-subtan').removeAttr('disabled');
-      action('update', $('#ini-ID').val(), 3);
-
-    }else{
-      $('#step-selesai-2').addClass('active');
-
-      $('#btn-proses-subtan').attr('disabled', 'disabled');
-      action('update', $('#ini-ID').val(), 4);
-    }
-    $(this).data("clicks", !clicks);
-    
-  })
+  formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
+  formData.append("bab", $('#bab_standar').val());
+  
+  upload(formData);
+});
 
 
 });
@@ -172,11 +116,9 @@ function loadpermohonan(param){
                   mRender: function ( data, type, row ) {
 
                     var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
-                                <i class="ace-icon fa fa-search bigger-120"></i>
+                                <i class="ace-icon fa fa-file bigger-120"></i>
                               </button>
-                              <button class="btn btn-xs btn-success" onclick="action(\'delete\','+row.user_id+',\'\')">
-																<i class="ace-icon fa fa-edit bigger-120"></i>
-															</button>
+                              
                               <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
           											<i class="ace-icon fa fa-trash-o bigger-120"></i>
           										</button>`;
@@ -204,9 +146,6 @@ function loadpermohonan(param){
                 });
             }
         });
-
-        let first_row = dt.row(':first').data();
-        $('#satuan_code').val(parseInt(first_row.id) + 1 + '0');
 
         }
       })
@@ -236,9 +175,24 @@ function save(formData){
     });
   };
 
+  function upload(formData){
+
+    $.ajax({
+        type: 'post',
+        processData: false,
+        contentType: false,
+        url: 'uploadfile',
+        data : formData,
+        success: function(result){
+          location.reload()
+        }
+      });
+    };
+
   function action(mode, id, type){
     if(mode == 'view'){
       $('#modal_file').modal('show');
+      $('#ini-ID').val(id);
       $.ajax({
           type: 'post',
           dataType: 'json',
@@ -246,27 +200,196 @@ function save(formData){
           data : {
               id        : id,
               type      : type,
+              jenis      : 'doc_kajian',
           },
           success: function(result){
-            loadstatus(id);
+            loadstatus(id, 1, 'doc_kajian' );
             let data = result.data;
-            $('#ini-ID').val(id);
-            $('#create_date').html(data[0]['created_date']);
-            for (let index = 0; index < data.length; index++) {
-              if(data[index]['jenis'] == 'doc_kajian'){
-                  $('#file_name_kajian').html(data[index]['filename']);
-                  $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-                  $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
-              }else if(data[index]['jenis'] == 'doc_standar'){
-                $('#file_name_standar').html(data[index]['filename']);
-                $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-                $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
-              }
-              
-              
+            
+            if(data.length){
+              var dt = $('#data-file-kajian').DataTable({
+                destroy: true,
+                paging: true,
+                lengthChange: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 10,
+                aaData: result.data,
+                aoColumns: [
+                    { 'mDataProp': 'id', 'width':'10%'},
+                    { 'mDataProp': 'bab'},
+                    { 'mDataProp': 'filename'},
+                    { 'mDataProp': 'size'},
+                    { 'mDataProp': 'status'},
+                    { 'mDataProp': 'created_date'},
+                    { 'mDataProp': 'keterangan'},
+                    { 'mDataProp': 'id'},
+                ],
+                order: [[0, 'ASC']],
+                fixedColumns: true,
+                aoColumnDefs:[
+                  { width: 50, targets: 0 },
+                  {
+                      mRender: function ( data, type, row ) {
+    
+                        var el = bytesToSize(parseInt(data));
+    
+                          return el;
+                      },
+                      aTargets: [3]
+                  },
+                  {
+                      mRender: function ( data, type, row ) {
+    
+                        var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
+                                    <i class="ace-icon fa fa-download bigger-120"></i>
+                                  </a>
+                                  
+                                  <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                  </button>`;
+    
+                          return el;
+                      },
+                      aTargets: [7]
+                  },
+                ],
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                    var index = iDisplayIndexFull + 1;
+                    $('td:eq(0)', nRow).html('#'+index);
+                    return  index;
+                },
+                fnInitComplete: function () {
+    
+                    var that = this;
+                    var td ;
+                    var tr ;
+                    this.$('td').click( function () {
+                        td = this;
+                    });
+                    this.$('tr').click( function () {
+                        tr = this;
+                    });
+                }
+            });
             }
+            // $('#create_date').html(data[0]['created_date']);
+            // for (let index = 0; index < data.length; index++) {
+            //   if(data[index]['jenis'] == 'doc_kajian'){
+            //       $('#file_name_kajian').html(data[index]['filename']);
+            //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+            //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
+            //   }else if(data[index]['jenis'] == 'doc_standar'){
+            //     $('#file_name_standar').html(data[index]['filename']);
+            //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+            //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
+            //   }
+              
+              
+            // }
           }
-        })
+      })
+      $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: 'loadfile',
+        data : {
+            id        : id,
+            type      : type,
+            jenis      : 'doc_standar',
+        },
+        success: function(result){
+          loadstatus(id, 1, 'doc_standar');
+          let data = result.data;
+          console.log(data);
+          if(data.length){
+            var dt = $('#data-file-standar').DataTable({
+              destroy: true,
+              paging: true,
+              lengthChange: false,
+              searching: true,
+              ordering: true,
+              info: true,
+              autoWidth: false,
+              responsive: false,
+              pageLength: 10,
+              aaData: result.data,
+              aoColumns: [
+                  { 'mDataProp': 'id', 'width':'10%'},
+                  { 'mDataProp': 'bab'},
+                  { 'mDataProp': 'filename'},
+                  { 'mDataProp': 'size'},
+                  { 'mDataProp': 'status'},
+                  { 'mDataProp': 'keterangan'},
+                  { 'mDataProp': 'id'},
+              ],
+              order: [[0, 'ASC']],
+              fixedColumns: true,
+              aoColumnDefs:[
+                { width: 50, targets: 0 },
+                {
+                    mRender: function ( data, type, row ) {
+  
+                      var el = bytesToSize(parseInt(data));
+  
+                        return el;
+                    },
+                    aTargets: [3]
+                },
+                {
+                    mRender: function ( data, type, row ) {
+  
+                      var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
+                                  <i class="ace-icon fa fa-download bigger-120"></i>
+                                </a>
+                                
+                                <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                                  <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </button>`;
+  
+                        return el;
+                    },
+                    aTargets: [6]
+                },
+              ],
+              fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                  var index = iDisplayIndexFull + 1;
+                  $('td:eq(0)', nRow).html('#'+index);
+                  return  index;
+              },
+              fnInitComplete: function () {
+  
+                  var that = this;
+                  var td ;
+                  var tr ;
+                  this.$('td').click( function () {
+                      td = this;
+                  });
+                  this.$('tr').click( function () {
+                      tr = this;
+                  });
+              }
+          });
+          }
+          // $('#create_date').html(data[0]['created_date']);
+          // for (let index = 0; index < data.length; index++) {
+          //   if(data[index]['jenis'] == 'doc_kajian'){
+          //       $('#file_name_kajian').html(data[index]['filename']);
+          //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+          //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
+          //   }else if(data[index]['jenis'] == 'doc_standar'){
+          //     $('#file_name_standar').html(data[index]['filename']);
+          //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+          //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
+          //   }
+            
+            
+          // }
+        }
+      })
       }else if(mode == 'update'){
         $.ajax({
           type: 'post',
@@ -285,64 +408,31 @@ function save(formData){
       }
     }
 
-    function loadstatus(id){
+    function loadstatus(id, type, jenis){
       $.ajax({
         type: 'post',
         dataType: 'json',
         url: 'loadstatus',
         data : {
             id        : id,
+            type        : type,
+            jenis        : jenis,
         },
         success: function(result){
           let data = result.data;
           
-          switch (data[0]['status']) {
-            case '1':
-                $('#step-proses-1').addClass('active');
-                $('#btn-proses-admin').removeAttr('disabled');
-                $('#btn-selesai-admin').removeAttr('disabled');
-                var clicks = $('#btn-proses-admin').data('clicks');
-                $('#btn-proses-admin').data("clicks", !clicks);
-
-                
-              break;
-            case '2':
-                $('#step-proses-1').addClass('active');
-                $('#step-selesai-1').addClass('active');
-
-                $('#btn-proses-admin').attr('disabled', 'disabled');
-                $('#btn-selesai-admin').removeAttr('disabled');
-                $('#btn-proses-subtan').removeAttr('disabled');
-                var clicks = $('#btn-selesai-admin').data('clicks');
-                $('#btn-selesai-admin').data("clicks", !clicks);
-              break;
-            case '3':
-                $('#step-proses-1').addClass('active');
-                $('#step-selesai-1').addClass('active');
-                $('#step-proses-2').addClass('active');
-
-                $('#btn-proses-admin').attr('disabled', 'disabled');
-                $('#btn-selesai-admin').attr('disabled', 'disabled');
-                $('#btn-proses-subtan').removeAttr('disabled');
-                var clicks = $('#btn-proses-subtan').data('clicks');
-                $('#btn-proses-subtan').data("clicks", !clicks);
-
-              break;
-            case '4':
-                $('#step-proses-1').addClass('active');
-                $('#step-selesai-1').addClass('active');
-                $('#step-proses-2').addClass('active');
-                $('#step-selesai-2').addClass('active');
-
-                $('#btn-proses-admin').attr('disabled', 'disabled');
-                $('#btn-selesai-admin').attr('disabled', 'disabled');
-                $('#btn-proses-subtan').attr('disabled', 'disabled');
-                $('#btn-selesai-subtan').removeAttr('disabled');
-                var clicks = $('#btn-selesai-subtan').data('clicks');
-                $('#btn-selesai-subtan').data("clicks", !clicks);
-
-              break;
-
+          if(jenis == 'doc_kajian'){
+            for (let i = 0; i < data.length; i++) {
+              $('#bab_kajian option[value="'+data[i]['bab']+'"]').prop('disabled',true);
+              $('#bab_kajian').trigger("chosen:updated");
+              
+            }
+          }else if(jenis == 'doc_standar'){
+            for (let i = 0; i < data.length; i++) {
+              $('#bab_standar option[value="'+data[i]['bab']+'"]').prop('disabled',true);
+              $('#bab_standar').trigger("chosen:updated");
+              
+            }
           }
         }
       })
