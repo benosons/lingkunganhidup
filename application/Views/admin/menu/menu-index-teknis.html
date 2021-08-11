@@ -179,7 +179,6 @@
       </div>
       <div class="modal-body">
 
-            {% if role == 1 or role == 2 %}
 
               <ul class="nav nav-tabs" id="myTab">
                 <li class="active">
@@ -193,7 +192,8 @@
               </ul>
               <div class="tab-content">
                 <div id="kajian" class="tab-pane active">
-                  
+                  {% if role == 1 or role == 2 %}
+
                     <div class="form-group row">
                       <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen Kajian Teknis </label>
           
@@ -214,6 +214,7 @@
                         <button type="button" class="btn btn-xs btn-success" id="submit_kajian"><i class="ace-icon fa fa-check-square-o"></i>Submit</button>
                       </div>
                     </div>
+                  {% endif %}
                   
                   <table id="data-file-kajian" class="table table-striped table-bordered nowrap table-responsive">
                     <thead>
@@ -221,8 +222,9 @@
                             <th>No</th>
                             <th>BAB</th>
                             <th>Nama File</th>
-                            <th>Size</th>
+                            <!-- <th>Size</th> -->
                             <th>Status</th>
+                            <th>Tanggal Input</th>
                             <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
@@ -231,6 +233,8 @@
                 </div>
 
                 <div id="standar" class="tab-pane">
+
+                  {% if role == 1 or role == 2 %}
 
                   <div class="form-group row">
                     <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen Standar Teknis </label>
@@ -253,13 +257,15 @@
                       </div>
                   </div>
 
+                  {% endif %}
+
                   <table id="data-file-standar" class="table table-striped table-bordered nowrap table-responsive">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>BAB</th>
                             <th>Nama File</th>
-                            <th>Size</th>
+                            <!-- <th>Size</th> -->
                             <th>Status</th>
                             <th>Tanggal Input</th>
                             <th>Keterangan</th>
@@ -271,7 +277,6 @@
 
               </div>
 
-            {% endif %}
 
       </div>
       

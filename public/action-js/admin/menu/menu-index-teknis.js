@@ -117,11 +117,14 @@ function loadpermohonan(param){
 
                     var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
                                 <i class="ace-icon fa fa-file bigger-120"></i>
-                              </button>
-                              
-                              <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                              </button>`;
+
+                    if($('#role').val() == '1' || $('#role').val() == '2') {
+                      
+                      el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
           											<i class="ace-icon fa fa-trash-o bigger-120"></i>
           										</button>`;
+                    }
 
                       return el;
                   },
@@ -189,7 +192,7 @@ function save(formData){
       });
     };
 
-  function action(mode, id, type){
+  function action(mode, id, type, keterangan){
     if(mode == 'view'){
       $('#modal_file').modal('show');
       $('#ini-ID').val(id);
@@ -222,7 +225,7 @@ function save(formData){
                     { 'mDataProp': 'id', 'width':'10%'},
                     { 'mDataProp': 'bab'},
                     { 'mDataProp': 'filename'},
-                    { 'mDataProp': 'size'},
+                    // { 'mDataProp': 'size'},
                     { 'mDataProp': 'status'},
                     { 'mDataProp': 'created_date'},
                     { 'mDataProp': 'keterangan'},
@@ -232,29 +235,78 @@ function save(formData){
                 fixedColumns: true,
                 aoColumnDefs:[
                   { width: 50, targets: 0 },
+                  // {
+                  //     mRender: function ( data, type, row ) {
+    
+                  //       var el = bytesToSize(parseInt(data));
+    
+                  //         return el;
+                  //     },
+                  //     aTargets: [3]
+                  // },
                   {
-                      mRender: function ( data, type, row ) {
-    
-                        var el = bytesToSize(parseInt(data));
-    
-                          return el;
-                      },
-                      aTargets: [3]
-                  },
+                    mRender: function ( data, type, row ) {
+  
+                        if($('#role').val() == '10' || $('#role').val() == '100'){
+                          let rev = '';
+                          let done = '';
+                          if(data == '1'){
+                              rev = 'selected';
+                          }
+
+                          if(data == '0'){
+                              done = 'selected';
+                          }
+                          
+                        var el =`<select class="form-control" id="status_1_`+row.id+`" >
+                                  <option value=""> - </option>
+                                  <option `+rev+` value="1"> Revisi </option>
+                                  <option `+done+` value="0"> Selesai </option>
+                                </select>`;
+                        }else{
+                          var el = data;
+                        }
+  
+                        return el;
+                    },
+                    aTargets: [ 3 ]
+                },
+                  {
+                    mRender: function ( data, type, row ) {
+  
+                        if($('#role').val() == '10' || $('#role').val() == '100'){
+                          if(data == null){
+                            data = '';
+                          }
+                        var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
+                        }else{
+                          var el = data;
+                        }
+  
+                        return el;
+                    },
+                    aTargets: [ 5 ]
+                },
                   {
                       mRender: function ( data, type, row ) {
     
                         var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
-                                    <i class="ace-icon fa fa-download bigger-120"></i>
-                                  </a>
-                                  
-                                  <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                  </button>`;
+                                  <i class="ace-icon fa fa-download bigger-120"></i>
+                                </a>`;
+
+                      if($('#role').val() == '1' || $('#role').val() == '2') {
+                        el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                                  <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </button>`;
+                      }else{
+                        el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
+                                  <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                </button>`;
+                      }
     
                           return el;
                       },
-                      aTargets: [7]
+                      aTargets: [6]
                   },
                 ],
                 fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
@@ -304,7 +356,7 @@ function save(formData){
         success: function(result){
           loadstatus(id, 1, 'doc_standar');
           let data = result.data;
-          console.log(data);
+          
           if(data.length){
             var dt = $('#data-file-standar').DataTable({
               destroy: true,
@@ -321,8 +373,9 @@ function save(formData){
                   { 'mDataProp': 'id', 'width':'10%'},
                   { 'mDataProp': 'bab'},
                   { 'mDataProp': 'filename'},
-                  { 'mDataProp': 'size'},
+                  // { 'mDataProp': 'size'},
                   { 'mDataProp': 'status'},
+                  { 'mDataProp': 'created_date'},
                   { 'mDataProp': 'keterangan'},
                   { 'mDataProp': 'id'},
               ],
@@ -330,25 +383,74 @@ function save(formData){
               fixedColumns: true,
               aoColumnDefs:[
                 { width: 50, targets: 0 },
+                // {
+                //     mRender: function ( data, type, row ) {
+  
+                //       var el = bytesToSize(parseInt(data));
+  
+                //         return el;
+                //     },
+                //     aTargets: [3]
+                // },
                 {
-                    mRender: function ( data, type, row ) {
-  
-                      var el = bytesToSize(parseInt(data));
-  
-                        return el;
-                    },
-                    aTargets: [3]
-                },
+                  mRender: function ( data, type, row ) {
+
+                    if($('#role').val() == '10' || $('#role').val() == '100'){
+                      let rev = '';
+                      let done = '';
+                      if(data == '1'){
+                          rev = 'selected';
+                      }
+
+                      if(data == '0'){
+                          done = 'selected';
+                      }
+                      
+                    var el =`<select class="form-control" id="status_1_`+row.id+`" >
+                              <option value=""> - </option>
+                              <option `+rev+` value="1"> Revisi </option>
+                              <option `+done+` value="0"> Selesai </option>
+                            </select>`;
+                    }else{
+                        var el = data;
+                      }
+
+                      return el;
+                  },
+                  aTargets: [ 3 ]
+              },
+                {
+                  mRender: function ( data, type, row ) {
+
+                    if($('#role').val() == '10' || $('#role').val() == '100'){
+                      if(data == null){
+                        data = '';
+                      }
+                    var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
+                    }else{
+                        var el = data;
+                      }
+
+                      return el;
+                  },
+                  aTargets: [ 5 ]
+              },
                 {
                     mRender: function ( data, type, row ) {
   
                       var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
                                   <i class="ace-icon fa fa-download bigger-120"></i>
-                                </a>
-                                
-                                <button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                                </a>`;
+
+                      if($('#role').val() == '1' || $('#role').val() == '2') {
+                        el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>`;
+                      }else{
+                        el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
+                                  <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                </button>`;
+                      }
   
                         return el;
                     },
@@ -391,18 +493,24 @@ function save(formData){
         }
       })
       }else if(mode == 'update'){
+        
+        let stat = $('#status_'+type+'_'+id).val();
+        let keterangan = $('#keterangan_'+type+'_'+id).val();
+        
         $.ajax({
           type: 'post',
           dataType: 'json',
           url: 'updatestatus',
           data : {
-              table     : 'data_permohonan',
+              table     : 'param_file',
               id        : id,
               type      : type,
+              stat      : stat,
+              keterangan      : keterangan,
           },
           success: function(result){
             let data = result.data;
-            loadstatus(id);
+            location.reload()
           }
         })
       }

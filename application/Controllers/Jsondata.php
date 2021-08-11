@@ -2636,7 +2636,8 @@ class Jsondata extends \CodeIgniter\Controller
 		$request  = $this->request;
 		$table 	  = $request->getVar('table');
 		$id 	  = $request->getVar('id');
-		$stat 	  = $request->getVar('type');
+		$stat 	  = $request->getVar('stat');
+		$keterangan 	  = $request->getVar('keterangan');
 		$role 		= $this->data['role'];
 		$userid		= $this->data['userid'];
 
@@ -2644,10 +2645,11 @@ class Jsondata extends \CodeIgniter\Controller
 
 		$data = [
 						'updated_date'	=> $this->now,
-						'updated_by' 	=> $userid,
+						'update_by' 	=> $userid,
 						'status' 		=> $stat,
+						'keterangan' 	=> $keterangan,
         ];
-
+		// print_r($data);die;
 		$res = $model->updatestatus($table, $id, $data);
 
 		$response = [
