@@ -87,6 +87,7 @@ function loadpermohonan(param){
       },
       success: function(result){
           let data = result.data;
+          if(data.length){
           var dt = $('#all-permohonan').DataTable({
             destroy: true,
             paging: true,
@@ -147,10 +148,8 @@ function loadpermohonan(param){
                     tr = this;
                 });
             }
-        });
-
-        let first_row = dt.row(':first').data();
-        $('#satuan_code').val(parseInt(first_row.id) + 1 + '0');
+           });
+          }
 
         }
       })

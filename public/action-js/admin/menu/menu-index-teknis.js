@@ -85,70 +85,72 @@ function loadpermohonan(param){
       },
       success: function(result){
           let data = result.data;
-          var dt = $('#all-permohonan').DataTable({
-            destroy: true,
-            paging: true,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: false,
-            pageLength: 10,
-            aaData: result.data,
-            aoColumns: [
-                { 'mDataProp': 'id', 'width':'10%'},
-                { 'mDataProp': 'p1'},
-                { 'mDataProp': 'p2'},
-                { 'mDataProp': 'p3'},
-                { 'mDataProp': 'p4'},
-                { 'mDataProp': 'p5'},
-                { 'mDataProp': 'p6'},
-                { 'mDataProp': 'p7'},
-                { 'mDataProp': 'p8'},
-                { 'mDataProp': 'id'},
-            ],
-            order: [[0, 'ASC']],
-            fixedColumns: true,
-            aoColumnDefs:[
-              { width: 50, targets: 0 },
-              {
-                  mRender: function ( data, type, row ) {
+          if(data.length){
+            var dt = $('#all-permohonan').DataTable({
+                destroy: true,
+                paging: true,
+                lengthChange: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 10,
+                aaData: result.data,
+                aoColumns: [
+                    { 'mDataProp': 'id', 'width':'10%'},
+                    { 'mDataProp': 'p1'},
+                    { 'mDataProp': 'p2'},
+                    { 'mDataProp': 'p3'},
+                    { 'mDataProp': 'p4'},
+                    { 'mDataProp': 'p5'},
+                    { 'mDataProp': 'p6'},
+                    { 'mDataProp': 'p7'},
+                    { 'mDataProp': 'p8'},
+                    { 'mDataProp': 'id'},
+                ],
+                order: [[0, 'ASC']],
+                fixedColumns: true,
+                aoColumnDefs:[
+                  { width: 50, targets: 0 },
+                  {
+                      mRender: function ( data, type, row ) {
 
-                    var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
-                                <i class="ace-icon fa fa-file bigger-120"></i>
-                              </button>`;
+                        var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                                    <i class="ace-icon fa fa-file bigger-120"></i>
+                                  </button>`;
 
-                    if($('#role').val() == '1' || $('#role').val() == '2') {
-                      
-                      el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
-          											<i class="ace-icon fa fa-trash-o bigger-120"></i>
-          										</button>`;
-                    }
+                        if($('#role').val() == '1' || $('#role').val() == '2') {
+                          
+                          el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                  </button>`;
+                        }
 
-                      return el;
+                          return el;
+                      },
+                      aTargets: [9]
                   },
-                  aTargets: [9]
-              },
-            ],
-            fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
-                var index = iDisplayIndexFull + 1;
-                $('td:eq(0)', nRow).html('#'+index);
-                return  index;
-            },
-            fnInitComplete: function () {
+                ],
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                    var index = iDisplayIndexFull + 1;
+                    $('td:eq(0)', nRow).html('#'+index);
+                    return  index;
+                },
+                fnInitComplete: function () {
 
-                var that = this;
-                var td ;
-                var tr ;
-                this.$('td').click( function () {
-                    td = this;
-                });
-                this.$('tr').click( function () {
-                    tr = this;
-                });
-            }
-        });
+                    var that = this;
+                    var td ;
+                    var tr ;
+                    this.$('td').click( function () {
+                        td = this;
+                    });
+                    this.$('tr').click( function () {
+                        tr = this;
+                    });
+                }
+            });
+          }
 
         }
       })
