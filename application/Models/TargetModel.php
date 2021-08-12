@@ -399,6 +399,16 @@ class TargetModel extends Model{
       // echo $this->db->getLastQuery();die;
       return  $query->getResult();
     }
+
+    public function updateFile($id = null, $data = null)
+    {
+
+      $builder = $this->db->table('param_file');
+      $query   = $builder->where('id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();die;
+      return true;
+    }
     
 
 

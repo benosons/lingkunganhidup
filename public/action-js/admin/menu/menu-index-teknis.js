@@ -178,7 +178,7 @@ function save(formData){
           confirmButtonText: `Ok`,
         }).then((result) => {
           $(document).ready(function(){
-
+            location.reload()
           });
         })
       }
@@ -309,6 +309,10 @@ function save(formData){
 
                       if($('#role').val() == '1' || $('#role').val() == '2') {
                         if(row.status == '1'){
+                          el += `<button class="btn btn-xs btn-info" onclick="revisikajian('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
+                                  <i class="ace-icon fa fa-edit bigger-120"></i>
+                                </button>`;
+
                           el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>`;
@@ -469,6 +473,10 @@ function save(formData){
 
                       if($('#role').val() == '1' || $('#role').val() == '2') {
                         if(row.status == '1'){
+                          el += `<button class="btn btn-xs btn-info" onclick="revisistandar('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
+                                  <i class="ace-icon fa fa-edit bigger-120"></i>
+                                </button>`;
+
                           el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                                   <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                  </button>`;
@@ -578,6 +586,68 @@ function save(formData){
         }
       })
     }
+
+    function revisikajian(id, type, jenis, path, bab){
+      $('#edit_group_kajian').removeAttr('hidden');
+      $('#bab_edit_kajian').val(bab);
+      $('#id_edit_kajian').val(id);
+      $('#path_edit_kajian').val(path);
+      $('#type_edit_kajian').val(type);
+      
+      };
+
+    function revisistandar(id, type, jenis, path, bab){
+      $('#edit_group_standar').removeAttr('hidden');
+      $('#bab_edit_standar').val(bab);
+      $('#id_edit_standar').val(id);
+      $('#path_edit_standar').val(path);
+      $('#type_edit_standar').val(type);
+      
+      };
+
+    $('#submit_edit_kajian').on('click', function(){
+      
+      var formData = new FormData();
+      formData.append('id', $('#id_edit_kajian').val());
+      formData.append('path', $('#path_edit_kajian').val());
+      formData.append('type', $('#type_edit_kajian').val());
+      formData.append("file[]", $('#edit_file_kajian')[0].files[0]);
+
+      $.ajax({
+          type: 'post',
+          processData: false,
+          contentType: false,
+          url: 'editfile',
+          data : formData,
+          success: function(result){
+            location.reload();
+          }
+        });
+      
+      });
+
+    $('#submit_edit_standar').on('click', function(){
+      
+      var formData = new FormData();
+      formData.append('id', $('#id_edit_standar').val());
+      formData.append('path', $('#path_edit_standar').val());
+      formData.append('type', $('#type_edit_standar').val());
+      formData.append("file[]", $('#edit_file_standar')[0].files[0]);
+
+      $.ajax({
+          type: 'post',
+          processData: false,
+          contentType: false,
+          url: 'editfile',
+          data : formData,
+          success: function(result){
+            location.reload();
+          }
+        });
+      
+      });
+
+    
 
     function bytesToSize(bytes) {
       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];

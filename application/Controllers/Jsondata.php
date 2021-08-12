@@ -1595,6 +1595,64 @@ class Jsondata extends \CodeIgniter\Controller
 
 	}
 
+	public function editfile(){
+
+		$request  = $this->request;
+		$id 	  	= $request->getVar('id');
+		$path 		= $request->getVar('path');
+		$type 		= $request->getVar('type');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\ProgramModel();
+		$modelfile 	  = new \App\Models\TargetModel();
+		// print_r('public/'.$path);die;
+			if(unlink('public/'.$path)){
+				
+				if(!empty($_FILES)){
+
+					$files	 	= $request->getFiles()['file'];
+					$path		= FCPATH.'public';
+					$tipe		= 'uploads/permohonan';
+					$date 		= date('Y/m/d');
+					$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
+
+					if (!is_dir($folder)) {
+						mkdir($folder, 0777, TRUE);
+					}
+					
+					foreach ($files as $key => $value) {
+						
+						$stat = $files[$key]->move($folder, $files[$key]->getName());
+						
+						$data_file = [
+							'filename'			=> $files[$key]->getName(),
+							'ext'				=> null,
+							'size'				=> $files[$key]->getSize('kb'),
+							'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid,
+							'updated_date'		=> $this->now,
+							'status'			=> null,
+						];
+						// print_r($data_file);die;
+						$modelfile->updateFile($id, $data_file);
+
+					}
+
+				}
+			}
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
 	public function addKegiatan(){
 
 		$request  = $this->request;
