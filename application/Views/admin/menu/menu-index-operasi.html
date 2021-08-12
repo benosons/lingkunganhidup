@@ -281,6 +281,29 @@
                         </tr>
                     </thead>
                   </table>
+
+                  {% if role == 1 or role == 2 %}
+                  <div class="widget-box">
+                  <div class="widget-body">
+                  <div class="form-group row" id="edit_group" hidden style="padding: 20px 1px 0px 10px;">
+                      <label class="col-sm-3 control-label no-padding-right" for=""> <b>Revisi Dokumen</b> </label>
+          
+                      <div class="col-xs-2">
+                        <input type="text" id="jenis_edit" placeholder="" class="form-control" disabled>
+                        <input type="hidden" id="id_edit" disabled>
+                        <input type="hidden" id="path_edit" disabled>
+                        <input type="hidden" id="type_edit" disabled>
+                      </div>
+                      <div class="col-xs-5">
+                        <input type="file" name="id-input-file-3" id="edit_file" />
+                      </div>
+                      <div class="col-xs-2">
+                        <button type="button" class="btn btn-xs btn-success" id="submit_edit"><i class="ace-icon fa fa-check-square-o"></i>Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  {% endif %}
                 </div>
 
               </div>

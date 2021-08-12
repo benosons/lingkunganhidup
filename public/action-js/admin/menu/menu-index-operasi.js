@@ -309,6 +309,10 @@ function save(formData){
 
                 if($('#role').val() == '1' || $('#role').val() == '2') {
                   if(row.status == '1'){
+                    el += `<button class="btn btn-xs btn-info" onclick="revisi('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.jenis+`')">
+                                  <i class="ace-icon fa fa-edit bigger-120"></i>
+                                </button>`;
+
                     el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                           </button>`;
@@ -394,6 +398,36 @@ function save(formData){
         }
       })
     }
+
+    function revisi(id, type, jenis, path){
+      $('#edit_group').removeAttr('hidden');
+      $('#jenis_edit').val(jenis);
+      $('#id_edit').val(id);
+      $('#path_edit').val(path);
+      $('#type_edit').val(type);
+      
+      };
+
+      $('#submit_edit').on('click', function(){
+      
+        var formData = new FormData();
+        formData.append('id', $('#id_edit').val());
+        formData.append('path', $('#path_edit').val());
+        formData.append('type', $('#type_edit').val());
+        formData.append("file[]", $('#edit_file')[0].files[0]);
+  
+        $.ajax({
+            type: 'post',
+            processData: false,
+            contentType: false,
+            url: 'editfile',
+            data : formData,
+            success: function(result){
+              location.reload();
+            }
+          });
+        
+        });
 
     function bytesToSize(bytes) {
       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
