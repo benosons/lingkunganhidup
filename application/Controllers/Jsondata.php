@@ -1911,16 +1911,15 @@ class Jsondata extends \CodeIgniter\Controller
 
 		$data = [
 			'user_name' 		=> $request->getVar('user_name'),
-			'user_email' 		=> $request->getVar('user_email'),
-			'user_password' => password_hash($request->getVar('user_password'), PASSWORD_DEFAULT),
+			'user_password' 	=> password_hash($request->getVar('user_password'), PASSWORD_DEFAULT),
 			'user_role' 		=> $request->getVar('user_role'),
-			'user_fullname' => $request->getVar('user_fullname'),
-			'user_satuan' 	=> $request->getVar('user_satuan'),
-			'user_status' 	=> 1,
+			'user_fullname' 	=> $request->getVar('user_fullname'),
+			'user_status' 		=> null,
 			'create_by' 		=> $this->data['userid'],
-			'user_created_at'=> $this->now,
-			'nip'=> $request->getVar('nip'),
+			'user_created_at'	=> $this->now,
 		];
+
+		// print_r($data);die;
 
 		$model->save($data);
 		// $id  = $model->insertID();
@@ -2407,6 +2406,44 @@ class Jsondata extends \CodeIgniter\Controller
 		}
 	}
 
+	public function checkUser()
+	{
+		try
+		{
+				$request  	= $this->request;
+				$user_name 	= $request->getVar('user_name');
+				$user_role	= $request->getVar('user_role');
+				$role 		= $this->data['role'];
+				$userid		= $this->data['userid'];
+
+					$model = new \App\Models\UserModel();
+
+						$datauser = $model->checkuser($user_name, $user_role);
+
+					if(count($datauser)){
+						$response = [
+							'status'   => 'sukses',
+							'code'     => '1',
+							'data' 		 => count($datauser)
+						];
+					}else{
+						$response = [
+						    'status'   => 'gagal',
+						    'code'     => '0',
+						    'data'     => 'tidak ada data',
+						];
+					}
+
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function loadppk()
 	{
 		try
@@ -2597,7 +2634,7 @@ class Jsondata extends \CodeIgniter\Controller
 						'update_by' 	=> $userid,
 						'user_status' => $status,
         ];
-		if($mode == 'update'){
+		if($mode == 'update' || $mode == 'validate'){
 			$res = $model->update($id, $data);
 
 		}else{
@@ -2762,6 +2799,31 @@ class Jsondata extends \CodeIgniter\Controller
 		{
 			die($e->getMessage());
 		}
+	}
+
+	public function deletedata(){
+
+		$request  = $this->request;
+		$param 	  = $request->getVar('param');
+		$id 	  	= $request->getVar('id');
+		$type 	= $request->getVar('type');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\KegiatanModel();
+
+		$res = $model->deletedata($param, $id);
+		
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'deleted'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
 	}
 
 }

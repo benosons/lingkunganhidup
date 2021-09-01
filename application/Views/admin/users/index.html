@@ -86,11 +86,12 @@
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 					<!-- #section:elements.form -->
-					<div class="form-group">
+					<div class="form-group" id="form_uname">
 						<label class="col-sm-3 control-label no-padding-right" for="user_name"> Username </label>
 
 						<div class="col-sm-9">
 							<input type="text" id="user_name" placeholder="username" class="form-control">
+              <code hidden id="isAda">Username sudah ada</code>
 						</div>
 					</div>
 
@@ -103,23 +104,14 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="user_fullname"> NIP </label>
+						<label class="col-sm-3 control-label no-padding-right" for="user_role"> Tipe </label>
 
 						<div class="col-sm-9">
-							<input type="text" id="user_nip" placeholder="NIP" class="form-control">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="user_role"> Role Level </label>
-
-						<div class="col-sm-9">
-						  	<select class="chosen-select form-control" id="user_role" data-placeholder="select role...">
+						  	<select class="chosen-select form-control" id="user_role" data-placeholder="Pilih Tipe...">
 						  		<option value="">  </option>
-						  		<option value="10">admin</option>
-						  		<option value="20">operator</option>
-						  		<option value="30">ppk</option>
-						  		<option value="40">pptk</option>
+						  		<option value="10">Admin</option>
+						  		<option value="1">Persetujuan Teknis</option>
+						  		<option value="2">Surat Kelayakan Operasi (SLO)</option>
 
 						  	</select>
 						</div>
@@ -129,7 +121,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-xs btn-danger" data-dismiss="modal"><i class="ace-icon fa fa-close"></i>close</button>
-        <button type="button" class="btn btn-xs btn-success" data-dismiss="modal" id="save-user" ><i class="ace-icon fa fa-check"></i>submit</button>
+        <button type="button" class="btn btn-xs btn-success" id="save-user" ><i class="ace-icon fa fa-check"></i>submit</button>
       </div>
     </div>
 

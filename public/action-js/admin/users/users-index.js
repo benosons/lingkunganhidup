@@ -66,6 +66,11 @@ $(document).ready(function(){
     }
   });
 
+  $('#user_name').on('keyup', function(){
+    $('#form_uname').removeClass('has-error');
+    $('#isAda').hide();
+  })
+
 });
 
 function loadusers(param){
@@ -115,10 +120,13 @@ function loadusers(param){
                   mRender: function ( data, type, row ) {
 
                     var stt = '';
+                    
                       if(row.user_status == 1){
                         stt = 'checked'
-                      }else{
+                      }else if(row.user_status == 0){
                         stt ='';
+                      }else{
+                        stt = 'disabled'
                       }
                       var el ='<input value="'+row.user_id+'" type="checkbox" class="js-primary" '+stt+' />';
 
@@ -142,8 +150,15 @@ function loadusers(param){
               },
               {
                   mRender: function ( data, type, row ) {
+                    var el = '';
+                    
+                    if(row.user_status == null){
+                        el += `<button title="Validasi User" class="btn btn-xs btn-info" onclick="action('validate','`+row.user_id+`','')">
+                                <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                              </button>`;
+                    }
 
-                    var el = `<button class="btn btn-xs btn-danger" onclick="action('delete','`+row.user_id+`','')">
+                        el += `<button title="Hapus User" class="btn btn-xs btn-danger" onclick="action('delete','`+row.user_id+`','')">
 																<i class="ace-icon fa fa-trash-o bigger-120"></i>
 															</button>`;
 
@@ -204,28 +219,48 @@ function onusers(type){
 };
 
 function save(formData){
+  
 
-  $.ajax({
-      type: 'post',
-      processData: false,
-      contentType: false,
-      url: 'addUser',
-      data : formData,
-      success: function(result){
-        Swal.fire({
-          type: 'success',
-          title: 'Success add User !',
-          showConfirmButton: true,
-          // showCancelButton: true,
-          confirmButtonText: `Ok`,
-        }).then((result) => {
-              loadusers('');
-              $('#user_name').val('');
-              $('#user_fullname').val('');
-              $('#user_role').val(0).trigger("chosen:updated");
-        })
-      }
-    });
+      $.ajax({
+        type: 'post',
+        processData: false,
+        contentType: false,
+        url: 'checkUser',
+        data : formData,
+        success: function(result){
+          var code = result.code;
+          
+          if(code == '0'){
+            $('#form_uname').removeClass('has-error');
+            $('#isAda').hide();
+              $.ajax({
+                type: 'post',
+                processData: false,
+                contentType: false,
+                url: 'addUser',
+                data : formData,
+                success: function(result){
+                  Swal.fire({
+                    type: 'success',
+                    title: 'Success add User !',
+                    showConfirmButton: true,
+                    // showCancelButton: true,
+                    confirmButtonText: `Ok`,
+                  }).then((result) => {
+                        loadusers('');
+                        $('#user_name').val('');
+                        $('#user_fullname').val('');
+                        $('#user_role').val(0).trigger("chosen:updated");
+                        $('#modal_user').modal('hide');
+                  })
+                }
+              });
+          }else if(code == '1'){
+              $('#form_uname').addClass('has-error');
+              $('#isAda').show();
+          }
+        }
+      });
   };
 
   function action(mode, id, status){
@@ -248,8 +283,10 @@ function save(formData){
     			}
     		}
     });
-  }else{
+  }else if(mode == 'update'){
     isAction(mode, id, status);
+  }else if(mode == 'validate'){
+    isAction(mode, id, 1);
   }
 }
 
@@ -289,4 +326,20 @@ function save(formData){
             $('#user_satuan').append(opt);
           }
         })
+      }
+    
+      function isCheck(username, role){
+        var formData = new FormData();
+        formData.append('user_name', mode);
+        formData.append('user_role', id);
+        $.ajax({
+            type: 'post',
+            processData: false,
+            contentType: false,
+            url: 'checkUser',
+            data : formData,
+            success: function(result){
+              // loadusers('');
+            }
+          });
       }

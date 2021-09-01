@@ -168,6 +168,7 @@
   														<span class="block input-icon input-icon-right">
   															<input name="register_username" type="text" class="form-control" placeholder="Username" />
   															<i class="ace-icon fa fa-user"></i>
+															  <code id="adaDOng" hidden >Username sudah ada !!</code>
   														</span>
   													</label>
 
@@ -223,7 +224,7 @@
   															<span class="bigger-110">Reset</span>
   														</button>
 
-  														<button type="submit" class="width-65 pull-right btn btn-sm btn-success">
+  														<button type="submit" id="isregis" class="width-65 pull-right btn btn-sm btn-success">
   															<span class="bigger-110">Register</span>
 
   															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -329,6 +330,33 @@
 
   				e.preventDefault();
   			 });
+
+			   $('[name="register_username"]').on('keyup', function(){
+					var formData = new FormData();
+						formData.append('user_name', $('[name="register_username"]').val());
+						formData.append('user_email', $('[name="register_email"]').val());
+						$.ajax({
+							type: 'post',
+							processData: false,
+							contentType: false,
+							url: 'checkUser',
+							data : formData,
+							success: function(result){
+							var code = result.code;
+							
+							if(code == '0'){
+								$('[name="register_username"]').parent().removeClass('has-error')
+								$('#adaDOng').hide();
+								$('#isregis').prop('disabled', false);
+							}else{
+								$('[name="register_username"]').parent().addClass('has-error')
+								$('#adaDOng').show();
+								$('#isregis').prop('disabled', true);
+
+							}
+						}
+				});
+				})
 
   			});
   		</script>

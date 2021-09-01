@@ -12,9 +12,10 @@ class UserModel extends Model{
       $this->join('users_role', 'users_role.role_id = users.user_role', 'LEFT');
       $this->select('*');
       $this->whereNotIn('user_id', $id);
+      $this->whereNotIn('user_role', 100);
       $result = $this->findAll();
 
-      // echo $this->db->getLastQuery();
+      // echo $this->db->getLastQuery();die;
 
       return $result;
     }
@@ -57,5 +58,16 @@ class UserModel extends Model{
       // echo $this->db->getLastQuery();
 
       return true;
+    }
+
+    public function checkuser($username = null, $role = null)
+    {
+      $this->select('*');
+      $this->where(['user_name' => $username]);
+      $result = $this->findAll();
+
+      // echo $this->db->getLastQuery();die;
+
+      return $result;
     }
 }

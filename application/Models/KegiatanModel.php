@@ -53,4 +53,12 @@ class KegiatanModel extends Model{
         return  $this->db->table($table)->insert($data);
     }
 
+    public function deletedata($table = null, $id = null)
+    {
+      $builder = $this->db->table($table);
+      $builder->where('id', $id);
+      $builder->delete();
+      return  true;
+    }
+
 }

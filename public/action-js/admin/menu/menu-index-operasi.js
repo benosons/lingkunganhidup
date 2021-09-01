@@ -11,11 +11,17 @@ $(document).ready(function(){
     btn_change:'Ganti',
     droppable:false,
     onchange:null,
-    thumbnail:false //| true | large
+    thumbnail:false, //| true | large
     //whitelist:'gif|png|jpg|jpeg'
     //blacklist:'exe|php'
     //onchange:''
     //
+    before_remove : function() {
+      $('#submit_doc').prop('disabled', true);
+      return true;
+    }
+  }).on('change', function(){
+    $('#submit_doc').prop('disabled', false);
   });
 
   $('#all-permohonan').DataTable();
@@ -28,12 +34,21 @@ $(document).ready(function(){
       var formData = new FormData();
       formData.append('param', 'data_permohonan');
       formData.append('type', '2');
+      let berapa = [];
       for (let index = 1; index <= 8; index++) {
-        formData.append('input_'+index, $('#input_'+index).val());
+        if($('#input_'+index).val()){
+          formData.append('input_'+index, $('#input_'+index).val());
+          $('#input_'+index).parent().parent().removeClass('has-error');
+          berapa.push(index);
+        }else{
+          $('#input_'+index).parent().parent().addClass('has-error');
+        }
       }
 
 
-      save(formData);
+      if(berapa.length == 8){
+        save(formData);
+      }
   });
 
   $('#submit_doc').on('click', function(){
@@ -125,7 +140,7 @@ function loadpermohonan(param){
 
                       if($('#role').val() == '1' || $('#role').val() == '2') {
 
-                        el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                        el += `<button class="btn btn-xs btn-danger" onclick="action('delete',`+row.id+`,'`+row.type+`','','data_permohonan')">
           											<i class="ace-icon fa fa-trash-o bigger-120"></i>
           										</button>`;
                       }
@@ -200,7 +215,7 @@ function save(formData){
       });
     };
 
-  function action(mode, id, type, keterangan){
+  function action(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file').modal('show');
       loadstatus(id, 2);
@@ -372,6 +387,37 @@ function save(formData){
           success: function(result){
             let data = result.data;
             location.reload()
+          }
+        })
+      }else if(mode == 'delete'){
+        bootbox.confirm({
+            message: "Anda Yakin <b>Hapus</b> data ini?",
+            buttons: {
+            confirm: {
+                label: '<i class="fa fa-check"></i> Ya',
+                className: 'btn-success btn-xs',
+            },
+            cancel: {
+                label: '<i class="fa fa-times"></i> Tidak',
+                className: 'btn-danger btn-xs',
+            }
+          },
+          callback : function(result) {
+          if(result) {
+              $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'deletedata',
+                data : {
+                    param     : param,
+                    id        : id,
+                    type      : type,
+                },
+                success: function(result){
+                  location.reload()
+                }
+              })
+            }
           }
         })
       }

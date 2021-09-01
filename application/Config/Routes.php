@@ -108,6 +108,8 @@ $routes->post('actionUsers', 'Jsondata::actionUsers');
 $routes->post('addUser', 'Jsondata::addUser');
 $routes->post('addpermohonan', 'Jsondata::addpermohonan');
 $routes->post('editfile', 'Jsondata::editfile');
+$routes->post('checkUser', 'Jsondata::checkUser');
+$routes->post('deletedata', 'Jsondata::deletedata');
 
 
 
