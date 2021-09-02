@@ -359,17 +359,57 @@ class Jsondata extends \CodeIgniter\Controller
 
 					$model = new \App\Models\ProgramModel();
 					$modelparam = new \App\Models\ParamModel();
-					$modelfiles = new \App\Models\FilesModel();
+					$modelfiles = new \App\Models\TargetModel();
 			
 						$fulldata = [];
+						$st = null;
 						$dataprogram = $model->getpermohonan($role, $userid, $param);
+						foreach ($dataprogram as $key => $value) {
+							if($value->type == 2){
+								if($role == 100){
+									$data = $modelfiles->getparam('param_file', $value->id, $value->type);
+									if(count($data) == 6){
+										$stt = [];
+										foreach ($data as $key1 => $value1) {
+											
+											if($value1->status == 0){
+												array_push($stt, $value1->status);
+											}
+										}
+										if(count($stt) >= 6){
+											$data = [
+												'updated_date'	=> $this->now,
+												'updated_by' 	=> $userid,
+												'status' 		=> 1,
+											];
+											$st = 1;
+											$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
 
-
-					if($dataprogram){
+										}else{
+											$data = [
+												'updated_date'	=> $this->now,
+												'updated_by' 	=> $userid,
+												'status' 		=> 0,
+											];
+											$st = 0;
+											$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+											
+										}
+									}
+								}
+							}
+							if($role == 100){
+								$value->status = $st;
+							}
+							array_push($fulldata, $value);
+						}
+						
+					
+					if($fulldata){
 						$response = [
 							'status'   => 'sukses',
 							'code'     => '1',
-							'data' 		 => $dataprogram
+							'data' 		 => $fulldata
 						];
 					}else{
 						$response = [
@@ -1595,6 +1635,65 @@ class Jsondata extends \CodeIgniter\Controller
 
 	}
 
+	public function uploadfilelapangan(){
+
+		$request  = $this->request;
+		$param 	  	= $request->getVar('param');
+		$id 	  	= $request->getVar('id');
+		$type 		= $request->getVar('type');
+		$bab		= $request->getVar('bab');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\ProgramModel();
+		$modelfile 	  = new \App\Models\TargetModel();
+
+		if(!empty($_FILES)){
+
+			$files	 	= $request->getFiles()['file'];
+			$path		= FCPATH.'public';
+			$tipe		= 'uploads/permohonan/lapangan';
+			$date 		= date('Y/m/d');
+			$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
+
+			if (!is_dir($folder)) {
+				mkdir($folder, 0777, TRUE);
+			}
+			
+			foreach ($files as $key => $value) {
+				
+				$stat = $files[$key]->move($folder, $files[$key]->getName());
+				
+				$data_file = [
+					'id_parent'			=> $id,
+					'type'				=> $request->getVar('type'),
+					'jenis'				=> $request->getVar('keterangan'),
+					'filename'			=> $files[$key]->getName(),
+					'ext'				=> null,
+					'size'				=> $files[$key]->getSize('kb'),
+					'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid,
+					'created_date'		=> $this->now,
+					'updated_date'		=> $this->now,
+					'create_by'			=> $userid,
+					'bab'				=> $bab,
+				];
+				$resfile = $modelfile->saveParam('param_file_lapangan', $data_file);
+			}
+
+		}
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
 	public function editfile(){
 
 		$request  = $this->request;
@@ -2726,6 +2825,43 @@ class Jsondata extends \CodeIgniter\Controller
 		}
 	}
 
+	public function loadfilelapangan(){
+		try
+		{
+				$request  	= $this->request;
+				$id		 	= $request->getVar('id');
+				$param 	 	= $request->getVar('type');
+				$jenis 	 	= $request->getVar('jenis');
+				$role 		= $this->data['role'];
+				$userid		= $this->data['userid'];
+
+				$modelfiles = new \App\Models\TargetModel();
+				$data = $modelfiles->getparam('param_file_lapangan', $id, $param, $jenis);
+
+					if($data){
+						$response = [
+							'status'   => 'sukses',
+							'code'     => '1',
+							'data' 		 => $data
+						];
+					}else{
+						$response = [
+						    'status'   => 'gagal',
+						    'code'     => '0',
+						    'data'     => 'tidak ada data',
+						];
+					}
+
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
 	public function updatestatus(){
 
 		$request  = $this->request;
@@ -2746,6 +2882,37 @@ class Jsondata extends \CodeIgniter\Controller
         ];
 		// print_r($data);die;
 		$res = $model->updatestatus($table, $id, $data);
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terupdate'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function updatestatusmaster(){
+
+		$request  = $this->request;
+		$table 	  = $request->getVar('table');
+		$id 	  = $request->getVar('id');
+		$stat 	  = $request->getVar('stat');
+		$keterangan 	  = $request->getVar('keterangan');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\TargetModel();
+
+		$data = [
+						'updated_date'	=> $this->now,
+						'updated_by' 	=> $userid,
+						'status' 		=> $stat,
+        ];
+		// print_r($data);die;
+		$res = $model->updatestatusmaster('data_permohonan', $id, $data);
 
 		$response = [
 				'status'   => 'sukses',

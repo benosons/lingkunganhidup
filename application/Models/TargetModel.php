@@ -386,6 +386,16 @@ class TargetModel extends Model{
       return true;
     }
 
+    public function updatestatusmaster($table = null, $id = null, $data = null)
+    {
+
+      $builder = $this->db->table($table);
+      $query   = $builder->where('id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();die;
+      return true;
+    }
+
     public function getstatus($id, $type, $jenis, $userid){
 
       $builder = $this->db->table('param_file');
