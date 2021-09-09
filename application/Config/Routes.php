@@ -112,6 +112,7 @@ $routes->post('addpermohonan', 'Jsondata::addpermohonan');
 $routes->post('editfile', 'Jsondata::editfile');
 $routes->post('checkUser', 'Jsondata::checkUser');
 $routes->post('deletedata', 'Jsondata::deletedata');
+$routes->post('deletedataungahan', 'Jsondata::deletedataungahan');
 $routes->post('updatestatusmaster', 'Jsondata::updatestatusmaster');
 
 

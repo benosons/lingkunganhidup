@@ -366,8 +366,9 @@ class Jsondata extends \CodeIgniter\Controller
 						$dataprogram = $model->getpermohonan($role, $userid, $param);
 						foreach ($dataprogram as $key => $value) {
 							if($value->type == 2){
-								if($role == 100){
+								if($role == 100 || $role == 10){
 									$data = $modelfiles->getparam('param_file', $value->id, $value->type);
+									
 									if(count($data) == 6){
 										$stt = [];
 										foreach ($data as $key1 => $value1) {
@@ -376,6 +377,7 @@ class Jsondata extends \CodeIgniter\Controller
 												array_push($stt, $value1->status);
 											}
 										}
+										
 										if(count($stt) >= 6){
 											$data = [
 												'updated_date'	=> $this->now,
@@ -398,7 +400,7 @@ class Jsondata extends \CodeIgniter\Controller
 									}
 								}
 							}
-							if($role == 100){
+							if($role == 100 || $role == 10){
 								$value->status = $st;
 							}
 							array_push($fulldata, $value);
@@ -2981,6 +2983,33 @@ class Jsondata extends \CodeIgniter\Controller
 		$model 	  = new \App\Models\KegiatanModel();
 
 		$res = $model->deletedata($param, $id);
+		
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'deleted'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function deletedataungahan(){
+
+		$request  = $this->request;
+		$param 	  = $request->getVar('param');
+		$id 	  = $request->getVar('id');
+		$type 	= $request->getVar('type');
+		$path 	= $request->getVar('path');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\KegiatanModel();
+		if(unlink('public/'.$path)){
+			$res = $model->deletedata($param, $id);
+		}
 		
 		$response = [
 				'status'   => 'sukses',

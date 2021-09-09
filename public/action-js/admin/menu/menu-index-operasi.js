@@ -123,6 +123,18 @@ $(document).ready(function(){
     uploadlapangan(formData);
   });
 
+  $('#cekunggahan').on('click', function(){
+    action('view', $('#idpermohonan').val(), $('#initype').val())
+  })
+
+  $('#deletedataini').on('click', function(){
+    action('delete',$('#idpermohonan').val(),$('#initype').val(),'','data_permohonan')
+  })
+
+  $('#verlapanganini').on('click', function(){
+    actionlapangan('view',$('#idpermohonan').val(),$('#initype').val())
+  })
+
 });
 
 function loadpermohonan(param){
@@ -138,84 +150,110 @@ function loadpermohonan(param){
           let data = result.data;
           let code = result.code;
           if(code != '0'){
-          var dt = $('#all-permohonan').DataTable({
-            destroy: true,
-            paging: true,
-            lengthChange: false,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: false,
-            pageLength: 10,
-            aaData: result.data,
-            aoColumns: [
-                { 'mDataProp': 'id', 'width':'10%'},
-                { 'mDataProp': 'p1'},
-                { 'mDataProp': 'p2'},
-                { 'mDataProp': 'p3'},
-                { 'mDataProp': 'p4'},
-                { 'mDataProp': 'p5'},
-                { 'mDataProp': 'p6'},
-                { 'mDataProp': 'p7'},
-                { 'mDataProp': 'p8'},
-                { 'mDataProp': 'id'},
-            ],
-            order: [[0, 'ASC']],
-            fixedColumns: true,
-            aoColumnDefs:[
-              { width: 50, targets: 0 },
-              {
-                  mRender: function ( data, type, row ) {
 
-                    var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
-                                <i class="ace-icon fa fa-file bigger-120"></i>
-                              </button>`;
+            if($('#isRole').val() == 2){
+              $('#idpermohonan').val(data[0].id);
+              $('#initype').val(data[0].type);
+              $('#initambah').hide()
 
-                      if($('#role').val() == '1' || $('#role').val() == '2') {
+              if(data[0].status == 1){
+                $('#verlapanganini').parent().parent().show();
+              }else{
+                $('#verlapanganini').parent().parent().hide();
+              }
 
-                        el += `<button class="btn btn-xs btn-danger" onclick="action('delete',`+row.id+`,'`+row.type+`','','data_permohonan')">
-          											<i class="ace-icon fa fa-trash-o bigger-120"></i>
-          										</button>`;
-                        if(row.status == 1){
-                          el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
-                                <i class="ace-icon fa fa-check-square-o bigger-120"></i>
-                              </button>`;
-                        }
-                      }else{
-                        if(row.status == 1){
-                          el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
-                                <i class="ace-icon fa fa-check-square-o bigger-120"></i>
-                              </button>`;
-                        }
-                      }
+              $('#cekunggahan').show()
+              $('#deletedataini').show()
+              for (let index = 1; index <= 8; index++) {
+                $('#view_'+index).val(data[0]['p'+index]);
+                $('#view_'+index).prop('disabled', true);
+              }
+            }else{
+              var dt = $('#all-permohonan').DataTable({
+                destroy: true,
+                paging: true,
+                lengthChange: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 10,
+                aaData: result.data,
+                aoColumns: [
+                    { 'mDataProp': 'id', 'width':'10%'},
+                    { 'mDataProp': 'p1'},
+                    { 'mDataProp': 'p2'},
+                    { 'mDataProp': 'p3'},
+                    { 'mDataProp': 'p4'},
+                    { 'mDataProp': 'p5'},
+                    { 'mDataProp': 'p6'},
+                    { 'mDataProp': 'p7'},
+                    { 'mDataProp': 'p8'},
+                    { 'mDataProp': 'id'},
+                ],
+                order: [[0, 'ASC']],
+                fixedColumns: true,
+                aoColumnDefs:[
+                  { width: 50, targets: 0 },
+                  {
+                      mRender: function ( data, type, row ) {
 
-                      return el;
+                        var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                                    <i class="ace-icon fa fa-file bigger-120"></i>
+                                  </button>`;
+
+                          if($('#role').val() == '1' || $('#role').val() == '2') {
+
+                            el += `<button class="btn btn-xs btn-danger" onclick="action('delete',`+row.id+`,'`+row.type+`','','data_permohonan')">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                  </button>`;
+                            if(row.status == 1){
+                              el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
+                                    <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                  </button>`;
+                            }
+                          }else{
+                            if(row.status == 1){
+                              el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
+                                    <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                  </button>`;
+                            }
+                          }
+
+                          return el;
+                      },
+                      aTargets: [9]
                   },
-                  aTargets: [9]
-              },
-            ],
-            fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
-                var index = iDisplayIndexFull + 1;
-                $('td:eq(0)', nRow).html('#'+index);
-                return  index;
-            },
-            fnInitComplete: function () {
+                ],
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                    var index = iDisplayIndexFull + 1;
+                    $('td:eq(0)', nRow).html('#'+index);
+                    return  index;
+                },
+                fnInitComplete: function () {
 
-                var that = this;
-                var td ;
-                var tr ;
-                this.$('td').click( function () {
-                    td = this;
-                });
-                this.$('tr').click( function () {
-                    tr = this;
-                });
+                    var that = this;
+                    var td ;
+                    var tr ;
+                    this.$('td').click( function () {
+                        td = this;
+                    });
+                    this.$('tr').click( function () {
+                        tr = this;
+                    });
+                }
+              });
             }
-           });
           }else{
-            var dt = $('#all-permohonan').DataTable();
-            dt.clear().draw()
+            if($('#isRole').val() == 2){
+              $('#initambah').show()
+              $('#cekunggahan').hide()
+              $('#deletedataini').hide()
+            }else{
+              var dt = $('#all-permohonan').DataTable();
+              dt.clear().draw()
+            }
           }
 
         }
@@ -408,7 +446,7 @@ function save(formData){
                                   <i class="ace-icon fa fa-edit bigger-120"></i>
                                 </button>`;
 
-                    el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                    el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                           </button>`;
                   }
@@ -568,7 +606,7 @@ function save(formData){
                                   <i class="ace-icon fa fa-edit bigger-120"></i>
                                 </button>`;
 
-                    el += `<button class="btn btn-xs btn-danger" onclick="action(\'delete\','+row.user_id+',\'\')">
+                    el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                           </button>`;
                   }
@@ -738,3 +776,37 @@ function save(formData){
       var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
       return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
    }
+
+   function actionfile(mode,id,type, path){
+    bootbox.confirm({
+      message: "Anda Yakin <b>Hapus</b> data ini?",
+      buttons: {
+      confirm: {
+          label: '<i class="fa fa-check"></i> Ya',
+          className: 'btn-success btn-xs',
+      },
+      cancel: {
+          label: '<i class="fa fa-times"></i> Tidak',
+          className: 'btn-danger btn-xs',
+      }
+    },
+    callback : function(result) {
+    if(result) {
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'deletedataungahan',
+          data : {
+              param     : 'param_file',
+              id        : id,
+              type      : type,
+              path      : path,
+          },
+          success: function(result){
+            location.reload()
+          }
+        })
+      }
+    }
+  })
+}

@@ -7,6 +7,8 @@ class Auth extends \CodeIgniter\Controller
 
 	public function auth()
 	{
+		try
+			{
 
 			$session = session();
 			$model = new UserModel();
@@ -14,24 +16,45 @@ class Auth extends \CodeIgniter\Controller
 
 			$email = $this->request->getVar('username');
 			$password = $this->request->getVar('password');
-			$data = $model->getWhere(['user_name' => $email])->getRow();
+			$dataemail = $model->getWhere(['user_name' => $email])->getRow();
+			
+			if(!$dataemail){
+				$session->setFlashdata('msg', 'User Belum Terdaftar');
+				return redirect('login');
+			}
 
-			if($data){
-					$pass = $data->user_password;
+			$dataactive = $model->getWhere(['user_name' => $email, 'user_status' => 0])->getRow();
+			
+			if($dataactive){
+				$session->setFlashdata('msg', 'User Tidak Aktif');
+				return redirect('login');
+			}
+
+			$datastatus = $model->getWhere(['user_name' => $email, 'user_status' => 1])->getRow();
+			
+			if(!$datastatus){
+				$session->setFlashdata('msg', 'User Belum di Verifikasi');
+				return redirect('login');
+			}
+
+			
+
+			if($dataemail && $datastatus){
+					$pass = $dataemail->user_password;
 					$hash =  substr_replace($pass, "$2y$10", 0, 1);
 					$verify_pass = password_verify($password, $hash);
 					if($verify_pass){
 							$ses_data = [
-									'user_id'       => $data->user_id,
-									'user_name'     => $data->user_name,
-									'user_fullname' => $data->user_fullname,
-									'user_email'    => $data->user_email,
+									'user_id'       => $dataemail->user_id,
+									'user_name'     => $dataemail->user_name,
+									'user_fullname' => $dataemail->user_fullname,
+									'user_email'    => $dataemail->user_email,
 									'logged_in'     => TRUE,
-									'user_role'     => $data->user_role,
+									'user_role'     => $dataemail->user_role,
 							];
 							$session->set($ses_data);
 
-							$userModel->updateIsLogin($data->user_id, ['isLogin' => 1]);
+							$userModel->updateIsLogin($dataemail->user_id, ['isLogin' => 1]);
 							return redirect('dashboard');
 					}else{
 							$session->setFlashdata('msg', 'Salah Password');
@@ -41,6 +64,11 @@ class Auth extends \CodeIgniter\Controller
 					$session->setFlashdata('msg', 'User belum terdaftar');
 					return redirect('login');
 			}
+		}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
 	}
 
 	public function reg()

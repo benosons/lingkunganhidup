@@ -38,6 +38,7 @@
 
   <body class="login-layout">
 	  <input type="hidden" id="paramregis" value="{{register}}">
+	  
   		<div class="main-container">
   			<div class="main-content">
   				<div class="row">
@@ -79,7 +80,7 @@
 
   											<div class="space-6"></div>
 
-                        					<form class="md-float-material" action="auth" method="post">
+                        					<form class="md-float-material" action="auth" method="post" onsubmit="return validateForm()">
   												<fieldset>
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
@@ -96,6 +97,14 @@
   													</label>
 
   													<div class="space"></div>
+													  
+  													<div class="clearfix" id="iniMessage">
+														  <label class="inline">
+															  <code id="message" value="{{message}}">{{message}}</code>
+															</label>
+														</div>
+														
+													<div class="space"></div>
 
   													<div class="clearfix">
   														<label class="inline">
@@ -103,7 +112,7 @@
   															<span class="lbl"> Remember Me</span>
   														</label>
 
-  														<button type="submit" class="width-35 pull-right btn btn-sm btn-success">
+  														<button id="btnlogin" type="submit" class="width-35 pull-right btn btn-sm btn-success">
   															<i class="ace-icon fa fa-key"></i>
   															<span class="bigger-110">Login</span>
   														</button>
@@ -111,6 +120,7 @@
 
   													<div class="space-4"></div>
   												</fieldset>
+												  
   											</form>
 
   											<!-- <div class="social-or-login center">
@@ -159,14 +169,14 @@
   												<fieldset>
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
-  															<input name="register_email" type="email" class="form-control" placeholder="Email" />
+  															<input name="register_email" type="email" class="form-control regis" placeholder="Email" />
   															<i class="ace-icon fa fa-envelope"></i>
   														</span>
   													</label>
 
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
-  															<input name="register_username" type="text" class="form-control" placeholder="Username" />
+  															<input name="register_username" type="text" class="form-control regis" placeholder="Username" />
   															<i class="ace-icon fa fa-user"></i>
 															  <code id="adaDOng" hidden >Username sudah ada !!</code>
   														</span>
@@ -174,21 +184,21 @@
 
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
-  															<input name="register_password" type="password" class="form-control" placeholder="Password" />
+  															<input name="register_password" type="password" class="form-control regis" placeholder="Password" />
   															<i class="ace-icon fa fa-lock"></i>
   														</span>
   													</label>
 
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
-  															<input type="password" class="form-control" placeholder="Ulangi password" />
+  															<input type="password" class="form-control regis" placeholder="Ulangi password" />
   															<i class="ace-icon fa fa-retweet"></i>
   														</span>
   													</label>
 
   													<label class="block clearfix">
   														<span class="block input-icon input-icon-right">
-  															<input name="register_badan_usaha" type="text" class="form-control" placeholder="Nama Badan Usaha" />
+  															<input name="register_badan_usaha" type="text" class="form-control regis" placeholder="Nama Badan Usaha" />
   															<i class="ace-icon fa fa-building"></i>
   														</span>
   													</label>
@@ -224,7 +234,7 @@
   															<span class="bigger-110">Reset</span>
   														</button>
 
-  														<button type="submit" id="isregis" class="width-65 pull-right btn btn-sm btn-success">
+  														<button disabled type="submit" id="isregis" class="width-65 pull-right btn btn-sm btn-success">
   															<span class="bigger-110">Register</span>
 
   															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -358,7 +368,47 @@
 				});
 				})
 
+				$('#btnlogin').on('click', function(){
+					$('#iniMessage').hide();
+					$('#message').text('');
+				});
+
+				if($('#message').text()){
+					$('#iniMessage').show();
+				}
+
+				setTimeout(function(){
+					$('#iniMessage').hide();
+					$('#message').text('');
+				}, 10000)
+
+
+				$('.regis').on('keyup', function() {
+					if($('[name="register_email"]').val() && 
+					$('[name="register_username"]').val() && 
+					$('[name="register_password"]').val() &&
+					$('[name="register_badan_usaha"]').val())
+					{
+						$('#isregis').prop('disabled', false);
+					}else{
+						$('#isregis').prop('disabled', true);
+					}
+					
+				})
+
   			});
+
+			  function validateForm(){
+					let x = $('[name="username"]').val();
+					let y = $('[name="password"]').val();
+						if (x == "" & y == "") {
+							$('#iniMessage').show();
+							$('#message').text('Harap isi username dan password');
+							return false;
+						}
+			 }
+
+
   		</script>
   	</body>
 
