@@ -397,6 +397,8 @@ class Jsondata extends \CodeIgniter\Controller
 											$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
 											
 										}
+									}else{
+										$st = 0;
 									}
 								}
 							}

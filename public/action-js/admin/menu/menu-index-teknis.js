@@ -274,6 +274,7 @@ function save(formData){
   function action(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file').modal('show');
+      $('#modal_file > .modal-dialog').width($('#modal_file > .modal-dialog').width() + 100);
       $('#ini-ID').val(id);
       $.ajax({
           type: 'post',
