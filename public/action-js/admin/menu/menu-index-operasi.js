@@ -155,6 +155,8 @@ function loadpermohonan(param){
               $('#idpermohonan').val(data[0].id);
               $('#initype').val(data[0].type);
               $('#initambah').hide()
+              $('#ini-form-add').hide()
+              $('#ini-form-view').show()
 
               if(data[0].status == 1){
                 $('#verlapanganini').parent().parent().show();

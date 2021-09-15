@@ -294,6 +294,7 @@
 
   		<!-- inline scripts related to this page -->
   		<script type="text/javascript">
+		  window.ada = 1;
   			jQuery(function($) {
 				$(document).ready(function(){
 					if({{register}}){
@@ -355,10 +356,21 @@
 							var code = result.code;
 							
 							if(code == '0'){
+								window.ada = 0;
 								$('[name="register_username"]').parent().removeClass('has-error')
 								$('#adaDOng').hide();
-								$('#isregis').prop('disabled', false);
+								// $('#isregis').prop('disabled', false);
+								if($('[name="register_email"]').val() &&  $('[name="register_username"]').val() && $('[name="register_password"]').val() && $('[name="register_badan_usaha"]').val())
+								{
+									if($('#teknis').is(":checked")){
+										$('#isregis').prop('disabled', false);
+									}
+									
+								}else{
+									$('#isregis').prop('disabled', true);
+								}
 							}else{
+								window.ada = 1;
 								$('[name="register_username"]').parent().addClass('has-error')
 								$('#adaDOng').show();
 								$('#isregis').prop('disabled', true);
@@ -384,16 +396,26 @@
 
 
 				$('.regis').on('keyup', function() {
-					if($('[name="register_email"]').val() && 
-					$('[name="register_username"]').val() && 
-					$('[name="register_password"]').val() &&
-					$('[name="register_badan_usaha"]').val())
+					if($('[name="register_email"]').val() &&  $('[name="register_username"]').val() && $('[name="register_password"]').val() && $('[name="register_badan_usaha"]').val())
 					{
-						$('#isregis').prop('disabled', false);
+						if($('#teknis').is(":checked")){
+							$('#isregis').prop('disabled', false);
+						}
+						
 					}else{
 						$('#isregis').prop('disabled', true);
 					}
 					
+				})
+
+				$('[name="register_tipe"]').on('change', function name() {
+					if($('#teknis').is(":checked") || $('#operasi').is(":checked")){
+						if(window.ada == 0){
+							$('#isregis').prop('disabled', false);
+						}
+					}else{
+						$('#isregis').prop('disabled', true);
+					}
 				})
 
   			});

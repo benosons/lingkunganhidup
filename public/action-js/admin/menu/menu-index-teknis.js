@@ -140,6 +140,8 @@ function loadpermohonan(param){
               $('#idpermohonan').val(data[0].id);
               $('#initype').val(data[0].type);
               $('#initambah').hide()
+              $('#ini-form-add').hide()
+              $('#ini-form-view').show()
 
               $('#cekunggahan').show()
               $('#deletedataini').show()

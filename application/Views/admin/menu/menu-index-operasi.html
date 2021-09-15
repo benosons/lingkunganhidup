@@ -44,10 +44,10 @@
         <div class="widget-header">
 					<div class="widget-toolbar no-border">
             {% if role == 2%}
-						<button id="initambah" class="btn btn-xs btn-inverse bigger" data-toggle="modal" data-target="#modal_program">
+						<!-- <button id="initambah" class="btn btn-xs btn-inverse bigger" data-toggle="modal" data-target="#modal_program">
 							<i class="ace-icon fa fa-plus"></i>
 							Tambah Permohonan
-						</button>
+						</button> -->
             {% endif %}
 					</div>
 				</div>
@@ -56,7 +56,7 @@
             {% if role == 2 %}
             <input type="hidden" id="idpermohonan">
             <input type="hidden" id="initype">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" id="ini-form-view" hidden>
               <!-- #section:elements.form -->
               <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="kode_program"> Nama Badan Usaha/ Kegiatan </label>
@@ -151,6 +151,137 @@
 
 
             </form>
+            
+            <form class="form-horizontal" role="form" id="ini-form-add">
+              <!-- #section:elements.form -->
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="kode_program"> Nama Badan Usaha/ Kegiatan </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_1" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Bidang Usaha/ Kegiatan </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_2" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor Induk Berusaha </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_3" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nama Penanggung Jawab Usaha/ Kegiatan </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_4" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Jabatan </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_5" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Alamat Kantor dan Lokasi Usaha/ Kegiatan </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_6" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> No. Telepon </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_7" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Email </label>
+    
+                <div class="col-sm-6">
+                  <input type="text" id="input_8" placeholder="" class="form-control">
+                </div>
+              </div>
+    
+              <!-- <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Perizinan Berusaha </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_izin_usaha" />
+    
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Persetujuan Lingkungan </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_persetujauan_lingkungan" />
+    
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Persetujuan Teknis </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_persetujuan_teknis" />
+    
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Hasil pemantauan Air Limbah </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_hasil_pemantauan" />
+    
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen kontrol jaminan </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_kontrol_jaminan" />
+    
+                </div>
+              </div>
+    
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Sertifikat registrasi </label>
+    
+                <div class="col-xs-9">
+                  <input type="file" name="id-input-file-3" id="doc_sertifikat_registrasi" />
+    
+                </div>
+              </div> -->
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"></label>
+    
+                <div class="col-sm-6">
+                  <button type="button" id="mohon_save" class="btn btn-xs btn-success btn-block" ><i class="ace-icon fa fa-check"></i>submit</button>
+                </div>
+              </div>
+    
+            </form>
+
             {% else %}
             <div class="table-responsive">
             <table id="all-permohonan" class="table table-striped table-bordered nowrap table-responsive">
