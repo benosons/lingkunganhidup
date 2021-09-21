@@ -43,6 +43,25 @@ $(document).ready(function(){
     $('#submit_standar').prop('disabled', false);
   });
 
+  $('[name="id-input-file-5"]').ace_file_input({
+    no_file:'tidak ada file ...',
+    btn_choose:'Pilih File',
+    btn_change:'Ganti',
+    droppable:false,
+    onchange:null,
+    thumbnail:false, //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
+    before_remove : function() {
+      $('#mohon_save').prop('disabled', true);
+      return true;
+    }
+  }).on('change', function(){
+    $('#mohon_save').prop('disabled', false);
+  });
+
   $('#modal_program').on('shown.bs.modal', function () {
 
 
@@ -59,7 +78,7 @@ $(document).ready(function(){
       formData.append('param', 'data_permohonan');
       formData.append('type', '1');
       let berapa = [];
-      for (let index = 1; index <= 8; index++) {
+      for (let index = 1; index <= 9; index++) {
         if($('#input_'+index).val()){
           formData.append('input_'+index, $('#input_'+index).val());
           $('#input_'+index).parent().parent().removeClass('has-error');
@@ -69,12 +88,14 @@ $(document).ready(function(){
         }
       }
 
-      // formData.append("file[doc_kajian]", $('#doc_kajian')[0].files[0]);
+      formData.append("file[doc_permohonan]", $('#doc_permohonan')[0].files[0]);
+      formData.append("file[doc_izin_lingkungan]", $('#doc_izin_lingkungan')[0].files[0]);
+      formData.append("file[doc_nib]", $('#doc_nib')[0].files[0]);
       // formData.append("bab_kajian", $('#bab_kajian').val());
       // formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
       // formData.append("bab_standar", $('#bab_standar').val());
       
-      if(berapa.length == 8){
+      if(berapa.length == 9){
         save(formData);
       }
   });
@@ -142,13 +163,45 @@ function loadpermohonan(param){
               $('#initambah').hide()
               $('#ini-form-add').hide()
               $('#ini-form-view').show()
-
-              $('#cekunggahan').show()
+              if(!data[0]['param']){
+                $('#cekunggahan').hide()
+                $('#ini-verifikasi').show()
+              }else{
+                $('#cekunggahan').show()
+                $('#ini-verifikasi').hide()
+              }
               $('#deletedataini').show()
-              for (let index = 1; index <= 8; index++) {
+              for (var index = 1; index <= 9; index++) {
                 $('#view_'+index).val(data[0]['p'+index]);
                 $('#view_'+index).prop('disabled', true);
               }
+
+              $('#ini-paramnya').val(data[0]['param']);
+
+              for (var f in data[0]['file'] ) {
+
+                var jenisnya = data[0].file[f]['jenis'];
+
+                switch (jenisnya) {
+                  case 'doc_permohonan':
+                        $('#nama-file-permohonan').html(data[0].file[f]['filename']);
+                        $('#nama-file-permohonan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                    break;
+                  case 'doc_izin_lingkungan':
+                        $('#nama-file-izin-lingkungan').html(data[0].file[f]['filename']);
+                        $('#nama-file-izin-lingkungan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                    break;
+                  case 'doc_nib':
+                        $('#nama-file-nib').html(data[0].file[f]['filename']);
+                        $('#nama-file-nib').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                    break;
+                
+                  default:
+                    break;
+                }
+            }
 
             }else{
               var dt = $('#all-permohonan').DataTable({
@@ -180,10 +233,61 @@ function loadpermohonan(param){
                     { width: 50, targets: 0 },
                     {
                         mRender: function ( data, type, row ) {
-
-                          var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                          var el = '';
+                          if(row.param){
+                            el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`', '', '', '`+row.param+`')">
                                       <i class="ace-icon fa fa-file bigger-120"></i>
                                     </button>`;
+                          }else{
+                            console.log(row.file);
+
+                            el += `<div class="btn-group">
+                                      <button data-toggle="dropdown" class="btn btn-xs btn-indo dropdown-toggle" aria-expanded="false">
+                                        File
+                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                                      </button>
+
+                                      <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[0]['path']+'/'+row.file[0]['filename']+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                        </li>
+
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[1]['path']+'/'+row.file[1]['filename']+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                        </li>
+
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[2]['path']+'/'+row.file[2]['filename']+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                              <a type="button" class="btn btn-white btn-block btn-sm btn-primary" onclick="validasi(`+row.id+`, 1)"> <i class="ace-icon fa fa-check"></i> Kajian teknis </a>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                              <a type="button" class="btn btn-white btn-block btn-sm btn-primary" onclick="validasi(`+row.id+`, 2)"> <i class="ace-icon fa fa-check"></i> Standar Teknis</a>
+                                            </div>
+                                          </div>
+                                          
+                                        </li>
+
+                                      </ul>
+                                    </div>`
+
+                            // el += `<a class="" target="_blank" href="public/">
+                            //       Permohonan
+                            //     </a>`
+                            // el += `<a class="btn btn-xs btn-primary" target="_blank" href="public/">
+                            //       <i class="ace-icon fa fa-download bigger-120"></i>
+                            //     </a>`
+                            // el += `<a class="btn btn-xs btn-info" target="_blank" href="public/">
+                            //       <i class="ace-icon fa fa-download bigger-120"></i>
+                            //     </a>`
+                          }
 
                           if($('#role').val() == '1' || $('#role').val() == '2') {
                             
@@ -271,8 +375,24 @@ function save(formData){
       });
     };
 
-  function action(mode, id, type, keterangan, param){
+  function action(mode, id, type, keterangan, param, kode){
     if(mode == 'view'){
+      
+      if(!kode){
+        kode = $('#ini-paramnya').val();
+      }
+
+      switch (kode) {
+        case '1':
+            $('#kajian-teknis').show();
+            $('#standar-teknis').hide();
+          break;
+        case '2':
+            $('#kajian-teknis').hide();
+            $('#standar-teknis').show();
+          break;
+      }
+
       $('#modal_file').modal('show');
       $('#modal_file > .modal-dialog').width($('#modal_file > .modal-dialog').width() + 100);
       $('#ini-ID').val(id);
@@ -792,4 +912,23 @@ function save(formData){
           }
         }
       })
+   }
+
+   function downloadatuh(path){
+     window.open(path);
+   }
+
+   function validasi(id, param){
+    $.ajax({
+      type: 'post',
+      dataType: 'json',
+      url: 'updatepermohonanparam',
+      data : {
+          id        : id,
+          param      : param,
+      },
+      success: function(result){
+        location.reload()
+      }
+    })
    }

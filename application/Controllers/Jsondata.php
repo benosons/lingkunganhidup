@@ -365,6 +365,9 @@ class Jsondata extends \CodeIgniter\Controller
 						$st = null;
 						$dataprogram = $model->getpermohonan($role, $userid, $param);
 						foreach ($dataprogram as $key => $value) {
+							$datafilenya = $modelfiles->getfilenya('param_file', $value->id, $value->type);
+							$value->file = (object) $datafilenya;
+							// print_r($value);die;
 							if($value->type == 2){
 								if($role == 100 || $role == 10){
 									$data = $modelfiles->getparam('param_file', $value->id, $value->type);
@@ -402,6 +405,7 @@ class Jsondata extends \CodeIgniter\Controller
 									}
 								}
 							}
+
 							if($role == 100 || $role == 10){
 								$value->status = $st;
 							}
@@ -1505,7 +1509,8 @@ class Jsondata extends \CodeIgniter\Controller
 	}
 
 	public function addpermohonan(){
-
+		try
+		{
 		$request  = $this->request;
 		$param 	  = $request->getVar('param');
 		$role 		= $this->data['role'];
@@ -1516,7 +1521,7 @@ class Jsondata extends \CodeIgniter\Controller
 
 		$data = [];
 
-		for ($i=1; $i <= 8 ; $i++) { 
+		for ($i=1; $i <= 9 ; $i++) { 
 			$data['p'.$i] = $request->getVar('input_'.$i);
 		}
 
@@ -1528,51 +1533,88 @@ class Jsondata extends \CodeIgniter\Controller
 		$res = $model->saveParam($param, $data);
 		$id  = $model->insertID();
 
-		// if(!empty($_FILES)){
+		if(!empty($_FILES)){
 
-		// 	$files	 	= $request->getFiles()['file'];
-		// 	$path		= FCPATH.'public';
-		// 	$tipe		= 'uploads/permohonan';
-		// 	$date 		= date('Y/m/d');
-		// 	$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
-
-		// 	if (!is_dir($folder)) {
-		// 		mkdir($folder, 0777, TRUE);
-		// 	}
+			$files	 	= $request->getFiles()['file'];
+			$path		= FCPATH.'public';
+			$tipe		= 'uploads/permohonan';
+			$date 		= date('Y/m/d');
+			$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
+			$bab		= '';
 			
-		// 	foreach ($files as $key => $value) {
+			
+			foreach ($files as $key => $value) {
 				
-		// 		$stat = $files[$key]->move($folder, $files[$key]->getName());
-		// 		if($key == 'doc_kajian'){
-		// 			$bab = $request->getVar('bab_kajian');
-		// 		}else if($key == 'doc_standar'){
-		// 			$bab = $request->getVar('bab_standar');
-		// 		}
-				
-				
-				
-		// 		$data_file = [
-		// 			'id_parent'			=> $id,
-		// 			'type'				=> $request->getVar('type'),
-		// 			'jenis'				=> $key,
-		// 			'filename'			=> $files[$key]->getName(),
-		// 			'ext'				=> null,
-		// 			'size'				=> $files[$key]->getSize('kb'),
-		// 			'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid,
-		// 			'created_date'		=> $this->now,
-		// 			'updated_date'		=> $this->now,
-		// 			'create_by'			=> $userid,
-		// 			'bab'				=> $bab,
-		// 		];
-		// 		$resfile = $modelfile->saveParam('param_file', $data_file);
-		// 	}
+				if (!is_dir($folder.'/'.$key)) {
+					mkdir($folder.'/'.$key, 0777, TRUE);
+				}
 
-		// }
+				$stat = $files[$key]->move($folder.'/'.$key, $files[$key]->getName());
+				// if($key == 'doc_kajian'){
+				// 	$bab = $request->getVar('bab_kajian');
+				// }else if($key == 'doc_standar'){
+				// 	$bab = $request->getVar('bab_standar');
+				// }
+				
+				
+				
+				$data_file = [
+					'id_parent'			=> $id,
+					'type'				=> $request->getVar('type'),
+					'jenis'				=> $key,
+					'filename'			=> $files[$key]->getName(),
+					'ext'				=> null,
+					'size'				=> $files[$key]->getSize('kb'),
+					'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid.'/'.$key,
+					'created_date'		=> $this->now,
+					'updated_date'		=> $this->now,
+					'create_by'			=> $userid,
+					'bab'				=> $bab,
+				];
+
+				$resfile = $modelfile->saveParam('param_file', $data_file);
+			}
+
+		}
 
 		$response = [
 				'status'   => 'sukses',
 				'code'     => '0',
 				'data' 	   => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+		}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+
+	}
+
+	public function updatepermohonanparam(){
+
+		$request  = $this->request;
+		$id 	  = $request->getVar('id');
+		$param 	  = $request->getVar('param');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\TargetModel();
+
+		$data = [
+						'updated_date' 		=> $this->now,
+						'updated_by' 		=> $userid,
+						'param' 			=> $param,
+        ];
+
+		$res = $model->updateparam($id, $data);
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terupdate'
 		];
 		header('Content-Type: application/json');
 		echo json_encode($response);

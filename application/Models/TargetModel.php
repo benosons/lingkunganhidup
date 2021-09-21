@@ -364,16 +364,33 @@ class TargetModel extends Model{
 
     public function getparam($table = null, $id = null, $type = null, $jenis = null)
     {
+
+          // print_r($table);die;
           $builder = $this->db->table($table);
           if($type == '1'){
-            $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
+            // $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
+
+            $builder->where(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
+          
+            // $builder->whereIn('jenis', ['doc_permohonan', 'doc_izin_lingkungan', 'doc_nib']);
+            
 
           }else if($type == '2'){
-            $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type ]);
+            // $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type ]);
+
+            $builder->where(['id_parent' => $id, 'type' => $type]);
 
           }
-          // echo $this->db->getLastQuery();die;
+          
+          $builder->where("jenis not in ('doc_permohonan', 'doc_izin_lingkungan', 'doc_nib')");
+          // $builder->where('jenis !=', 'doc_izin_lingkungan');
+          // $builder->where('jenis !=', 'doc_izin_lingkungan');
+            // $builder->whereNotIn('jenis', ['doc_permohonan', 'doc_izin_lingkungan', 'doc_nib']);
+          
+            $query = $builder->get();
+            // echo $this->db->getLastQuery();die;
           return  $query->getResult();
+          
     }
 
     public function updatestatus($table = null, $id = null, $data = null)
@@ -414,6 +431,32 @@ class TargetModel extends Model{
     {
 
       $builder = $this->db->table('param_file');
+      $query   = $builder->where('id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();die;
+      return true;
+    }
+
+    public function getfilenya($table = null, $id = null, $type = null, $jenis = null, $param = null)
+    {
+
+     
+          $builder = $this->db->table($table);
+          $builder->where(['id_parent' => $id, 'type' => $type]);
+          
+          $builder->whereIn('jenis', ['doc_permohonan', 'doc_izin_lingkungan', 'doc_nib']);
+          $query = $builder->get();
+
+
+          // echo $this->db->getLastQuery();die;
+          return  $query->getResult();
+          
+    }
+
+    public function updateparam($id = null, $data = null)
+    {
+
+      $builder = $this->db->table('data_permohonan');
       $query   = $builder->where('id', $id);
       $query->update($data);
       // echo $this->db->getLastQuery();die;
