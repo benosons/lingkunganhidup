@@ -44,6 +44,25 @@ $(document).ready(function(){
     $('#submit_doc_lapangan').prop('disabled', false);
   });
 
+  $('[name="id-input-file-6"]').ace_file_input({
+    no_file:'tidak ada file ...',
+    btn_choose:'Pilih File',
+    btn_change:'Ganti',
+    droppable:false,
+    onchange:null,
+    thumbnail:false, //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
+    before_remove : function() {
+      $('#mohon_save').prop('disabled', true);
+      return true;
+    }
+  }).on('change', function(){
+    $('#mohon_save').prop('disabled', false);
+  });
+
   $('#all-permohonan').DataTable();
   $('#data-file-doc').DataTable();
   $('#data-file-doc-lapangan').DataTable();
@@ -56,7 +75,7 @@ $(document).ready(function(){
       formData.append('param', 'data_permohonan');
       formData.append('type', '2');
       let berapa = [];
-      for (let index = 1; index <= 8; index++) {
+      for (let index = 1; index <= 9; index++) {
         if($('#input_'+index).val()){
           formData.append('input_'+index, $('#input_'+index).val());
           $('#input_'+index).parent().parent().removeClass('has-error');
@@ -66,8 +85,11 @@ $(document).ready(function(){
         }
       }
 
+      formData.append("file[doc_permohonan]", $('#doc_permohonan')[0].files[0]);
+      formData.append("file[doc_izin_lingkungan]", $('#doc_izin_lingkungan')[0].files[0]);
+      formData.append("file[doc_nib]", $('#doc_nib')[0].files[0]);
 
-      if(berapa.length == 8){
+      if(berapa.length == 9){
         save(formData);
       }
   });
@@ -166,10 +188,36 @@ function loadpermohonan(param){
 
               $('#cekunggahan').show()
               $('#deletedataini').show()
-              for (let index = 1; index <= 8; index++) {
+              for (let index = 1; index <= 9; index++) {
                 $('#view_'+index).val(data[0]['p'+index]);
                 $('#view_'+index).prop('disabled', true);
               }
+
+              for (var f in data[0]['file'] ) {
+
+                var jenisnya = data[0].file[f]['jenis'];
+
+                switch (jenisnya) {
+                  case 'doc_permohonan':
+                        $('#nama-file-permohonan').html(data[0].file[f]['filename']);
+                        $('#nama-file-permohonan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                    break;
+                  case 'doc_izin_lingkungan':
+                        $('#nama-file-izin-lingkungan').html(data[0].file[f]['filename']);
+                        $('#nama-file-izin-lingkungan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                    break;
+                  case 'doc_nib':
+                        $('#nama-file-nib').html(data[0].file[f]['filename']);
+                        $('#nama-file-nib').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                    break;
+                
+                  default:
+                    break;
+                }
+              }
+
             }else{
               var dt = $('#all-permohonan').DataTable({
                 destroy: true,
@@ -201,9 +249,39 @@ function loadpermohonan(param){
                   {
                       mRender: function ( data, type, row ) {
 
-                        var el = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                        var elo = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
                                     <i class="ace-icon fa fa-file bigger-120"></i>
                                   </button>`;
+                                  var el = `<div class="btn-group">
+                                      <button data-toggle="dropdown" class="btn btn-xs btn-indo dropdown-toggle" aria-expanded="false">
+                                        File
+                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
+                                      </button>
+
+                                      <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[0]['path']+'/'+row.file[0]['filename']+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                        </li>
+
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[1]['path']+'/'+row.file[1]['filename']+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                        </li>
+
+                                        <li>
+                                          <a target="_blank" href="public/`+row.file[2]['path']+'/'+row.file[2]['filename']+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
+                                        <li>
+                                        <button class="btn btn-xs btn-block btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                                        <i class="ace-icon fa fa-file bigger-120"></i> Data Unggahan
+                                      </button>
+                                          
+                                        </li>
+
+                                      </ul>
+                                    </div>`;
 
                           if($('#role').val() == '1' || $('#role').val() == '2') {
 
@@ -813,4 +891,8 @@ function save(formData){
       }
     }
   })
-}
+  }
+
+  function downloadatuh(path){
+    window.open(path);
+  }
