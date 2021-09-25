@@ -446,6 +446,31 @@ function save(formData){
                   // },
                   {
                     mRender: function ( data, type, row ) {
+                      var el = "";
+                      switch (data) {
+                        case '1':
+                            el = 'Deskripsi rencana kegiatan';
+                          break;
+                      
+                        case '2':
+                           el = 'Rona Lingkungan Awal';
+                          break;
+                            
+                        case '3':
+                            el = 'Prakiraan Dampak';
+                          break;
+                      
+                        case '4':
+                            el = 'Rencana Pemantauan Lingkungan';
+                          break;
+                      }
+  
+                        return el;
+                    },
+                    aTargets: [ 1 ]
+                },
+                  {
+                    mRender: function ( data, type, row ) {
   
                         if($('#role').val() == '10' || $('#role').val() == '100'){
                           let rev = '';
