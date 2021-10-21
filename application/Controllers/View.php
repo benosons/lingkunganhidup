@@ -94,6 +94,33 @@ class View extends \CodeIgniter\Controller
 		return \Twig::instance()->display('users/eco_concept.html', $this->data);
 	}
 
+	public function penapisan()
+	{
+
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'penapisan';
+		return \Twig::instance()->display('users/penapisan.html', $this->data);
+	}
+
+	public function dasar_hukum()
+	{
+
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'dasar_hukum';
+		return \Twig::instance()->display('users/dasar_hukum.html', $this->data);
+	}
+
+	public function persyaratan()
+	{
+
+		helper('form');
+		// $this->data['script'] = $this->data['baseURL'] . '/action-js/users/home.js';
+		$this->data['page'] = 'persyaratan';
+		return \Twig::instance()->display('users/persyaratan.html', $this->data);
+	}
+
 	public function login()
 	{
 
