@@ -23,8 +23,7 @@ class View extends \CodeIgniter\Controller
 			'userid' => $this->session->get('user_id'),
 			'username' => $this->session->get('user_name'),
 			'role' => $this->session->get('user_role'),
-			'satuan' => $this->session->get('user_satuan'),
-			'nip' => $this->session->get('nip'),
+			'survey' => $this->session->get('survey'),
 		);
 	}
 
@@ -198,6 +197,17 @@ class View extends \CodeIgniter\Controller
 			helper('form');
 			$this->data['script'] = $this->data['baseURL'] . '/action-js/admin/menu/menu-index-operasi.js';
 			return \Twig::instance()->display('admin/menu/menu-index-operasi.html', $this->data);
+		} else {
+			return redirect('home');
+		}
+	}
+
+	public function puas()
+	{
+		if ($this->logged) {
+			helper('form');
+			$this->data['script'] = $this->data['baseURL'] . '/action-js/admin/menu/menu-index-puas.js';
+			return \Twig::instance()->display('admin/menu/menu-index-puas.html', $this->data);
 		} else {
 			return redirect('home');
 		}

@@ -370,7 +370,7 @@ class TargetModel extends Model{
           if($type == '1'){
             // $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
 
-            $builder->where(['id_parent' => $id, 'type' => $type, 'jenis' => $jenis ]);
+            $builder->where(['id_parent' => $id, 'type' => $type]);
           
             // $builder->whereIn('jenis', ['doc_permohonan', 'doc_izin_lingkungan', 'doc_nib']);
             
@@ -423,6 +423,25 @@ class TargetModel extends Model{
         $query   = $builder->getWhere(['id_parent' => $id, 'type' => $type, 'create_by' => $userid]);
 
       }
+      // echo $this->db->getLastQuery();die;
+      return  $query->getResult();
+    }
+
+    public function getkepuasan($userid, $param){
+      // print_r($param);die;
+      if($param == 10){
+        $sql = "SELECT *
+                FROM data_kepuasan dk
+                inner join users u on dk.create_by = u.user_id";
+
+        $result = $this->db->query($sql);
+        $row = $result->getResult();
+        return $row;
+      }
+
+      $builder = $this->db->table('data_kepuasan');
+      $query   = $builder->getWhere(['create_by' => $userid]);
+
       // echo $this->db->getLastQuery();die;
       return  $query->getResult();
     }

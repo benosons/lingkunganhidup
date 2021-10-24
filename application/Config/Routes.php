@@ -94,6 +94,7 @@ $routes->add('register', 'View::register');
 $routes->add('users', 'View::users');
 $routes->add('teknis', 'View::teknis');
 $routes->add('operasi', 'View::operasi');
+$routes->add('puas', 'View::puas');
 
 $routes->add('auth', 'Auth::auth');
 $routes->add('reg', 'Auth::reg');
@@ -106,12 +107,14 @@ $routes->post('loadfile', 'Jsondata::loadfile');
 $routes->post('loadfilelapangan', 'Jsondata::loadfilelapangan');
 $routes->post('updatestatus', 'Jsondata::updatestatus');
 $routes->post('loadstatus', 'Jsondata::loadstatus');
+$routes->post('loadkepuasan', 'Jsondata::loadkepuasan');
 $routes->post('uploadfile', 'Jsondata::uploadfile');
 $routes->post('uploadfilelapangan', 'Jsondata::uploadfilelapangan');
 
 $routes->post('actionUsers', 'Jsondata::actionUsers');
 $routes->post('addUser', 'Jsondata::addUser');
 $routes->post('addpermohonan', 'Jsondata::addpermohonan');
+$routes->post('addkepuasan', 'Jsondata::addkepuasan');
 $routes->post('editfile', 'Jsondata::editfile');
 $routes->post('checkUser', 'Jsondata::checkUser');
 $routes->post('deletedata', 'Jsondata::deletedata');

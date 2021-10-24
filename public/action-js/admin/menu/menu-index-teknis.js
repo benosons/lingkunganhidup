@@ -4,7 +4,7 @@ $(document).ready(function(){
   $('#nav-menu li').removeClass();
   // $('#nav-menu li#menu-data').addClass('open');
   $('#nav-menu li#menu-teknis').addClass('active');
-
+  
   $('[name="id-input-file-3"]').ace_file_input({
     no_file:'tidak ada file ...',
     btn_choose:'Pilih File',
@@ -62,6 +62,25 @@ $(document).ready(function(){
     $('#mohon_save').prop('disabled', false);
   });
 
+  $('[name="id-input-file-6"]').ace_file_input({
+    no_file:'tidak ada file ...',
+    btn_choose:'Pilih File',
+    btn_change:'Ganti',
+    droppable:false,
+    onchange:null,
+    thumbnail:false, //| true | large
+    //whitelist:'gif|png|jpg|jpeg'
+    //blacklist:'exe|php'
+    //onchange:''
+    //
+    before_remove : function() {
+      $('#submit_doc_lapangan').prop('disabled', true);
+      return true;
+    }
+  }).on('change', function(){
+    $('#submit_doc_lapangan').prop('disabled', false);
+  });
+
   $('#modal_program').on('shown.bs.modal', function () {
 
 
@@ -71,6 +90,10 @@ $(document).ready(function(){
   $('#data-file').DataTable();
 
   loadpermohonan('1');
+
+  $('#verlapanganini').on('click', function(){
+    actionlapangan('view',$('#idpermohonan').val(),$('#initype').val())
+  })
 
   $('#mohon_save').on('click', function(){
 
@@ -139,8 +162,22 @@ $('#deletedataini').on('click', function(){
   action('delete',$('#idpermohonan').val(),$('#initype').val(),'','data_permohonan')
 })
 
+$('#submit_doc_lapangan').on('click', function(){
+
+  var formData = new FormData();
+  formData.append('id', $('#ini-ID-lapangan').val());
+  formData.append('param', 'param_file_lapangan');
+  formData.append('type', '1');
+  formData.append("file[doc_izin_usaha]", $('#doc_lapangan')[0].files[0]);
+  formData.append("keterangan", $('#keterangan_lapangan').val());
+
+  
+  uploadlapangan(formData);
+});
+
 
 });
+
 
 function loadpermohonan(param){
 
@@ -170,6 +207,17 @@ function loadpermohonan(param){
                 $('#cekunggahan').show()
                 $('#ini-verifikasi').hide()
               }
+
+              if(data[0].status == 1){
+                $('#verlapanganini').parent().parent().show();
+                $('#menu-puas').show();
+                sessionStorage.setItem('survey', 1)
+              }else{
+                $('#verlapanganini').parent().parent().hide();
+                $('#menu-puas').hide();
+                sessionStorage.setItem('survey', 0)
+              }
+              
               $('#deletedataini').show()
               for (var index = 1; index <= 9; index++) {
                 $('#view_'+index).val(data[0]['p'+index]);
@@ -294,6 +342,12 @@ function loadpermohonan(param){
                             el += `<button class="btn btn-xs btn-danger" onclick="action('delete',`+row.id+`,'`+row.type+`','','data_permohonan')">
                                       <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </button>`;
+                          }else{
+                            if(row.status == 1){
+                              el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
+                                    <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                  </button>`;
+                            }
                           }
 
                             return el;
@@ -957,3 +1011,178 @@ function save(formData){
       }
     })
    }
+
+   
+   function actionlapangan(mode, id, type, keterangan, param){
+    if(mode == 'view'){
+      $('#modal_file_lapangan').modal('show');
+      loadstatus(id, 2);
+      $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'loadfilelapangan',
+          data : {
+              id        : id,
+              type      : type,
+          },
+          success: function(result){
+            let data = result.data;
+            let code = result.code;
+          
+
+            $('#ini-ID-lapangan').val(id);
+            if(code != '0'){
+              var dt = $('#data-file-doc-lapangan').DataTable({
+                destroy: true,
+                paging: true,
+                lengthChange: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: false,
+                pageLength: 10,
+                aaData: result.data,
+                aoColumns: [
+                    { 'mDataProp': 'id', 'width':'10%'},
+                    { 'mDataProp': 'jenis'},
+                    { 'mDataProp': 'filename'},
+                    { 'mDataProp': 'created_date'},
+                    { 'mDataProp': 'id'},
+                ],
+                order: [[0, 'ASC']],
+                fixedColumns: true,
+                aoColumnDefs:[
+                  { width: 50, targets: 0 },
+                  // {
+                  //     mRender: function ( data, type, row ) {
+    
+                  //       var el = bytesToSize(parseInt(data));
+    
+                  //         return el;
+                  //     },
+                  //     aTargets: [2]
+                  // },
+              {
+                mRender: function ( data, type, row ) {
+
+                  var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
+                            <i class="ace-icon fa fa-download bigger-120"></i>
+                          </a>`;
+
+                if($('#role').val() == '1' || $('#role').val() == '2') {
+                  if(row.status == '1'){
+                    el += `<button class="btn btn-xs btn-info" onclick="revisi('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.jenis+`')">
+                                  <i class="ace-icon fa fa-edit bigger-120"></i>
+                                </button>`;
+
+                    el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </button>`;
+                  }
+                  
+                }else{
+                  // el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
+                  //           <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                  //         </button>`;
+
+                }
+
+                    return el;
+                },
+                aTargets: [4]
+            },
+                ],
+                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                    var index = iDisplayIndexFull + 1;
+                    $('td:eq(0)', nRow).html('#'+index);
+                    return  index;
+                },
+                fnInitComplete: function () {
+    
+                    var that = this;
+                    var td ;
+                    var tr ;
+                    this.$('td').click( function () {
+                        td = this;
+                    });
+                    this.$('tr').click( function () {
+                        tr = this;
+                    });
+                }
+            });
+            }else{
+              var dt = $('#data-file-doc').DataTable();
+              dt.clear().draw();
+            }
+
+          }
+        })
+      }else if(mode == 'update'){
+        let stat = $('#status_'+type+'_'+id).val();
+        let keterangan = $('#keterangan_'+type+'_'+id).val();
+        
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'updatestatus',
+          data : {
+              table     : 'param_file',
+              id        : id,
+              type      : type,
+              stat      : stat,
+              keterangan      : keterangan,
+          },
+          success: function(result){
+            let data = result.data;
+            location.reload()
+          }
+        })
+      }else if(mode == 'delete'){
+        bootbox.confirm({
+            message: "Anda Yakin <b>Hapus</b> data ini?",
+            buttons: {
+            confirm: {
+                label: '<i class="fa fa-check"></i> Ya',
+                className: 'btn-success btn-xs',
+            },
+            cancel: {
+                label: '<i class="fa fa-times"></i> Tidak',
+                className: 'btn-danger btn-xs',
+            }
+          },
+          callback : function(result) {
+          if(result) {
+              $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: 'deletedata',
+                data : {
+                    param     : param,
+                    id        : id,
+                    type      : type,
+                },
+                success: function(result){
+                  location.reload()
+                }
+              })
+            }
+          }
+        })
+      }
+    }
+
+    function uploadlapangan(formData){
+
+      $.ajax({
+          type: 'post',
+          processData: false,
+          contentType: false,
+          url: 'uploadfilelapangan',
+          data : formData,
+          success: function(result){
+            // location.reload()
+            actionlapangan('view',$('#ini-ID-lapangan').val(),2)
+          }
+        });
+      };

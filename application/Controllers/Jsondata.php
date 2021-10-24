@@ -20,7 +20,6 @@ class Jsondata extends \CodeIgniter\Controller
 				'userid' => $this->session->get('user_id'),
 				'username' => $this->session->get('user_name'),
 				'role' => $this->session->get('user_role'),
-				'satuan' => $this->session->get('user_satuan'),
 				'nip' => $this->session->get('nip'),
 			);
   }
@@ -350,6 +349,8 @@ class Jsondata extends \CodeIgniter\Controller
 	{
 		try
 		{
+				$session = session();
+				
 				$request  = $this->request;
 				$param 	  = $request->getVar('param');
 				$id		 	  = $request->getVar('id');
@@ -367,41 +368,77 @@ class Jsondata extends \CodeIgniter\Controller
 						foreach ($dataprogram as $key => $value) {
 							$datafilenya = $modelfiles->getfilenya('param_file', $value->id, $value->type);
 							$value->file = (object) $datafilenya;
-							// print_r($value);die;
-							if($value->type == 2){
+							
+							if($value->type == 1 || $value->type == 2){
 								if($role == 100 || $role == 10){
 									$data = $modelfiles->getparam('param_file', $value->id, $value->type);
-									
-									if(count($data) == 6){
-										$stt = [];
-										foreach ($data as $key1 => $value1) {
-											
-											if($value1->status == 0){
-												array_push($stt, $value1->status);
-											}
-										}
-										
-										if(count($stt) >= 6){
-											$data = [
-												'updated_date'	=> $this->now,
-												'updated_by' 	=> $userid,
-												'status' 		=> 1,
-											];
-											$st = 1;
-											$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
 
-										}else{
-											$data = [
-												'updated_date'	=> $this->now,
-												'updated_by' 	=> $userid,
-												'status' 		=> 0,
-											];
-											$st = 0;
-											$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+									if($value->type == 1){
+										if(count($data) == 4){
+											$stt = [];
+											foreach ($data as $key1 => $value1) {
+												
+												if($value1->status == 0){
+													array_push($stt, $value1->status);
+												}
+											}
 											
+											if(count($stt) >= 4){
+												$data = [
+													'updated_date'	=> $this->now,
+													'updated_by' 	=> $userid,
+													'status' 		=> 1,
+												];
+												$st = 1;
+												$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+
+											}else{
+												$data = [
+													'updated_date'	=> $this->now,
+													'updated_by' 	=> $userid,
+													'status' 		=> 0,
+												];
+												$st = 0;
+												$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+												
+											}
+										}else{
+											$st = 0;
 										}
-									}else{
-										$st = 0;
+									}
+
+									if($value->type == 2){
+										if(count($data) == 6){
+											$stt = [];
+											foreach ($data as $key1 => $value1) {
+												
+												if($value1->status == 0){
+													array_push($stt, $value1->status);
+												}
+											}
+											
+											if(count($stt) >= 6){
+												$data = [
+													'updated_date'	=> $this->now,
+													'updated_by' 	=> $userid,
+													'status' 		=> 1,
+												];
+												$st = 1;
+												$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+
+											}else{
+												$data = [
+													'updated_date'	=> $this->now,
+													'updated_by' 	=> $userid,
+													'status' 		=> 0,
+												];
+												$st = 0;
+												$res = $modelfiles->updatestatusmaster('data_permohonan', $value->id, $data);
+												
+											}
+										}else{
+											$st = 0;
+										}
 									}
 								}
 							}
@@ -1851,6 +1888,37 @@ class Jsondata extends \CodeIgniter\Controller
 
 	}
 
+	public function addkepuasan(){
+
+		$request  = $this->request;
+		$param 	  = $request->getVar('param');
+		$role 		= $this->data['role'];
+		$userid 	= $this->data['userid'];
+
+		$model 	  = new \App\Models\KegiatanModel();
+
+		$data = [
+				'nilai' => $request->getVar('nilai'),
+				'tingkat' => $request->getVar('tingkat'),
+				'catatan' => $request->getVar('catatan'),
+				'create_date' => $this->now,
+				'create_by' => $userid
+			];
+
+		$res = $model->saveParam('data_kepuasan', $data);
+		$id  = $model->insertID();
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
 	public function addTarget(){
 
 		$request  = $this->request;
@@ -2988,6 +3056,48 @@ class Jsondata extends \CodeIgniter\Controller
 			
 						$fulldata = [];
 						$dataprogram = $model->getstatus($id, $type, $jenis, $userid);
+
+
+					if($dataprogram){
+						$response = [
+							'status'   => 'sukses',
+							'code'     => '1',
+							'data' 		 => $dataprogram
+						];
+					}else{
+						$response = [
+						    'status'   => 'gagal',
+						    'code'     => '0',
+						    'data'     => 'tidak ada data',
+						];
+					}
+
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+	}
+
+	public function loadkepuasan()
+	{
+		try
+		{
+				$request  = $this->request;
+				$id 	  = $request->getVar('id');
+				$param		= $request->getVar('param');
+				$role 		= $this->data['role'];
+				$userid		= $this->data['userid'];
+
+					$model = new \App\Models\TargetModel();
+					$modelparam = new \App\Models\ParamModel();
+					$modelfiles = new \App\Models\FilesModel();
+			
+						$fulldata = [];
+						$dataprogram = $model->getkepuasan($userid, $param);
 
 
 					if($dataprogram){

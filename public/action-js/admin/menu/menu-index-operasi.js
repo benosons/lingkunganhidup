@@ -182,8 +182,12 @@ function loadpermohonan(param){
 
               if(data[0].status == 1){
                 $('#verlapanganini').parent().parent().show();
+                $('#menu-puas').show();
+                sessionStorage.setItem('survey', 1)
               }else{
                 $('#verlapanganini').parent().parent().hide();
+                $('#menu-puas').hide();
+                sessionStorage.setItem('survey', 0)
               }
 
               $('#cekunggahan').show()

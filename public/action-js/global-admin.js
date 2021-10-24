@@ -43,6 +43,23 @@ $(document).ready(function(){
   if($('#session_satuan').val()){
     loadmenu('satuan', $('#session_satuan').val());
   }
+
+  if($('#role-nya').val() == '10'){
+    $('#menu-puas').show();
+  }
+
+  sessionStorage.setItem("survey", 0);
+
+  setInterval(() => {
+    if($('#role-nya').val() != '10'){
+      if(sessionStorage.getItem('survey') == 1){
+        $('#menu-puas').show();
+      }else{
+        $('#menu-puas').hide();
+      }
+    }
+  }, 1000);
+
 });
 
 function loadmenu(param, id){
