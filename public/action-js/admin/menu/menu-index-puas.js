@@ -30,7 +30,7 @@ $(document).ready(function(){
       formData.append('tingkat', $('#tingkat_kepuasan').val());
       formData.append('catatan', $('#catatan').val());
 
-      // savekepuasan(formData);
+      savekepuasan(formData);
   })
 });
 
