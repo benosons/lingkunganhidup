@@ -52,15 +52,40 @@ $(document).ready(function(){
 
   setInterval(() => {
     if($('#role-nya').val() != '10'){
-      if(sessionStorage.getItem('survey') == 1){
-        $('#menu-puas').show();
-      }else{
-        $('#menu-puas').hide();
-      }
+    //   if(sessionStorage.getItem('survey') == 1){
+    //     $('#menu-puas').show();
+    //   }else{
+    //     $('#menu-puas').hide();
+    //   }
+          $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'loadpermohonan',
+            data : {
+              param      : $('#role-nya').val(),
+            },
+            success: function(result){
+              let data = result.data;
+              let code = result.code;
+              
+              if(code != '0'){
+                if(data[0].status == 1){
+                  $('#menu-puas').show();
+                }else{
+                  $('#menu-puas').hide();
+                }
+              }
+            }
+          })
+    }else{
+      $('#menu-puas').show();
     }
   }, 1000);
 
 });
+
+
+
 
 function loadmenu(param, id){
 
