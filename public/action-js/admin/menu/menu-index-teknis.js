@@ -287,8 +287,37 @@ function loadpermohonan(param){
                                       <i class="ace-icon fa fa-file bigger-120"></i>
                                     </button>`;
                           }else{
-                            console.log(row.file);
-
+                            // console.log(_.keys(row.file).length);
+                            
+                            if(_.keys(row.file).length == 0){
+                                path_0 = '';
+                                path_1 = '';
+                                path_2 = '';
+                                filename_0 = '';
+                                filename_1 = '';
+                                filename_2 = '';
+                            }else if(_.keys(row.file).length == 1){
+                                var path_0 = row.file[0]['path'];
+                                var path_1 = '';
+                                var path_2 = '';
+                                var filename_0 = row.file[0]['filename'];
+                                var filename_1 = '';
+                                var filename_2 = '';
+                            }else if(_.keys(row.file).length == 2){
+                                var path_0 = row.file[0]['path'];
+                                var path_1 = row.file[1]['path'];
+                                var path_2 = '';
+                                var filename_0 = row.file[0]['filename'];
+                                var filename_1 = row.file[1]['filename'];
+                                var filename_2 = '';
+                            }else if(_.keys(row.file).length == 3){
+                                var path_0 = row.file[0]['path'];
+                                var path_1 = row.file[1]['path'];
+                                var path_2 = row.file[2]['path'];
+                                var filename_0 = row.file[0]['filename'];
+                                var filename_1 = row.file[1]['filename'];
+                                var filename_2 = row.file[2]['filename'];
+                            }
                             el += `<div class="btn-group">
                                       <button data-toggle="dropdown" class="btn btn-xs btn-indo dropdown-toggle" aria-expanded="false">
                                         File
@@ -297,15 +326,15 @@ function loadpermohonan(param){
 
                                       <ul class="dropdown-menu dropdown-info dropdown-menu-right">
                                         <li>
-                                          <a target="_blank" href="public/`+row.file[0]['path']+'/'+row.file[0]['filename']+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                          <a target="_blank" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
                                         </li>
 
                                         <li>
-                                          <a target="_blank" href="public/`+row.file[1]['path']+'/'+row.file[1]['filename']+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                          <a target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
                                         </li>
 
                                         <li>
-                                          <a target="_blank" href="public/`+row.file[2]['path']+'/'+row.file[2]['filename']+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                          <a target="_blank" href="public/`+path_2+'/'+filename_2+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
                                         </li>
 
                                         <li class="divider"></li>
