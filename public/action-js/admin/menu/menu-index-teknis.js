@@ -464,15 +464,30 @@ function save(formData){
       if(!kode){
         kode = $('#ini-paramnya').val();
       }
-
+      
       switch (kode) {
         case '1':
             $('#kajian-teknis').show();
             $('#standar-teknis').hide();
+            $( "#modal_file" ).on('shown.bs.modal', function (e) {
+              $("#kajian-teknis").addClass('active');
+              $("#standar-teknis").removeClass('active');
+
+              $('#kajian').addClass('tab-pane active');
+              $('#standar').addClass('tab-pane');
+            });
           break;
         case '2':
             $('#kajian-teknis').hide();
             $('#standar-teknis').show();
+            $( "#modal_file" ).on('shown.bs.modal', function (e) {
+              $("#kajian-teknis").removeClass('active');
+              $("#standar-teknis").addClass('active');
+
+              $('#kajian').removeClass('active');
+              $('#standar').addClass('active');
+              
+            });
           break;
       }
 
@@ -529,26 +544,10 @@ function save(formData){
                   // },
                   {
                     mRender: function ( data, type, row ) {
-                      var el = "";
-                      switch (data) {
-                        case '1':
-                            el = 'Deskripsi rencana kegiatan';
-                          break;
                       
-                        case '2':
-                           el = 'Rona Lingkungan Awal';
-                          break;
-                            
-                        case '3':
-                            el = 'Prakiraan Dampak';
-                          break;
-                      
-                        case '4':
-                            el = 'Rencana Pemantauan Lingkungan';
-                          break;
-                      }
+                        let des = ['-','DESKRIPSI KEGIATAN','RONA LINGKUNGAN AWAL','KOMPONEN LINGKUNGAN YANG TERKENA DAMPAK','PRAKIRAAN DAMPAK','RENCANA PENGELOLAAN LINGKUNGAN','RENCANA PEMANTAUAN LINGKUNGAN','SISTEM PENANGGULANGAN KEADAAAN DARURAT','INTERNALISASI BIAYA LINGKUNGAN','PERIODE WAKTU UJI COBA','STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA','SISTEM MANAJEMEN LINGKUNGAN'];
   
-                        return el;
+                        return des[data];
                     },
                     aTargets: [ 1 ]
                 },
@@ -635,8 +634,15 @@ function save(formData){
                     $('td:eq(0)', nRow).html('#'+index);
                     return  index;
                 },
+                fnDrawCallback: function(){
+                  var table = $('#data-file-kajian').DataTable();
+                  var trr = $("#data-file-kajian tbody tr");
+                  for (let index = 0; index < trr.length; index++) {
+                    $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
+                  }
+                },
                 fnInitComplete: function () {
-    
+                    
                     var that = this;
                     var td ;
                     var tr ;
@@ -749,6 +755,25 @@ function save(formData){
                   },
                   aTargets: [ 3 ]
               },
+                  {
+                    mRender: function ( data, type, row ) {
+                      
+                        let des = ['-',
+                          'DESKRIPSI KEGIATAN',
+                          'BAKU MUTU AIR LIMBAH NASIONAL',
+                          'RENCANA PENGELOLAAN LINGKUNGAN',
+                          'RENCANA PEMANTAUAN LINGKUNGAN',
+                          'SISTEM PENANGGULANGAN KEADAAAN DARURAT',
+                          'INTERNALISASI BIAYA LINGKUNGAN',
+                          'PERIODE WAKTU UJI COBA',
+                          'STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA',
+                          'SISTEM MANAJEMEN LINGKUNGAN'
+                          ]
+                        
+                        return des[data];
+                    },
+                    aTargets: [ 1 ]
+                },
                 {
                   mRender: function ( data, type, row ) {
 
@@ -798,8 +823,15 @@ function save(formData){
                   $('td:eq(0)', nRow).html('#'+index);
                   return  index;
               },
+              fnDrawCallback: function(){
+                var table = $('#data-file-standar').DataTable();
+                var trr = $("#data-file-standar tbody tr");
+                for (let index = 0; index < trr.length; index++) {
+                  $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
+                }
+              },
               fnInitComplete: function () {
-  
+
                   var that = this;
                   var td ;
                   var tr ;
