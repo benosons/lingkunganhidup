@@ -121,6 +121,7 @@ $routes->post('deletedata', 'Jsondata::deletedata');
 $routes->post('deletedataungahan', 'Jsondata::deletedataungahan');
 $routes->post('updatestatusmaster', 'Jsondata::updatestatusmaster');
 $routes->post('updatepermohonanparam', 'Jsondata::updatepermohonanparam');
+$routes->post('updatepass', 'Jsondata::updatepass');
 
 
 

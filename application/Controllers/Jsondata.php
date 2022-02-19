@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\Files\UploadedFile;
+use App\Controller\BaseController;
 
 class Jsondata extends \CodeIgniter\Controller
 {
@@ -3169,6 +3170,35 @@ class Jsondata extends \CodeIgniter\Controller
 				'status'   => 'sukses',
 				'code'     => '0',
 				'data' 	   => 'deleted'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function updatepass(){
+
+		$request  = $this->request;
+		$id 	  = $request->getVar('id');
+		$password 	  = $request->getVar('user_password');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+		
+		$model 	  = new \App\Models\UserModel();
+		
+		$data = [
+						'update_date' 	=> $this->now,
+						'update_by' 	=> $userid,
+						'user_password' => password_hash($password, PASSWORD_DEFAULT),
+        ];
+
+		$res = $model->updatepass($id, $data);
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terupdate'
 		];
 		header('Content-Type: application/json');
 		echo json_encode($response);

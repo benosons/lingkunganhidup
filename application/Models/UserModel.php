@@ -70,4 +70,14 @@ class UserModel extends Model{
 
       return $result;
     }
+
+    public function updatepass($id, $data)
+    {
+      $builder = $this->db->table('users');
+      $query   = $builder->where('user_id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();
+
+      return true;
+    }
 }

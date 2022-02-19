@@ -71,6 +71,20 @@ $(document).ready(function(){
     $('#isAda').hide();
   })
 
+  $('#view-pass').on('click', function(){
+    let type = $('#new-password').attr('type');
+    
+    if(type == 'password'){
+      $('#new-password').attr('type', 'text');
+      $(this).attr('class','btn btn-sm btn-default');
+      $(this).html('<i class="ace-icon fa fa-eye-slash bigger-110"></i>');
+    }else{
+      $('#new-password').attr('type', 'password');
+      $(this).attr('class','btn btn-sm btn-success');
+      $(this).html('<i class="ace-icon fa fa-eye bigger-110"></i>');
+    }
+  })
+
 });
 
 function loadusers(param){
@@ -162,6 +176,10 @@ function loadusers(param){
 																<i class="ace-icon fa fa-trash-o bigger-120"></i>
 															</button>`;
 
+                        el += `<button title="Ganti Password" class="btn btn-xs btn-warning" onclick="passreset('`+row.user_id+`')">
+																<i class="ace-icon fa fa-key bigger-120"></i>
+															</button>`;
+
                       return el;
                   },
                   aTargets: [ 6 ]
@@ -172,14 +190,25 @@ function loadusers(param){
                 $('td:eq(0)', nRow).html('#'+index);
                 return  index;
             },
-            fnInitComplete: function () {
+            fnDrawCallback: function(){
               var elemprimary = $('.js-primary');
               for (var i = 0; i < elemprimary.length; i++) {
-                var switchery = new Switchery(elemprimary[i], { color: '#1abc9c', jackColor: '#fff', size: 'small', className : 'switchery status' });
-                elemprimary[i].onchange = function() {
-                  action('update',this.value, this.checked)
+                if($(elemprimary[i]).attr('data-switchery') !== 'true'){
+                  var switchery = new Switchery(elemprimary[i], { color: '#1abc9c', jackColor: '#fff', size: 'small', className : 'switchery status' });
+                  elemprimary[i].onchange = function() {
+                    action('update',this.value, this.checked)
+                  }
                 }
               }
+            },
+            fnInitComplete: function () {
+              // var elemprimary = $('.js-primary');
+              // for (var i = 0; i < elemprimary.length; i++) {
+              //   var switchery = new Switchery(elemprimary[i], { color: '#1abc9c', jackColor: '#fff', size: 'small', className : 'switchery status' });
+              //   elemprimary[i].onchange = function() {
+              //     action('update',this.value, this.checked)
+              //   }
+              // }
 
 
                 var that = this;
@@ -220,7 +249,6 @@ function onusers(type){
 
 function save(formData){
   
-
       $.ajax({
         type: 'post',
         processData: false,
@@ -343,3 +371,49 @@ function save(formData){
             }
           });
       }
+
+      function passreset(id){
+        $('#modal_password').modal('show');
+        $('#id-password').val(id);
+        $('#new-password').val('');
+      }
+
+      $('#save-password').on('click', function(){
+        let id = $('#id-password').val();
+        let user_password = $('#new-password').val();
+        var formData = new FormData();
+        formData.append('id', id);
+        formData.append('user_password', user_password);
+        pass(formData);
+
+    });
+
+    function pass(formData){
+      $.ajax({
+        type: 'post',
+        processData: false,
+        contentType: false,
+        url: 'updatepass',
+        data : formData,
+        success: function(result){
+          var code = result.code;
+          
+          if(code == '0'){
+            Swal.fire({
+              type: 'success',
+              title: 'Success Ganti Password !',
+              showConfirmButton: true,
+              // showCancelButton: true,
+              confirmButtonText: `Ok`,
+            }).then((result) => {
+                  loadusers('');
+                  $('#user_name').val('');
+                  $('#user_fullname').val('');
+                  $('#user_role').val(0).trigger("chosen:updated");
+                  $('#modal_user').modal('hide');
+                  $('#modal_password').modal('hide');
+            })
+          }
+        }
+      });
+  };
