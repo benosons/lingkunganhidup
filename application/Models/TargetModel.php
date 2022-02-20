@@ -126,6 +126,16 @@ class TargetModel extends Model{
       return true;
     }
 
+    public function updateok($table = null, $id = null, $data = null)
+    {
+
+      $builder = $this->db->table($table);
+      $query   = $builder->where('id', $id);
+      $query->update($data);
+      // echo $this->db->getLastQuery();die;
+      return true;
+    }
+
     public function updateDong2($table = null, $id = null, $kode = null, $data = null)
     {
       $builder = $this->db->table($table);

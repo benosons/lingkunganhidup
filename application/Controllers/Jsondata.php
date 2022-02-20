@@ -3151,29 +3151,35 @@ class Jsondata extends \CodeIgniter\Controller
 	}
 
 	public function deletedataungahan(){
+		try
+		{
+			$request  = $this->request;
+			$param 	  = $request->getVar('param');
+			$id 	  = $request->getVar('id');
+			$type 	= $request->getVar('type');
+			$path 	= $request->getVar('path');
 
-		$request  = $this->request;
-		$param 	  = $request->getVar('param');
-		$id 	  = $request->getVar('id');
-		$type 	= $request->getVar('type');
-		$path 	= $request->getVar('path');
-
-		$role 		= $this->data['role'];
-		$userid		= $this->data['userid'];
-
-		$model 	  = new \App\Models\KegiatanModel();
-		if(unlink('public/'.$path)){
-			$res = $model->deletedata($param, $id);
+			$role 		= $this->data['role'];
+			$userid		= $this->data['userid'];
+			
+			$model 	  = new \App\Models\KegiatanModel();
+			if(unlink('public/'.$path)){
+				$res = $model->deletedata($param, $id);
+			}
+			
+			$response = [
+					'status'   => 'sukses',
+					'code'     => '0',
+					'data' 	   => 'deleted'
+			];
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
 		}
-		
-		$response = [
-				'status'   => 'sukses',
-				'code'     => '0',
-				'data' 	   => 'deleted'
-		];
-		header('Content-Type: application/json');
-		echo json_encode($response);
-		exit;
+			catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
 
 	}
 
@@ -3194,6 +3200,99 @@ class Jsondata extends \CodeIgniter\Controller
         ];
 
 		$res = $model->updatepass($id, $data);
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 		 => 'terupdate'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
+	public function reuploadfile(){
+		try
+		{
+		$request  = $this->request;
+		$param 	  = $request->getVar('param');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$modelfile 	  = new \App\Models\TargetModel();
+
+		if(!empty($_FILES)){
+
+			$files	 	= $request->getFiles()['file'];
+			$path		= FCPATH.'public';
+			$tipe		= 'uploads/permohonan';
+			$date 		= date('Y/m/d');
+			$folder		= $path.'/'.$tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid;
+			$bab		= '';
+			
+			
+			foreach ($files as $key => $value) {
+				
+				if (!is_dir($folder.'/'.$key)) {
+					mkdir($folder.'/'.$key, 0777, TRUE);
+				}
+
+				$stat = $files[$key]->move($folder.'/'.$key, $files[$key]->getName());
+
+				
+				$data_file = [
+					'id_parent'			=> $request->getVar('id_parent'),
+					'type'				=> $request->getVar('type'),
+					'jenis'				=> $key,
+					'filename'			=> $files[$key]->getName(),
+					'ext'				=> null,
+					'size'				=> $files[$key]->getSize('kb'),
+					'path'				=> $tipe.'/'.$date.'/'.$request->getVar('type').'/'.$userid.'/'.$key,
+					'created_date'		=> $this->now,
+					'updated_date'		=> $this->now,
+					'create_by'			=> $userid,
+					'bab'				=> $bab,
+				];
+
+				$resfile = $modelfile->saveParam('param_file', $data_file);
+			}
+
+		}
+
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'terkirim'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+		}
+		catch (\Exception $e)
+		{
+			die($e->getMessage());
+		}
+
+	}
+
+	public function okdong(){
+
+		$request  = $this->request;
+		$id 	  = $request->getVar('id');
+		$ok 	  = $request->getVar('ok');
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$modelfile 	  = new \App\Models\TargetModel();
+
+		$data = [
+						'updated_date' 	=> $this->now,
+						'update_by' 	=> $userid,
+						'ok' 			=> $ok,
+        ];
+
+		$res = $modelfile->updateok('param_file',$id, $data);
 
 		$response = [
 				'status'   => 'sukses',

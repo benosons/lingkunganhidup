@@ -50,37 +50,37 @@ $(document).ready(function(){
 
   sessionStorage.setItem("survey", 0);
 
-  setInterval(() => {
-    if($('#role-nya').val() != '10'){
-    //   if(sessionStorage.getItem('survey') == 1){
-    //     $('#menu-puas').show();
-    //   }else{
-    //     $('#menu-puas').hide();
-    //   }
-          $.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: 'loadpermohonan',
-            data : {
-              param      : $('#role-nya').val(),
-            },
-            success: function(result){
-              let data = result.data;
-              let code = result.code;
+  // setInterval(() => {
+  //   if($('#role-nya').val() != '10'){
+  //   //   if(sessionStorage.getItem('survey') == 1){
+  //   //     $('#menu-puas').show();
+  //   //   }else{
+  //   //     $('#menu-puas').hide();
+  //   //   }
+  //         $.ajax({
+  //           type: 'post',
+  //           dataType: 'json',
+  //           url: 'loadpermohonan',
+  //           data : {
+  //             param      : $('#role-nya').val(),
+  //           },
+  //           success: function(result){
+  //             let data = result.data;
+  //             let code = result.code;
               
-              if(code != '0'){
-                if(data[0].status == 1){
-                  $('#menu-puas').show();
-                }else{
-                  $('#menu-puas').hide();
-                }
-              }
-            }
-          })
-    }else{
-      $('#menu-puas').show();
-    }
-  }, 1000);
+  //             if(code != '0'){
+  //               if(data[0].status == 1){
+  //                 $('#menu-puas').show();
+  //               }else{
+  //                 $('#menu-puas').hide();
+  //               }
+  //             }
+  //           }
+  //         })
+  //   }else{
+  //     $('#menu-puas').show();
+  //   }
+  // }, 1000);
 
 });
 

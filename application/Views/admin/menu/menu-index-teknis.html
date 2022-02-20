@@ -86,10 +86,23 @@
                 <label class="col-sm-3 control-label no-padding-right" for=""> </label>
     
                 <div class="col-sm-6">
-                  <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
-                    <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
-                    <span class="bigger-110" id="nama-file-nib">View more activities</span>
-                  </button>
+                  <grp id="view-file-nib" style="display:none;">
+                    <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
+                      <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
+                      <span class="bigger-110" id="nama-file-nib"></span>
+                    </button>
+                    <a class="btn btn-danger btn-xs btn-round" id="hapus-nib"><i class="fa fa-trash"></i></a>
+                  </grp>
+
+                  <div class="form-group" id="form-nib-reupload" style="display:block;">        
+                    <div class="col-sm-11">
+                      <input type="file" name="id-input-file-5" id="doc_nib_reupload" />
+                    </div>
+                    <div class="col-sm-1">
+                      <button class="btn btn-success btn-xs btn-round" id="upload-nib" onclick="reupload('nib')" type="button"><i class="fa fa-check-square-o"></i></button>
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
 
@@ -105,11 +118,25 @@
                 <label class="col-sm-3 control-label no-padding-right" for=""> Izin Lingkungan </label>
     
                 <div class="col-sm-6">
-                  <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
-                    <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
-                    <span class="bigger-110" id="nama-file-izin-lingkungan">View more activities</span>
-                  </button>
+                  <grp id="view-file-izin-lingkungan" style="display:none;">
+                    <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
+                      <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
+                      <span class="bigger-110" id="nama-file-izin-lingkungan"></span>
+                    </button>
+                    <button class="btn btn-danger btn-xs btn-round" id="hapus-izin-lingkungan" type="button"><i class="fa fa-trash"></i></button>
+                  </grp>
+
+                  <div class="form-group" id="form-izin-lingkungan-reupload" style="display:block;">        
+                    <div class="col-sm-11">
+                      <input type="file" name="id-input-file-5" id="doc_izin_lingkungan_reupload" />
+                    </div>
+                    <div class="col-sm-1">
+                      <button class="btn btn-success btn-xs btn-round" id="upload-izin-lingkungan" onclick="reupload('izin-lingkungan')" type="button"><i class="fa fa-check-square-o"></i></button>
+                    </div>
+                  </div>
+
                 </div>
+                
               </div>
     
               <div class="form-group">
@@ -156,10 +183,23 @@
                 <label class="col-sm-3 control-label no-padding-right" for=""> Permohonan </label>
     
                 <div class="col-sm-6">
-                  <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
-                    <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
-                    <span class="bigger-110" id="nama-file-permohonan">View more activities</span>
-                  </button>
+                  <grp id="view-file-permohonan" style="display:none;">
+                    <button type="button" class="btn btn-sm btn-primary btn-white btn-round">
+                      <i class="ace-icon fa fa-file bigger-150 middle orange2"></i>
+                      <span class="bigger-110" id="nama-file-permohonan"></span>
+                    </button>
+                    <button class="btn btn-danger btn-xs btn-round" id="hapus-permohonan" type="button"><i class="fa fa-trash"></i></button>
+                  </grp>
+
+                  <div class="form-group" id="form-permohonan-reupload" style="display:block;">        
+                    <div class="col-sm-11">
+                      <input type="file" name="id-input-file-5" id="doc_permohonan_reupload" />
+                    </div>
+                    <div class="col-sm-1">
+                      <button class="btn btn-success btn-xs btn-round" id="upload-permohonan" onclick="reupload('permohonan')" type="button"><i class="fa fa-check-square-o"></i></button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
@@ -172,9 +212,14 @@
                       <i class="ace-icon fa fa-times"></i>
                     </button>
   
-                    <i class="ace-icon fa fa-check green"></i>
+                    
   
-                    Permohonan Belum di Verifikasi oleh Admin.
+                    <p><i class="ace-icon fa fa-warning green"></i> Permohonan Belum di Verifikasi oleh Admin.</p>
+                    <p id="harap">Harap Melakukan Upload Ulang file :</p>
+                    <ol id="harus-upload">
+                
+                      
+                    </ol>
                     
                   </div>
                 </div>
