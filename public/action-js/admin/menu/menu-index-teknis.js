@@ -306,7 +306,7 @@ function loadpermohonan(param){
 
 
               }
-              console.log(harap);
+              
               if(harap.length == 0){
                 $('#harap').hide();
               }
@@ -363,6 +363,28 @@ function loadpermohonan(param){
                                 var id_1 = '';
                                 var id_2 = '';
 
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
                                 var elemen_0 = '';
                                 var elemen_1 = '';
                                 var elemen_2 = '';
@@ -387,6 +409,28 @@ function loadpermohonan(param){
                                 var ok_1 = '';
                                 var ok_2 = '';
 
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
                                 var elemen_0 = `<div class="row">`;
                                     if(ok_0 == null){
                                     elemen_0 += `<div class="col-sm-2">
@@ -395,10 +439,22 @@ function loadpermohonan(param){
                                                   <div class="col-sm-2">
                                                     <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                   </div>`;
+                                    }else if(ok_0 == 1){
+                                      elemen_0 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`;
+
+                                    }else if(ok_0 == 2){
+                                      elemen_0 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `;
+
                                     }
 
                                     elemen_0 += `<div class="col-sm-8">
-                                                    <a target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                    <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
                                                   </div>
                                                 `;
 
@@ -427,6 +483,28 @@ function loadpermohonan(param){
                                 var ok_1 = row.file[1]['ok'];
                                 var ok_2 ='';
 
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
                                 var elemen_0 = `<div class="row">`
                                 if(ok_0 == null){
                                     elemen_0 += `     <div class="col-sm-2">
@@ -435,10 +513,22 @@ function loadpermohonan(param){
                                                       <div class="col-sm-2">
                                                         <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                       </div>`
+                                }else if(ok_0 == 1){
+                                  elemen_0 += `
+                                              <div class="col-sm-2">
+                                                <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                              </div>`;
+
+                                }else if(ok_0 == 2){
+                                  elemen_0 += `<div class="col-sm-2">
+                                                <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                              </div>
+                                              `;
+
                                 }
                                 
                                     elemen_0 += `<div class="col-sm-8">
-                                                        <a target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                        <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
                                                       </div>`;
                                 
                                     elemen_0 += `</div>`;
@@ -451,10 +541,22 @@ function loadpermohonan(param){
                                                   <div class="col-sm-2">
                                                     <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                   </div>`
+                                }else if(ok_1 == 1){
+                                  elemen_1 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+
+                                }else if(ok_1 == 2){
+                                  elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                 `
+
                                 }
 
                                     elemen_1 += `<div class="col-sm-8">
-                                                    <a target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                                    <a `+teks_1+` target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
                                                   </div>`
 
                                     elemen_1 += `</div>`;
@@ -481,6 +583,28 @@ function loadpermohonan(param){
                                 var ok_1 = row.file[1]['ok'];
                                 var ok_2 = row.file[2]['ok'];
 
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
                                  var elemen_0 = `<div class="row">`
                                     if(ok_0 == null){
                                     elemen_0 += `     <div class="col-sm-2">
@@ -489,10 +613,22 @@ function loadpermohonan(param){
                                                       <div class="col-sm-2">
                                                         <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                       </div>`
+                                    }else if(ok_0 == 1){
+                                      elemen_0 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`;
+    
+                                    }else if(ok_0 == 2){
+                                      elemen_0 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `;
+    
                                     }
                                 
                                     elemen_0 += `<div class="col-sm-8">
-                                                        <a target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                        <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
                                                       </div>`;
                                 
                                     elemen_0 += `</div>`;
@@ -505,10 +641,22 @@ function loadpermohonan(param){
                                                   <div class="col-sm-2">
                                                     <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                   </div>`
+                                }else if(ok_1 == 1){
+                                  elemen_1 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+
+                                }else if(ok_1 == 2){
+                                  elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                 `
+
                                 }
 
                                     elemen_1 += `<div class="col-sm-8">
-                                                    <a target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                                    <a `+teks_1+` target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
                                                   </div>`
 
                                     elemen_1 += `</div>`;
@@ -521,10 +669,22 @@ function loadpermohonan(param){
                                                   <div class="col-sm-2">
                                                     <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_2+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
                                                   </div>`
+                                }else if(ok_2 == 1){
+                                  elemen_2 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_2+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+
+                                }else if(ok_2 == 2){
+                                  elemen_2 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_2+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `
+
                                 }
 
                                     elemen_2 += `<div class="col-sm-8">
-                                                    <a target="_blank" href="public/`+path_2+'/'+filename_2+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                                    <a `+teks_2+` target="_blank" href="public/`+path_2+'/'+filename_2+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
                                                   </div>`
 
                                     elemen_2 += `</div>`;

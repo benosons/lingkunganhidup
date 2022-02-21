@@ -197,29 +197,86 @@ function loadpermohonan(param){
                 $('#view_'+index).prop('disabled', true);
               }
 
+              var harap = [];
               for (var f in data[0]['file'] ) {
 
                 var jenisnya = data[0].file[f]['jenis'];
+                var oknya = data[0].file[f]['ok'];
 
                 switch (jenisnya) {
                   case 'doc_permohonan':
                         $('#nama-file-permohonan').html(data[0].file[f]['filename']);
                         $('#nama-file-permohonan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                        $('#hapus-permohonan').attr('onclick', "actionfile('delete','"+data[0].file[f]['id']+"','"+data[0].type+"','"+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                        $('#view-file-permohonan').css('display', 'block');
+                        $('#form-permohonan-reupload').css('display', 'none');
+
+                        if(oknya == 1){
+                          $('#hapus-permohonan').css('display', 'none');
+                        }else{
+                          $('#hapus-permohonan').show();
+                          if(oknya == 2){
+                            var ell = ` <li>
+                                          <i class="">File Permohonan</i>
+                                        </li>`
+                            $('#harus-upload').append(ell);
+                            harap.push('permohonan');
+                          }
+                        }
 
                     break;
                   case 'doc_izin_lingkungan':
                         $('#nama-file-izin-lingkungan').html(data[0].file[f]['filename']);
                         $('#nama-file-izin-lingkungan').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                        $('#hapus-izin-lingkungan').attr('onclick', "actionfile('delete','"+data[0].file[f]['id']+"','"+data[0].type+"','"+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+
+                        $('#view-file-izin-lingkungan').css('display', 'block');
+                        $('#form-izin-lingkungan-reupload').css('display', 'none');
+
+                        if(oknya == 1){
+                          $('#hapus-izin-lingkungan').css('display', 'none');
+                        }else{
+                          $('#hapus-izin-lingkungan').show();
+                          if(oknya == 2){
+                            var ell = ` <li>
+                                          <i class="">File Izin Lingkungan</i>
+                                        </li>`
+                            $('#harus-upload').append(ell);
+                            harap.push('izin');
+                          }
+                        }
 
                     break;
                   case 'doc_nib':
                         $('#nama-file-nib').html(data[0].file[f]['filename']);
                         $('#nama-file-nib').attr('onclick', "downloadatuh('"+'public/'+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                        $('#hapus-nib').attr('onclick', "actionfile('delete','"+data[0].file[f]['id']+"','"+data[0].type+"','"+data[0].file[f]['path']+'/'+data[0].file[f]['filename']+"')");
+                     
+                        $('#view-file-nib').css('display', 'block');
+                        $('#form-nib-reupload').css('display', 'none');
+
+                        if(oknya == 1){
+                          $('#hapus-nib').css('display', 'none');
+                        }else{
+                          $('#hapus-nib').show();
+                          if(oknya == 2){
+                            var ell = ` <li>
+                                          <i class="">File NIB</i>
+                                        </li>`
+                            $('#harus-upload').append(ell);
+                            harap.push('nib');
+                          }
+                        }
                     break;
                 
                   default:
                     break;
                 }
+              }
+
+              if(harap.length == 0){
+                $('#harap').hide();
               }
 
             }else{
@@ -259,6 +316,39 @@ function loadpermohonan(param){
                                 filename_0 = '';
                                 filename_1 = '';
                                 filename_2 = '';
+
+                                var id_0 = '';
+                                var id_1 = '';
+                                var id_2 = '';
+
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
+                                var elemen_0 = '';
+                                var elemen_1 = '';
+                                var elemen_2 = '';
+
+                                var validasinya = '';
+
                             }else if(_.keys(row.file).length == 1){
                                 var path_0 = row.file[0]['path'];
                                 var path_1 = '';
@@ -266,6 +356,69 @@ function loadpermohonan(param){
                                 var filename_0 = row.file[0]['filename'];
                                 var filename_1 = '';
                                 var filename_2 = '';
+
+                                var id_0 = row.file[0]['id'];
+                                var id_1 = '';
+                                var id_2 = '';
+
+                                var ok_0 = row.file[0]['ok'];
+                                var ok_1 = '';
+                                var ok_2 = '';
+
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
+                                var elemen_0 = `<div class="row">`;
+                                    if(ok_0 == null){
+                                    elemen_0 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`;
+                                    }else if(ok_0 == 1){
+                                      elemen_0 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`;
+                                    }else if(ok_0 == 2){
+                                      elemen_0 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `;
+                                    }
+
+                                    elemen_0 += `<div class="col-sm-8">
+                                                    <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                  </div>
+                                                `;
+
+                                    elemen_0 += `</div>`;
+
+                                var elemen_1 = '';
+                                var elemen_2 = '';
+
+                                var validasinya = '';
+
                             }else if(_.keys(row.file).length == 2){
                                 var path_0 = row.file[0]['path'];
                                 var path_1 = row.file[1]['path'];
@@ -273,6 +426,95 @@ function loadpermohonan(param){
                                 var filename_0 = row.file[0]['filename'];
                                 var filename_1 = row.file[1]['filename'];
                                 var filename_2 = '';
+
+                                var id_0 = row.file[0]['id'];
+                                var id_1 = row.file[1]['id'];
+                                var id_2 ='';
+
+                                var ok_0 = row.file[0]['ok'];
+                                var ok_1 = row.file[1]['ok'];
+                                var ok_2 ='';
+
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
+                                var elemen_0 = `<div class="row">`
+                                if(ok_0 == null){
+                                    elemen_0 += `     <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                      </div>
+                                                      <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                      </div>`
+                                }else if(ok_0 == 1){
+                                  elemen_0 += `     
+                                                      <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                      </div>`
+
+                                }else if(ok_0 == 2){
+                                  elemen_0 += `     <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                      </div>
+                                                      `
+
+                                }
+                                
+                                    elemen_0 += `<div class="col-sm-8">
+                                                        <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                      </div>`;
+                                
+                                    elemen_0 += `</div>`;
+
+                                var elemen_1 = `<div class="row">`;
+                                if(ok_1 == null){
+                                    elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+                                }else if(ok_1 == 1){
+                                  elemen_1 += `
+                                          <div class="col-sm-2">
+                                            <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                          </div>`
+                                }else if(ok_1 == 2){
+                                  elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `
+                                }
+
+                                    elemen_1 += `<div class="col-sm-8">
+                                                    <a `+teks_1+` target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                                  </div>`
+
+                                    elemen_1 += `</div>`;
+
+                                var elemen_2 = '';
+
+                                var validasinya = '';
+
                             }else if(_.keys(row.file).length == 3){
                                 var path_0 = row.file[0]['path'];
                                 var path_1 = row.file[1]['path'];
@@ -280,6 +522,126 @@ function loadpermohonan(param){
                                 var filename_0 = row.file[0]['filename'];
                                 var filename_1 = row.file[1]['filename'];
                                 var filename_2 = row.file[2]['filename'];
+
+                                var id_0 = row.file[0]['id'];
+                                var id_1 = row.file[1]['id'];
+                                var id_2 = row.file[2]['id'];
+
+                                var ok_0 = row.file[0]['ok'];
+                                var ok_1 = row.file[1]['ok'];
+                                var ok_2 = row.file[2]['ok'];
+
+                                var teks_0 = '';
+                                var teks_1 = '';
+                                var teks_2 = '';
+
+                                if(ok_0 == 1){
+                                  teks_0 = 'class="text-success"';
+                                }else if(ok_0 == 2){
+                                  teks_0 = 'class="text-danger"';
+                                }
+
+                                if(ok_1 == 1){
+                                  teks_1 = 'class="text-success"';
+                                }else if(ok_1 == 2){
+                                  teks_1 = 'class="text-danger"';
+                                }
+
+                                if(ok_2 == 1){
+                                  teks_2 = 'class="text-success"';
+                                }else if(ok_2 == 2){
+                                  teks_2 = 'class="text-danger"';
+                                }
+
+                                var elemen_0 = `<div class="row">`
+                                    if(ok_0 == null){
+                                    elemen_0 += `     <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                      </div>
+                                                      <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                      </div>`
+                                    }else if(ok_0 == 1){
+                                      elemen_0 += `     
+                                                      <div class="col-sm-2">
+                                                        <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_0+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                      </div>`
+                                    }else if(ok_0 == 2){
+                                      elemen_0 += `     <div class="col-sm-2">
+                                                            <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_0+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                          </div>
+                                                          `
+                                    }
+                                
+                                    elemen_0 += `<div class="col-sm-8">
+                                                        <a `+teks_0+` target="_blank" type="button" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                                      </div>`;
+                                
+                                    elemen_0 += `</div>`;
+
+                                var elemen_1 = `<div class="row">`;
+                                if(ok_1 == null){
+                                    elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+                                }else if(ok_1 == 1){
+                                  elemen_1 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_1+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+
+                                }else if(ok_1 == 2){
+                                  elemen_1 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_1+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `
+
+                                }
+
+                                    elemen_1 += `<div class="col-sm-8">
+                                                    <a `+teks_1+` target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                                  </div>`
+
+                                    elemen_1 += `</div>`;
+
+                                var elemen_2 = `<div class="row">`
+                                if(ok_2 == null){
+                                    elemen_2 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_2+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_2+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+                                }else if(ok_2 == 1){
+
+                                  elemen_2 += `
+                                                  <div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-danger" onclick="okdong(`+id_2+`, 2)"> <i class="ace-icon fa fa-times"></i></a>
+                                                  </div>`
+                                }else if(ok_2 == 2){
+                                  elemen_2 += `<div class="col-sm-2">
+                                                    <a type="button" class="btn btn-white btn-xs btn-success" onclick="okdong(`+id_2+`, 1)"> <i class="ace-icon fa fa-check"></i></a>
+                                                  </div>
+                                                  `
+
+                                }
+
+                                    elemen_2 += `<div class="col-sm-8">
+                                                    <a `+teks_2+` target="_blank" href="public/`+path_2+'/'+filename_2+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                                  </div>`
+
+                                    elemen_2 += `</div>`;
+
+                                    var validasinya = '';
+                                    if(ok_0 == 1 && ok_1 == 1 && ok_2 == 1){
+                                      var validasinya = `<button class="btn btn-xs btn-block btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
+                                                            <i class="ace-icon fa fa-file bigger-120"></i> Data Unggahan
+                                                          </button>`;
+                                      }
+
                             }
                         var elo = `<button class="btn btn-xs btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
                                     <i class="ace-icon fa fa-file bigger-120"></i>
@@ -290,26 +652,23 @@ function loadpermohonan(param){
                                         <i class="ace-icon fa fa-angle-down icon-on-right"></i>
                                       </button>
 
-                                      <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                                      <ul class="dropdown-menu dropdown-info dropdown-menu-right" style="width:22rem">
                                         <li>
-                                          <a target="_blank" href="public/`+path_0+'/'+filename_0+`"> <i class="ace-icon fa fa-file"></i> Permohonan</a>
+                                          `+elemen_0+`                                        
                                         </li>
 
                                         <li>
-                                          <a target="_blank" href="public/`+path_1+'/'+filename_1+`"> <i class="ace-icon fa fa-file"></i> </i> Izin Lingkungan</a>
+                                          `+elemen_1+`                                        
                                         </li>
 
                                         <li>
-                                          <a target="_blank" href="public/`+path_2+'/'+filename_2+`"> <i class="ace-icon fa fa-file"></i> NIB</a>
+                                          `+elemen_2+`                                        
                                         </li>
 
                                         <li class="divider"></li>
 
                                         <li>
-                                        <button class="btn btn-xs btn-block btn-info" onclick="action('view',`+row.id+`,'`+row.type+`')">
-                                        <i class="ace-icon fa fa-file bigger-120"></i> Data Unggahan
-                                      </button>
-                                          
+                                            `+validasinya+`
                                         </li>
 
                                       </ul>
@@ -927,4 +1286,70 @@ function save(formData){
 
   function downloadatuh(path){
     window.open(path);
+  }
+
+  function reupload(type){
+    var formData = new FormData();
+    formData.append('param', 'data_file');
+    formData.append('type', '2');
+    formData.append('id_parent', $('#idpermohonan').val());
+
+    if(type == 'izin-lingkungan'){
+      formData.append("file[doc_izin_lingkungan]", $('#doc_izin_lingkungan_reupload')[0].files[0]);
+    }else if(type == 'nib'){
+      formData.append("file[doc_nib]", $('#doc_nib_reupload')[0].files[0]);
+    }else if(type == 'permohonan'){
+      formData.append("file[doc_permohonan]", $('#doc_permohonan_reupload')[0].files[0]);
+    }
+
+    $.ajax({
+      type: 'post',
+      processData: false,
+      contentType: false,
+      url: 'reuploadfile',
+      data : formData,
+      success: function(result){
+        Swal.fire({
+          type: 'success',
+          title: 'Berhasil Upload File !',
+          showConfirmButton: true,
+          // showCancelButton: true,
+          confirmButtonText: `Ok`,
+        }).then((result) => {
+          $(document).ready(function(){
+            location.reload()
+          });
+        })
+      }
+    });
+
+  }
+
+  function okdong(id, ok){
+    var formData = new FormData();
+    formData.append('param', 'data_file');
+    formData.append('id', id);
+    formData.append('ok', ok);
+
+    $.ajax({
+      type: 'post',
+      processData: false,
+      contentType: false,
+      url: 'okdong',
+      data : formData,
+      success: function(result){
+        Swal.fire({
+          type: 'success',
+          title: 'Berhasil Verifikasi File !',
+          showConfirmButton: true,
+          // showCancelButton: true,
+          confirmButtonText: `Ok`,
+        }).then((result) => {
+          $(document).ready(function(){
+            location.reload()
+          });
+        })
+      }
+    });
+
   }
