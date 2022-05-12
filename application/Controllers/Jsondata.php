@@ -375,7 +375,7 @@ class Jsondata extends \CodeIgniter\Controller
 									$data = $modelfiles->getparam('param_file', $value->id, $value->type);
 
 									if($value->type == 1){
-										if(count($data) == 4){
+										if(count($data) == 11){
 											$stt = [];
 											foreach ($data as $key1 => $value1) {
 												
@@ -409,7 +409,7 @@ class Jsondata extends \CodeIgniter\Controller
 									}
 
 									if($value->type == 2){
-										if(count($data) == 6){
+										if(count($data) == 9){
 											$stt = [];
 											foreach ($data as $key1 => $value1) {
 												
@@ -418,7 +418,7 @@ class Jsondata extends \CodeIgniter\Controller
 												}
 											}
 											
-											if(count($stt) >= 6){
+											if(count($stt) >= 9){
 												$data = [
 													'updated_date'	=> $this->now,
 													'updated_by' 	=> $userid,

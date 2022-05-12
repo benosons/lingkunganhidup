@@ -141,7 +141,7 @@ $('#submit_standar').on('click', function(){
   var formData = new FormData();
   formData.append('id', $('#ini-ID').val());
   formData.append('param', 'param_file');
-  formData.append('type', '1');
+  formData.append('type', '2');
 
   formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
   formData.append("bab", $('#bab_standar').val());
@@ -191,7 +191,7 @@ function loadpermohonan(param){
       success: function(result){
           let data = result.data;
           let code = result.code;
-
+          console.log(data);
           if(code != '0'){
             if($('#isRole').val() == 1){
               // console.log(data[0].id);
@@ -877,7 +877,7 @@ function save(formData){
           url: 'loadfile',
           data : {
               id        : id,
-              type      : type,
+              type      : 1,
               jenis      : 'doc_kajian',
           },
           success: function(result){
@@ -894,7 +894,7 @@ function save(formData){
                 info: true,
                 autoWidth: false,
                 responsive: false,
-                pageLength: 10,
+                pageLength: 11,
                 aaData: result.data,
                 aoColumns: [
                     { 'mDataProp': 'id', 'width':'10%'},
@@ -1015,6 +1015,7 @@ function save(formData){
                   var table = $('#data-file-kajian').DataTable();
                   var trr = $("#data-file-kajian tbody tr");
                   for (let index = 0; index < trr.length; index++) {
+                    $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
                     $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
                   }
                 },
@@ -1057,13 +1058,14 @@ function save(formData){
         url: 'loadfile',
         data : {
             id        : id,
-            type      : type,
+            type      : 2,
             jenis      : 'doc_standar',
         },
         success: function(result){
           loadstatus(id, 1, 'doc_standar');
           let data = result.data;
           let code = result.code;
+          
           if(code != '0'){
             var dt = $('#data-file-standar').DataTable({
               destroy: true,
@@ -1113,7 +1115,7 @@ function save(formData){
                           done = 'selected';
                       }
                       
-                    var el =`<select class="form-control" id="status_1_`+row.id+`" >
+                    var el =`<select class="form-control" id="status_2_`+row.id+`" >
                               <option value=""> - </option>
                               <option `+rev+` value="1"> Revisi </option>
                               <option `+done+` value="0"> Selesai </option>
@@ -1135,17 +1137,18 @@ function save(formData){
                   {
                     mRender: function ( data, type, row ) {
                       
-                        let des = ['-',
-                          'DESKRIPSI KEGIATAN',
-                          'BAKU MUTU AIR LIMBAH NASIONAL',
-                          'RENCANA PENGELOLAAN LINGKUNGAN',
-                          'RENCANA PEMANTAUAN LINGKUNGAN',
-                          'SISTEM PENANGGULANGAN KEADAAAN DARURAT',
-                          'INTERNALISASI BIAYA LINGKUNGAN',
-                          'PERIODE WAKTU UJI COBA',
-                          'STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA',
-                          'SISTEM MANAJEMEN LINGKUNGAN'
-                          ]
+                      let des = [
+                        '-',
+                        'DESKRIPSI KEGIATAN',
+                        'BAKU MUTU AIR LIMBAH NASIONAL',
+                        'RENCANA PENGELOLAAN LINGKUNGAN',
+                        'RENCANA PEMANTAUAN LINGKUNGAN',
+                        'SISTEM PENANGGULANGAN KEADAAAN DARURAT',
+                        'INTERNALISASI BIAYA LINGKUNGAN',
+                        'PERIODE WAKTU UJI COBA',
+                        'STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA',
+                        'SISTEM MANAJEMEN LINGKUNGAN'
+                      ]
                         
                         return des[data];
                     },
@@ -1204,6 +1207,7 @@ function save(formData){
                 var table = $('#data-file-standar').DataTable();
                 var trr = $("#data-file-standar tbody tr");
                 for (let index = 0; index < trr.length; index++) {
+                  $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
                   $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
                 }
               },
@@ -1296,21 +1300,32 @@ function save(formData){
       }
     }
 
-    function loadstatus(id, type, jenis){
+    function loadstatus(id, type, jenis){      
+      
+      switch (jenis) {
+        case 'doc_kajian':
+            type = '1';
+          break;
+        case 'doc_standar':
+            type = '2';
+          break;
+      }
       $.ajax({
         type: 'post',
         dataType: 'json',
         url: 'loadstatus',
         data : {
             id        : id,
-            type        : type,
-            jenis        : jenis,
+            type       : type,
+            jenis      : jenis,
         },
         success: function(result){
           let data = result.data;
           let code = result.code;
-          if(code){
+          
+          if(code == '1'){
             if(jenis == 'doc_kajian'){
+              
               for (let i = 0; i < data.length; i++) {
                 $('#bab_kajian option[value="'+data[i]['bab']+'"]').prop('disabled',true);
                 $('#bab_kajian').trigger("chosen:updated");
