@@ -141,7 +141,7 @@ $('#submit_standar').on('click', function(){
   var formData = new FormData();
   formData.append('id', $('#ini-ID').val());
   formData.append('param', 'param_file');
-  formData.append('type', '2');
+  formData.append('type', '1');
 
   formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
   formData.append("bab", $('#bab_standar').val());
@@ -871,66 +871,241 @@ function save(formData){
       $('#modal_file').modal('show');
       $('#modal_file > .modal-dialog').width($('#modal_file > .modal-dialog').width() + 100);
       $('#ini-ID').val(id);
-      $.ajax({
-          type: 'post',
-          dataType: 'json',
-          url: 'loadfile',
-          data : {
-              id        : id,
-              type      : 1,
-              jenis      : 'doc_kajian',
-          },
-          success: function(result){
-            loadstatus(id, 1, 'doc_kajian' );
-            let data = result.data;
-            let code = result.code;
-            if(code != '0'){
-              var dt = $('#data-file-kajian').DataTable({
-                destroy: true,
-                paging: true,
-                lengthChange: false,
-                searching: true,
-                ordering: true,
-                info: true,
-                autoWidth: false,
-                responsive: false,
-                pageLength: 11,
-                aaData: result.data,
-                aoColumns: [
-                    { 'mDataProp': 'id', 'width':'10%'},
-                    { 'mDataProp': 'bab'},
-                    { 'mDataProp': 'filename'},
-                    // { 'mDataProp': 'size'},
-                    { 'mDataProp': 'status'},
-                    { 'mDataProp': 'created_date'},
-                    { 'mDataProp': 'keterangan'},
-                    { 'mDataProp': 'id'},
-                ],
-                order: [[0, 'ASC']],
-                fixedColumns: true,
-                aoColumnDefs:[
-                  { width: 50, targets: 0 },
-                  // {
-                  //     mRender: function ( data, type, row ) {
-    
-                  //       var el = bytesToSize(parseInt(data));
-    
-                  //         return el;
-                  //     },
-                  //     aTargets: [3]
-                  // },
-                  {
-                    mRender: function ( data, type, row ) {
-                      
-                        let des = ['-','DESKRIPSI KEGIATAN','RONA LINGKUNGAN AWAL','KOMPONEN LINGKUNGAN YANG TERKENA DAMPAK','PRAKIRAAN DAMPAK','RENCANA PENGELOLAAN LINGKUNGAN','RENCANA PEMANTAUAN LINGKUNGAN','SISTEM PENANGGULANGAN KEADAAAN DARURAT','INTERNALISASI BIAYA LINGKUNGAN','PERIODE WAKTU UJI COBA','STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA','SISTEM MANAJEMEN LINGKUNGAN'];
-  
-                        return des[data];
+        if(kode == '1'){
+          $.ajax({
+              type: 'post',
+              dataType: 'json',
+              url: 'loadfile',
+              data : {
+                  id        : id,
+                  type      : 1,
+                  jenis      : 'doc_kajian',
+              },
+              success: function(result){
+                loadstatus(id, 1, 'doc_kajian' );
+                let data = result.data;
+                let code = result.code;
+                if(code != '0'){
+                  var dt = $('#data-file-kajian').DataTable({
+                    destroy: true,
+                    paging: true,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    info: true,
+                    autoWidth: false,
+                    responsive: false,
+                    pageLength: 11,
+                    aaData: result.data,
+                    aoColumns: [
+                        { 'mDataProp': 'id', 'width':'10%'},
+                        { 'mDataProp': 'bab'},
+                        { 'mDataProp': 'filename'},
+                        // { 'mDataProp': 'size'},
+                        { 'mDataProp': 'status'},
+                        { 'mDataProp': 'created_date'},
+                        { 'mDataProp': 'keterangan'},
+                        { 'mDataProp': 'id'},
+                    ],
+                    order: [[0, 'ASC']],
+                    fixedColumns: true,
+                    aoColumnDefs:[
+                      { width: 50, targets: 0 },
+                      // {
+                      //     mRender: function ( data, type, row ) {
+        
+                      //       var el = bytesToSize(parseInt(data));
+        
+                      //         return el;
+                      //     },
+                      //     aTargets: [3]
+                      // },
+                      {
+                        mRender: function ( data, type, row ) {
+                          
+                            let des = ['-','DESKRIPSI KEGIATAN','RONA LINGKUNGAN AWAL','KOMPONEN LINGKUNGAN YANG TERKENA DAMPAK','PRAKIRAAN DAMPAK','RENCANA PENGELOLAAN LINGKUNGAN','RENCANA PEMANTAUAN LINGKUNGAN','SISTEM PENANGGULANGAN KEADAAAN DARURAT','INTERNALISASI BIAYA LINGKUNGAN','PERIODE WAKTU UJI COBA','STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA','SISTEM MANAJEMEN LINGKUNGAN'];
+      
+                            return des[data];
+                        },
+                        aTargets: [ 1 ]
                     },
-                    aTargets: [ 1 ]
-                },
-                  {
-                    mRender: function ( data, type, row ) {
-  
+                      {
+                        mRender: function ( data, type, row ) {
+      
+                            if($('#role').val() == '10' || $('#role').val() == '100'){
+                              let rev = '';
+                              let done = '';
+                              if(data == '1'){
+                                  rev = 'selected';
+                              }
+
+                              if(data == '0'){
+                                  done = 'selected';
+                              }
+                              
+                            var el =`<select class="form-control" id="status_1_`+row.id+`" >
+                                      <option value=""> - </option>
+                                      <option `+rev+` value="1"> Revisi </option>
+                                      <option `+done+` value="0"> Selesai </option>
+                                    </select>`;
+                            }else{
+                              if(data == '1'){
+                                var el = '<span class="label label-danger arrowed">Revisi</span>';
+                              }else if(data == '0'){
+                                var el = '<span class="label label-primary arrowed">Selesai</span>';
+                              }else{
+                                var el = '-'
+                              }
+                            }
+      
+                            return el;
+                        },
+                        aTargets: [ 3 ]
+                    },
+                      {
+                        mRender: function ( data, type, row ) {
+      
+                            if($('#role').val() == '10' || $('#role').val() == '100'){
+                              if(data == null){
+                                data = '';
+                              }
+                            var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
+                            }else{
+                              var el = data;
+                            }
+      
+                            return el;
+                        },
+                        aTargets: [ 5 ]
+                    },
+                      {
+                          mRender: function ( data, type, row ) {
+        
+                            var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
+                                      <i class="ace-icon fa fa-download bigger-120"></i>
+                                    </a>`;
+
+                          if($('#role').val() == '1' || $('#role').val() == '2') {
+                            if(row.status == '1'){
+                              el += `<button class="btn btn-xs btn-info" onclick="revisikajian('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
+                                      <i class="ace-icon fa fa-edit bigger-120"></i>
+                                    </button>`;
+
+                              el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
+                                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>`;
+                            }
+                            
+                          }else{
+                            el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`','','1')">
+                                      <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                    </button>`;
+                          }
+        
+                              return el;
+                          },
+                          aTargets: [6]
+                      },
+                    ],
+                    fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                        var index = iDisplayIndexFull + 1;
+                        $('td:eq(0)', nRow).html('#'+index);
+                        return  index;
+                    },
+                    fnDrawCallback: function(){
+                      var table = $('#data-file-kajian').DataTable();
+                      var trr = $("#data-file-kajian tbody tr");
+                      for (let index = 0; index < trr.length; index++) {
+                        $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
+                        $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
+                      }
+                    },
+                    fnInitComplete: function () {
+                        
+                        var that = this;
+                        var td ;
+                        var tr ;
+                        this.$('td').click( function () {
+                            td = this;
+                        });
+                        this.$('tr').click( function () {
+                            tr = this;
+                        });
+                    }
+                  });
+                }else{
+                  var table = $('#data-file-kajian').DataTable();
+                  table.clear().draw();
+                }
+                // $('#create_date').html(data[0]['created_date']);
+                // for (let index = 0; index < data.length; index++) {
+                //   if(data[index]['jenis'] == 'doc_kajian'){
+                //       $('#file_name_kajian').html(data[index]['filename']);
+                //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+                //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
+                //   }else if(data[index]['jenis'] == 'doc_standar'){
+                //     $('#file_name_standar').html(data[index]['filename']);
+                //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+                //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
+                //   }
+                  
+                  
+                // }
+              }
+          })
+        }else if(kode == '2'){
+          $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'loadfile',
+            data : {
+                id        : id,
+                type      : 1,
+                jenis      : 'doc_standar',
+            },
+            success: function(result){
+              loadstatus(id, 1, 'doc_standar');
+              let data = result.data;
+              let code = result.code;
+              
+              if(code != '0'){
+                var dt = $('#data-file-standar').DataTable({
+                  destroy: true,
+                  paging: true,
+                  lengthChange: false,
+                  searching: true,
+                  ordering: true,
+                  info: true,
+                  autoWidth: false,
+                  responsive: false,
+                  pageLength: 10,
+                  aaData: result.data,
+                  aoColumns: [
+                      { 'mDataProp': 'id', 'width':'10%'},
+                      { 'mDataProp': 'bab'},
+                      { 'mDataProp': 'filename'},
+                      // { 'mDataProp': 'size'},
+                      { 'mDataProp': 'status'},
+                      { 'mDataProp': 'created_date'},
+                      { 'mDataProp': 'keterangan'},
+                      { 'mDataProp': 'id'},
+                  ],
+                  order: [[0, 'ASC']],
+                  fixedColumns: true,
+                  aoColumnDefs:[
+                    { width: 50, targets: 0 },
+                    // {
+                    //     mRender: function ( data, type, row ) {
+      
+                    //       var el = bytesToSize(parseInt(data));
+      
+                    //         return el;
+                    //     },
+                    //     aTargets: [3]
+                    // },
+                    {
+                      mRender: function ( data, type, row ) {
+
                         if($('#role').val() == '10' || $('#role').val() == '100'){
                           let rev = '';
                           let done = '';
@@ -942,313 +1117,141 @@ function save(formData){
                               done = 'selected';
                           }
                           
-                        var el =`<select class="form-control" id="status_1_`+row.id+`" >
+                        var el =`<select class="form-control" id="status_2_`+row.id+`" >
                                   <option value=""> - </option>
                                   <option `+rev+` value="1"> Revisi </option>
                                   <option `+done+` value="0"> Selesai </option>
                                 </select>`;
                         }else{
-                          if(data == '1'){
-                            var el = '<span class="label label-danger arrowed">Revisi</span>';
-                          }else if(data == '0'){
-                            var el = '<span class="label label-primary arrowed">Selesai</span>';
-                          }else{
-                            var el = '-'
+                            if(data == '1'){
+                              var el = '<span class="label label-danger arrowed">Revisi</span>';
+                            }else if(data == '0'){
+                              var el = '<span class="label label-primary arrowed">Selesai</span>';
+                            }else{
+                              var el = '-'
+                            }
                           }
-                        }
-  
-                        return el;
+
+                          return el;
+                      },
+                      aTargets: [ 3 ]
+                  },
+                      {
+                        mRender: function ( data, type, row ) {
+                          
+                          let des = [
+                            '-',
+                            'DESKRIPSI KEGIATAN',
+                            'BAKU MUTU AIR LIMBAH NASIONAL',
+                            'RENCANA PENGELOLAAN LINGKUNGAN',
+                            'RENCANA PEMANTAUAN LINGKUNGAN',
+                            'SISTEM PENANGGULANGAN KEADAAAN DARURAT',
+                            'INTERNALISASI BIAYA LINGKUNGAN',
+                            'PERIODE WAKTU UJI COBA',
+                            'STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA',
+                            'SISTEM MANAJEMEN LINGKUNGAN'
+                          ]
+                            
+                            return des[data];
+                        },
+                        aTargets: [ 1 ]
                     },
-                    aTargets: [ 3 ]
-                },
-                  {
-                    mRender: function ( data, type, row ) {
-  
+                    {
+                      mRender: function ( data, type, row ) {
+
                         if($('#role').val() == '10' || $('#role').val() == '100'){
                           if(data == null){
                             data = '';
                           }
                         var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
                         }else{
-                          var el = data;
-                        }
-  
-                        return el;
-                    },
-                    aTargets: [ 5 ]
-                },
-                  {
-                      mRender: function ( data, type, row ) {
-    
-                        var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
-                                  <i class="ace-icon fa fa-download bigger-120"></i>
-                                </a>`;
+                            var el = data;
+                          }
 
-                      if($('#role').val() == '1' || $('#role').val() == '2') {
-                        if(row.status == '1'){
-                          el += `<button class="btn btn-xs btn-info" onclick="revisikajian('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
-                                  <i class="ace-icon fa fa-edit bigger-120"></i>
-                                </button>`;
-
-                          el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
-                                  <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                </button>`;
-                        }
-                        
-                      }else{
-                        el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
-                                  <i class="ace-icon fa fa-check-square-o bigger-120"></i>
-                                </button>`;
-                      }
-    
                           return el;
                       },
-                      aTargets: [6]
+                      aTargets: [ 5 ]
                   },
-                ],
-                fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
-                    var index = iDisplayIndexFull + 1;
-                    $('td:eq(0)', nRow).html('#'+index);
-                    return  index;
-                },
-                fnDrawCallback: function(){
-                  var table = $('#data-file-kajian').DataTable();
-                  var trr = $("#data-file-kajian tbody tr");
-                  for (let index = 0; index < trr.length; index++) {
-                    $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
-                    $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
+                    {
+                        mRender: function ( data, type, row ) {
+      
+                          var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
+                                      <i class="ace-icon fa fa-download bigger-120"></i>
+                                    </a>`;
+
+                          if($('#role').val() == '1' || $('#role').val() == '2') {
+                            if(row.status == '1'){
+                              el += `<button class="btn btn-xs btn-info" onclick="revisistandar('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
+                                      <i class="ace-icon fa fa-edit bigger-120"></i>
+                                    </button>`;
+
+                              el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
+                                      <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>`;
+                            }
+                          }else{
+                            el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`','','2')">
+                                      <i class="ace-icon fa fa-check-square-o bigger-120"></i>
+                                    </button>`;
+                          }
+      
+                            return el;
+                        },
+                        aTargets: [6]
+                    },
+                  ],
+                  fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
+                      var index = iDisplayIndexFull + 1;
+                      $('td:eq(0)', nRow).html('#'+index);
+                      return  index;
+                  },
+                  fnDrawCallback: function(){
+                    var table = $('#data-file-standar').DataTable();
+                    var trr = $("#data-file-standar tbody tr");
+                    for (let index = 0; index < trr.length; index++) {
+                      $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
+                      $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
+                    }
+                  },
+                  fnInitComplete: function () {
+
+                      var that = this;
+                      var td ;
+                      var tr ;
+                      this.$('td').click( function () {
+                          td = this;
+                      });
+                      this.$('tr').click( function () {
+                          tr = this;
+                      });
                   }
-                },
-                fnInitComplete: function () {
-                    
-                    var that = this;
-                    var td ;
-                    var tr ;
-                    this.$('td').click( function () {
-                        td = this;
-                    });
-                    this.$('tr').click( function () {
-                        tr = this;
-                    });
-                }
-              });
-            }else{
-              var table = $('#data-file-kajian').DataTable();
-              table.clear().draw();
-            }
-            // $('#create_date').html(data[0]['created_date']);
-            // for (let index = 0; index < data.length; index++) {
-            //   if(data[index]['jenis'] == 'doc_kajian'){
-            //       $('#file_name_kajian').html(data[index]['filename']);
-            //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-            //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
-            //   }else if(data[index]['jenis'] == 'doc_standar'){
-            //     $('#file_name_standar').html(data[index]['filename']);
-            //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-            //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
-            //   }
-              
-              
-            // }
-          }
-      })
-      $.ajax({
-        type: 'post',
-        dataType: 'json',
-        url: 'loadfile',
-        data : {
-            id        : id,
-            type      : 2,
-            jenis      : 'doc_standar',
-        },
-        success: function(result){
-          loadstatus(id, 1, 'doc_standar');
-          let data = result.data;
-          let code = result.code;
-          
-          if(code != '0'){
-            var dt = $('#data-file-standar').DataTable({
-              destroy: true,
-              paging: true,
-              lengthChange: false,
-              searching: true,
-              ordering: true,
-              info: true,
-              autoWidth: false,
-              responsive: false,
-              pageLength: 10,
-              aaData: result.data,
-              aoColumns: [
-                  { 'mDataProp': 'id', 'width':'10%'},
-                  { 'mDataProp': 'bab'},
-                  { 'mDataProp': 'filename'},
-                  // { 'mDataProp': 'size'},
-                  { 'mDataProp': 'status'},
-                  { 'mDataProp': 'created_date'},
-                  { 'mDataProp': 'keterangan'},
-                  { 'mDataProp': 'id'},
-              ],
-              order: [[0, 'ASC']],
-              fixedColumns: true,
-              aoColumnDefs:[
-                { width: 50, targets: 0 },
-                // {
-                //     mRender: function ( data, type, row ) {
-  
-                //       var el = bytesToSize(parseInt(data));
-  
-                //         return el;
-                //     },
-                //     aTargets: [3]
-                // },
-                {
-                  mRender: function ( data, type, row ) {
-
-                    if($('#role').val() == '10' || $('#role').val() == '100'){
-                      let rev = '';
-                      let done = '';
-                      if(data == '1'){
-                          rev = 'selected';
-                      }
-
-                      if(data == '0'){
-                          done = 'selected';
-                      }
-                      
-                    var el =`<select class="form-control" id="status_2_`+row.id+`" >
-                              <option value=""> - </option>
-                              <option `+rev+` value="1"> Revisi </option>
-                              <option `+done+` value="0"> Selesai </option>
-                            </select>`;
-                    }else{
-                        if(data == '1'){
-                          var el = '<span class="label label-danger arrowed">Revisi</span>';
-                        }else if(data == '0'){
-                          var el = '<span class="label label-primary arrowed">Selesai</span>';
-                        }else{
-                          var el = '-'
-                        }
-                      }
-
-                      return el;
-                  },
-                  aTargets: [ 3 ]
-              },
-                  {
-                    mRender: function ( data, type, row ) {
-                      
-                      let des = [
-                        '-',
-                        'DESKRIPSI KEGIATAN',
-                        'BAKU MUTU AIR LIMBAH NASIONAL',
-                        'RENCANA PENGELOLAAN LINGKUNGAN',
-                        'RENCANA PEMANTAUAN LINGKUNGAN',
-                        'SISTEM PENANGGULANGAN KEADAAAN DARURAT',
-                        'INTERNALISASI BIAYA LINGKUNGAN',
-                        'PERIODE WAKTU UJI COBA',
-                        'STRUKTUR ORGANISASI DAN STANDAR KOMPETENSI SUMBER DAYA MANUSIA',
-                        'SISTEM MANAJEMEN LINGKUNGAN'
-                      ]
-                        
-                        return des[data];
-                    },
-                    aTargets: [ 1 ]
-                },
-                {
-                  mRender: function ( data, type, row ) {
-
-                    if($('#role').val() == '10' || $('#role').val() == '100'){
-                      if(data == null){
-                        data = '';
-                      }
-                    var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
-                    }else{
-                        var el = data;
-                      }
-
-                      return el;
-                  },
-                  aTargets: [ 5 ]
-              },
-                {
-                    mRender: function ( data, type, row ) {
-  
-                      var el = `<a class="btn btn-xs btn-warning" target="_blank" href="public/`+row.path+'/'+row.filename+`">
-                                  <i class="ace-icon fa fa-download bigger-120"></i>
-                                </a>`;
-
-                      if($('#role').val() == '1' || $('#role').val() == '2') {
-                        if(row.status == '1'){
-                          el += `<button class="btn btn-xs btn-info" onclick="revisistandar('`+row.id+`','`+row.type+`','`+row.jenis+`','`+row.path+'/'+row.filename+`','`+row.bab+`')">
-                                  <i class="ace-icon fa fa-edit bigger-120"></i>
-                                </button>`;
-
-                          el += `<button class="btn btn-xs btn-danger" onclick="actionfile('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
-                                  <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                 </button>`;
-                        }
-                      }else{
-                        el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
-                                  <i class="ace-icon fa fa-check-square-o bigger-120"></i>
-                                </button>`;
-                      }
-  
-                        return el;
-                    },
-                    aTargets: [6]
-                },
-              ],
-              fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
-                  var index = iDisplayIndexFull + 1;
-                  $('td:eq(0)', nRow).html('#'+index);
-                  return  index;
-              },
-              fnDrawCallback: function(){
+                });
+              }else{
                 var table = $('#data-file-standar').DataTable();
-                var trr = $("#data-file-standar tbody tr");
-                for (let index = 0; index < trr.length; index++) {
-                  $(trr[index]).find('td:eq(1)').css('white-space', 'normal');
-                  $(trr[index]).find('td:eq(2)').css('white-space', 'normal');
-                }
-              },
-              fnInitComplete: function () {
-
-                  var that = this;
-                  var td ;
-                  var tr ;
-                  this.$('td').click( function () {
-                      td = this;
-                  });
-                  this.$('tr').click( function () {
-                      tr = this;
-                  });
+                table.clear().draw();
               }
-            });
-          }else{
-            var table = $('#data-file-standar').DataTable();
-            table.clear().draw();
-          }
-          // $('#create_date').html(data[0]['created_date']);
-          // for (let index = 0; index < data.length; index++) {
-          //   if(data[index]['jenis'] == 'doc_kajian'){
-          //       $('#file_name_kajian').html(data[index]['filename']);
-          //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-          //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
-          //   }else if(data[index]['jenis'] == 'doc_standar'){
-          //     $('#file_name_standar').html(data[index]['filename']);
-          //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
-          //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
-          //   }
-            
-            
-          // }
+              // $('#create_date').html(data[0]['created_date']);
+              // for (let index = 0; index < data.length; index++) {
+              //   if(data[index]['jenis'] == 'doc_kajian'){
+              //       $('#file_name_kajian').html(data[index]['filename']);
+              //       $('#file_name_kajian').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+              //       $('#file_size_kajian').html(bytesToSize(parseInt(data[index]['size'])));
+              //   }else if(data[index]['jenis'] == 'doc_standar'){
+              //     $('#file_name_standar').html(data[index]['filename']);
+              //     $('#file_name_standar').attr('href', 'public'+ '/'+ data[index]['path']+'/'+data[index]['filename']);
+              //     $('#file_size_standar').html(bytesToSize(parseInt(data[index]['size'])));
+              //   }
+                
+                
+              // }
+            }
+          })
         }
-      })
 
       }else if(mode == 'update'){
         
-        let stat = $('#status_'+type+'_'+id).val();
-        let keterangan = $('#keterangan_'+type+'_'+id).val();
+        let stat = $('#status_'+param+'_'+id).val();
+        let keterangan = $('#keterangan_'+param+'_'+id).val();
         
         $.ajax({
           type: 'post',
@@ -1300,14 +1303,14 @@ function save(formData){
       }
     }
 
-    function loadstatus(id, type, jenis){      
+    function loadstatus(id, param, jenis){      
       
       switch (jenis) {
         case 'doc_kajian':
-            type = '1';
+            param = '1';
           break;
         case 'doc_standar':
-            type = '2';
+            param = '2';
           break;
       }
       $.ajax({
@@ -1316,7 +1319,7 @@ function save(formData){
         url: 'loadstatus',
         data : {
             id        : id,
-            type       : type,
+            type       : 1,
             jenis      : jenis,
         },
         success: function(result){
@@ -1470,7 +1473,7 @@ function save(formData){
    function actionlapangan(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file_lapangan').modal('show');
-      loadstatus(id, 2);
+      loadstatus(id, 1);
       $.ajax({
           type: 'post',
           dataType: 'json',

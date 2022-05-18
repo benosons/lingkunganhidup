@@ -80,7 +80,7 @@ $(document).ready(function(){
     }else{
       $('#menu-puas').show();
     }
-  }, 1000);
+  }, 1000000000);
 
 });
 
