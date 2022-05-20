@@ -61,4 +61,12 @@ class KegiatanModel extends Model{
       return  true;
     }
 
+    public function deletedatafilepermohonan($table = null, $id = null)
+    {
+      $builder = $this->db->table($table);
+      $builder->where('id_parent', $id);
+      $builder->delete();
+      return  true;
+    }
+
 }

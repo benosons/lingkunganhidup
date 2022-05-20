@@ -3220,6 +3220,44 @@ class Jsondata extends \CodeIgniter\Controller
 
 	}
 
+	public function deletedatapermohonan(){
+
+		$request  = $this->request;
+		$param 	  = $request->getVar('param');
+		$id 	  	= $request->getVar('id');
+		$type 	= $request->getVar('type');
+		$createby 	= $request->getVar('createby');
+		$createdate 	= $request->getVar('createdate');
+
+		$role 		= $this->data['role'];
+		$userid		= $this->data['userid'];
+
+		$model 	  = new \App\Models\KegiatanModel();
+
+		$res = $model->deletedata('data_permohonan', $id);
+		$originalDate = $createdate;
+		$newDate = date("Y/m/d", strtotime($originalDate));
+
+		$path		= FCPATH.'public';
+		$tipe		= 'uploads/permohonan';
+		$date 		= $newDate;
+		$folder		= $path.'/'.$tipe.'/'.$date.'/'.$type.'/'.$createby;
+		
+		if(unlink($folder)){
+			$res = $model->deletedatafilepermohonan('data_file', $id);
+		}
+		
+		$response = [
+				'status'   => 'sukses',
+				'code'     => '0',
+				'data' 	   => 'deleted'
+		];
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
+
+	}
+
 	public function updatepass(){
 
 		$request  = $this->request;

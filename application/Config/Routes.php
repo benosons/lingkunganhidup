@@ -119,6 +119,7 @@ $routes->post('editfile', 'Jsondata::editfile');
 $routes->post('checkUser', 'Jsondata::checkUser');
 $routes->post('deletedata', 'Jsondata::deletedata');
 $routes->post('deletedataungahan', 'Jsondata::deletedataungahan');
+$routes->post('deletedatapermohonan', 'Jsondata::deletedatapermohonan');
 $routes->post('updatestatusmaster', 'Jsondata::updatestatusmaster');
 $routes->post('updatepermohonanparam', 'Jsondata::updatepermohonanparam');
 $routes->post('updatepass', 'Jsondata::updatepass');
