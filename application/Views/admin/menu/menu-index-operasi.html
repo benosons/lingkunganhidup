@@ -74,7 +74,7 @@
                 </div>
               </div>
     
-              <div class="form-group">
+              <div class="form-group hide">
                 <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor Induk Berusaha </label>
     
                 <div class="col-sm-6">
@@ -82,7 +82,7 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group hide">
                 <label class="col-sm-3 control-label no-padding-right" for=""> </label>
     
                 <div class="col-sm-6">
@@ -114,7 +114,7 @@
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group hide">
                 <label class="col-sm-3 control-label no-padding-right" for=""> Izin Lingkungan </label>
     
                 <div class="col-sm-6">
@@ -272,19 +272,19 @@
                 </div>
               </div>
     
-              <div class="form-group">
+              <div class="form-group hide">
                 <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor Induk Berusaha <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" name="form-input" id="input_3" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_3_Remove" placeholder="" class="form-control">
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group hide">
                 <label class="col-sm-3 control-label no-padding-right" for="doc_nib"></label>
     
                 <div class="col-sm-6">
-                  <input type="file" name="id-input-file-6" id="doc_nib" accept=".pdf,.doc,.docx" />
+                  <input type="file" name="id-input-file-6" id="doc_nib_remove" accept=".pdf,.doc,.docx" />
                   <code>File .PDF - Max 5 mb</code>
                 </div>
               </div>
@@ -297,11 +297,11 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="doc_izin_lingkungan">Izin Lingkungan <code>*</code></label>
+              <div class="form-group hide">
+                <label class="col-sm-3 control-label no-padding-right" for="doc_izin_lingkungan_remove">Izin Lingkungan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="file" name="id-input-file-6" id="doc_izin_lingkungan" accept=".pdf,.doc,.docx" />
+                  <input type="file" name="id-input-file-6" id="doc_izin_lingkungan_remove" accept=".pdf,.doc,.docx" />
                   <code>File .PDF - Max 5 mb</code>
                 </div>
               </div>
@@ -618,11 +618,11 @@
                       <div class="col-xs-5">
                         <select class="chosen-select form-control" id="jenis_doc"  data-placeholder="Pilih Dokumen ...">
                           <option value=""> </option>
-                          <option value="doc_izin_usaha">Perizinan Berusaha</option>
-                          <option value="doc_persetujauan_lingkungan">Persetujuan Lingkungan</option>
+                          <option value="doc_izin_usaha">NIB</option>
+                          <option value="doc_persetujauan_lingkungan">izin / persetujuan lingkungan</option>
                           <option value="doc_persetujuan_teknis">Persetujuan Teknis</option>
-                          <option value="doc_hasil_pemantauan">Hasil pemantauan Air Limbah </option>
-                          <option value="doc_kontrol_jaminan">Dokumen kontrol jaminan/jaminan kualitas </option>
+                          <option value="doc_hasil_pemantauan">Hasil pemantauan Air Limbah ( 2 Bulan Terakhir )</option>
+                          <option value="doc_kontrol_jaminan">SOP Ipal </option>
                           <option value="doc_sertifikat_registrasi">Sertifikat registrasi laboratorium lingkungan</option>
                         </select>
                       </div>

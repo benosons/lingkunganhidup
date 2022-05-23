@@ -451,7 +451,7 @@ class Jsondata extends \CodeIgniter\Controller
 											$stt = [];
 											foreach ($data as $key1 => $value1) {
 												
-												if($value1->status == 0){
+												if($value1->status == '0'){
 													array_push($stt, $value1->status);
 												}
 											}

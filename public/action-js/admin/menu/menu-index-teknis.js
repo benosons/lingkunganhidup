@@ -203,7 +203,7 @@ $(document).ready(function(){
       }
     }
     
-    if(vl.length == 8){
+    if(vl.length == 9){
       $('#mohon_save').prop('disabled', false);
     }else{
       $('#mohon_save').prop('disabled', true);
