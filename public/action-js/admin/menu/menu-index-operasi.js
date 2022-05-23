@@ -837,11 +837,15 @@ function loadpermohonan(param){
                                   </button>`;
                             }
                           }else{
-                            console.log(row.status);
+                            
                             if(row.status == 1){
                               el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
                                     <i class="ace-icon fa fa-check-square-o bigger-120"></i>
                                   </button>`;
+                            }else{
+                              el += `<button class="btn btn-xs btn-danger" onclick="inidelete('data_permohonan','${row.id}','${row.type}','${row.created_by}','${row.created_date}')">
+                              <i class="ace-icon fa fa-trash bigger-120"></i>
+                            </button>`;
                             }
                           }
 
@@ -1505,4 +1509,39 @@ function save(formData){
       }
     });
 
+  }
+
+  function inidelete(param, id, type, by, date) {
+    bootbox.confirm({
+        message: "Anda Yakin <b>Hapus</b> data ini?",
+        buttons: {
+        confirm: {
+            label: '<i class="fa fa-check"></i> Ya',
+            className: 'btn-success btn-xs',
+        },
+        cancel: {
+            label: '<i class="fa fa-times"></i> Tidak',
+            className: 'btn-danger btn-xs',
+        }
+      },
+      callback : function(result) {
+      if(result) {
+          $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: 'deletedatapermohonan',
+            data : {
+                param     : param,
+                id        : id,
+                type      : type,
+                createby  : by,
+                createdate  : date,
+            },
+            success: function(result){
+              location.reload()
+            }
+          })
+        }
+      }
+    })
   }
