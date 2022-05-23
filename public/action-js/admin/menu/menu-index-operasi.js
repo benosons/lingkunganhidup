@@ -184,10 +184,12 @@ function loadpermohonan(param){
                 $('#verlapanganini').parent().parent().show();
                 $('#menu-puas').show();
                 sessionStorage.setItem('survey', 1)
+                $('#ini-verifikasi').hide()
               }else{
                 $('#verlapanganini').parent().parent().hide();
                 $('#menu-puas').hide();
                 sessionStorage.setItem('survey', 0)
+                $('#ini-verifikasi').show()
               }
 
               $('#cekunggahan').show()
@@ -685,6 +687,7 @@ function loadpermohonan(param){
                                   </button>`;
                             }
                           }else{
+                            console.log(row.status);
                             if(row.status == 1){
                               el += `<button title="Verifikasi Lapangan" class="btn btn-xs btn-success" onclick="actionlapangan('view',`+row.id+`,'`+row.type+`')">
                                     <i class="ace-icon fa fa-check-square-o bigger-120"></i>

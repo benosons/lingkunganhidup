@@ -1,10 +1,11 @@
 "use strict";
 console.log('You are running jQuery version: ' + $.fn.jquery);
 $(document).ready(function(){
+  
   $('#nav-menu li').removeClass();
   // $('#nav-menu li#menu-data').addClass('open');
   $('#nav-menu li#menu-teknis').addClass('active');
-  
+  $('#mohon_save').prop('disabled', true);
   $('[name="id-input-file-3"]').ace_file_input({
     no_file:'tidak ada file ...',
     btn_choose:'Pilih File',
@@ -96,31 +97,48 @@ $(document).ready(function(){
   })
 
   $('#mohon_save').on('click', function(){
-
-      var formData = new FormData();
-      formData.append('param', 'data_permohonan');
-      formData.append('type', '1');
-      let berapa = [];
-      for (let index = 1; index <= 9; index++) {
-        if($('#input_'+index).val()){
-          formData.append('input_'+index, $('#input_'+index).val());
-          $('#input_'+index).parent().parent().removeClass('has-error');
-          berapa.push(index);
-        }else{
-          $('#input_'+index).parent().parent().addClass('has-error');
+    bootbox.confirm({
+        message: "Apakah data yg anda masukan sudah <b>sesuai</b> ?",
+        buttons: {
+        confirm: {
+            label: '<i class="fa fa-check"></i> Ya',
+            className: 'btn-success btn-xs',
+        },
+        cancel: {
+            label: '<i class="fa fa-times"></i> Tidak',
+            className: 'btn-danger btn-xs',
+        }
+      },
+      callback : function(result) {
+      if(result) {
+          var formData = new FormData();
+          formData.append('param', 'data_permohonan');
+          formData.append('type', '1');
+          let berapa = [];
+          for (let index = 1; index <= 9; index++) {
+            if($('#input_'+index).val()){
+              formData.append('input_'+index, $('#input_'+index).val());
+              $('#input_'+index).parent().parent().removeClass('has-error');
+              berapa.push(index);
+            }else{
+              $('#input_'+index).parent().parent().addClass('has-error');
+            }
+          }
+    
+          formData.append("file[doc_permohonan]", $('#doc_permohonan')[0].files[0]);
+          formData.append("file[doc_izin_lingkungan]", $('#doc_izin_lingkungan')[0].files[0]);
+          formData.append("file[doc_nib]", $('#doc_nib')[0].files[0]);
+          // formData.append("bab_kajian", $('#bab_kajian').val());
+          // formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
+          // formData.append("bab_standar", $('#bab_standar').val());
+          
+          if(berapa.length == 9){
+            save(formData);
+          }
         }
       }
-
-      formData.append("file[doc_permohonan]", $('#doc_permohonan')[0].files[0]);
-      formData.append("file[doc_izin_lingkungan]", $('#doc_izin_lingkungan')[0].files[0]);
-      formData.append("file[doc_nib]", $('#doc_nib')[0].files[0]);
-      // formData.append("bab_kajian", $('#bab_kajian').val());
-      // formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
-      // formData.append("bab_standar", $('#bab_standar').val());
+    })
       
-      if(berapa.length == 9){
-        save(formData);
-      }
   });
 
   $('#submit_kajian').on('click', function(){
@@ -134,48 +152,63 @@ $(document).ready(function(){
     formData.append("bab", $('#bab_kajian').val());
     
     upload(formData);
-});
+  });
 
-$('#submit_standar').on('click', function(){
+  $('#submit_standar').on('click', function(){
 
-  var formData = new FormData();
-  formData.append('id', $('#ini-ID').val());
-  formData.append('param', 'param_file');
-  formData.append('type', '1');
+    var formData = new FormData();
+    formData.append('id', $('#ini-ID').val());
+    formData.append('param', 'param_file');
+    formData.append('type', '1');
 
-  formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
-  formData.append("bab", $('#bab_standar').val());
-  
-  upload(formData);
-});
-
-
-$('#doc_kajain').on('change', function(){
-
-})
-
-$('#cekunggahan').on('click', function(){
-  action('view', $('#idpermohonan').val(), $('#initype').val())
-})
-
-$('#deletedataini').on('click', function(){
-  action('delete',$('#idpermohonan').val(),$('#initype').val(),'','data_permohonan')
-})
-
-$('#submit_doc_lapangan').on('click', function(){
-
-  var formData = new FormData();
-  formData.append('id', $('#ini-ID-lapangan').val());
-  formData.append('param', 'param_file_lapangan');
-  formData.append('type', '1');
-  formData.append("file[doc_izin_usaha]", $('#doc_lapangan')[0].files[0]);
-  formData.append("keterangan", $('#keterangan_lapangan').val());
-
-  
-  uploadlapangan(formData);
-});
+    formData.append("file[doc_standar]", $('#doc_standar')[0].files[0]);
+    formData.append("bab", $('#bab_standar').val());
+    
+    upload(formData);
+  });
 
 
+  $('#doc_kajain').on('change', function(){
+
+  })
+
+  $('#cekunggahan').on('click', function(){
+    action('view', $('#idpermohonan').val(), $('#initype').val())
+  })
+
+  $('#deletedataini').on('click', function(){
+    action('delete',$('#idpermohonan').val(),$('#initype').val(),'','data_permohonan')
+  })
+
+  $('#submit_doc_lapangan').on('click', function(){
+
+    var formData = new FormData();
+    formData.append('id', $('#ini-ID-lapangan').val());
+    formData.append('param', 'param_file_lapangan');
+    formData.append('type', '1');
+    formData.append("file[doc_izin_usaha]", $('#doc_lapangan')[0].files[0]);
+    formData.append("keterangan", $('#keterangan_lapangan').val());
+
+    
+    uploadlapangan(formData);
+  });
+
+  $('[name=form-input]').on('change', function(){
+    
+    let vl = []
+    for (let index = 0; index < $('[name=form-input]').length; index++) {
+      let valn = $('[name=form-input]')[index].value
+      if(valn){
+        vl.push(valn)
+      }
+    }
+    
+    if(vl.length == 8){
+      $('#mohon_save').prop('disabled', false);
+    }else{
+      $('#mohon_save').prop('disabled', true);
+    }
+  })
 });
 
 

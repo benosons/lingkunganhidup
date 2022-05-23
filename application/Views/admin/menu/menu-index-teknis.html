@@ -239,7 +239,7 @@
     
                 <div class="col-sm-6">
                   
-                  <button type="button" id="verlapanganini" class="btn btn-xs btn-block btn-success" ><i class="ace-icon fa fa-check-square-o"></i>Dokumen Verifikasi Lapangan</button>
+                  <button type="button" id="verlapanganini" class="btn btn-xs btn-block btn-warning" ><i class="ace-icon fa fa-check-square-o"></i>Dokumen BA & Pertek</button>
 
                 </div>
               </div>
@@ -257,26 +257,26 @@
             <form class="form-horizontal" role="form" id="ini-form-add">
               <!-- #section:elements.form -->
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="kode_program"> Nama Badan Usaha/ Kegiatan </label>
+                <label class="col-sm-3 control-label no-padding-right" for="kode_program"> Nama Badan Usaha/ Kegiatan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_1" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_1" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Bidang Usaha/ Kegiatan </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Bidang Usaha/ Kegiatan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_2" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_2" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor Induk Berusaha </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor Induk Berusaha <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_3" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_3" placeholder="" class="form-control">
                 </div>
               </div>
 
@@ -284,71 +284,74 @@
                 <label class="col-sm-3 control-label no-padding-right" for="doc_nib"></label>
     
                 <div class="col-sm-6">
-                  <input type="file" name="id-input-file-5" id="doc_nib" />
+                  <input type="file" name="id-input-file-5" id="doc_nib" accept=".pdf,.doc,.docx" />
+                  <code>File .PDF - Max 2 mb</code>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor KBLI </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nomor KBLI <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_9" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_9" placeholder="" class="form-control">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="doc_izin_lingkungan">Izin Lingkungan</label>
+                <label class="col-sm-3 control-label no-padding-right" for="doc_izin_lingkungan">Izin Lingkungan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="file" name="id-input-file-5" id="doc_izin_lingkungan" />
+                  <input type="file" name="id-input-file-5" id="doc_izin_lingkungan" accept=".pdf,.doc,.docx" />
+                  <code>File .PDF - Max 2 mb</code>
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nama Penanggung Jawab Usaha/ Kegiatan </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Nama Penanggung Jawab Usaha/ Kegiatan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_4" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_4" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Jabatan </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Jabatan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_5" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_5" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Alamat Kantor dan Lokasi Usaha/ Kegiatan </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Alamat Kantor dan Lokasi Usaha/ Kegiatan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_6" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_6" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> No. Telepon </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> No. Telepon <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_7" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_7" placeholder="" class="form-control">
                 </div>
               </div>
     
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Email </label>
+                <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Email <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="text" id="input_8" placeholder="" class="form-control">
+                  <input type="text" name="form-input" id="input_8" placeholder="" class="form-control">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="doc_permohonan">Permohonan</label>
+                <label class="col-sm-3 control-label no-padding-right" for="doc_permohonan">Permohonan <code>*</code></label>
     
                 <div class="col-sm-6">
-                  <input type="file" name="id-input-file-5" id="doc_permohonan" />
+                  <input type="file" name="id-input-file-5" id="doc_permohonan" accept=".pdf,.doc,.docx" />
+                  <code>File .PDF - Max 2 mb</code>
                 </div>
               </div>
 
@@ -669,7 +672,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">
           <center><i class="ace-icon fa fa-file green "></i>
-            Dokumen Verifikasi Lapangan</center>
+            Dokumen BA & Pertek</center>
             <input type="hidden" id="ini-ID-lapangan">
         </h4>
       </div>
@@ -694,7 +697,7 @@
                     <div class="widget-main" id="ini-doc-ver-lapangan">
                       <div class="widget-body">
                         <div class="form-group row">
-                          <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen Verifikasi Lapangan </label>
+                          <label class="col-sm-3 control-label no-padding-right" for="nama_program"> Dokumen BA & Pertek </label>
                           
                           <div class="col-xs-4">
                             <input type="file" name="id-input-file-6" id="doc_lapangan" />
