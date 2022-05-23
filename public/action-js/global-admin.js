@@ -74,13 +74,15 @@ $(document).ready(function(){
                 }else{
                   $('#menu-puas').hide();
                 }
+              }else{
+                $('#menu-puas').hide();
               }
             }
           })
     }else{
       $('#menu-puas').show();
     }
-  }, 1000000000);
+  }, 1000);
 
 });
 

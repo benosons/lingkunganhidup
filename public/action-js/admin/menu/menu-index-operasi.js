@@ -5,7 +5,7 @@ $(document).ready(function(){
   $('#nav-menu li').removeClass();
   // $('#nav-menu li#menu-data').addClass('open');
   $('#nav-menu li#menu-operasi').addClass('active');
-
+  $('#mohon_save').prop('disabled', true);
   $('[name="id-input-file-3"]').ace_file_input({
     no_file:'tidak ada file ...',
     btn_choose:'Pilih File',
@@ -155,6 +155,23 @@ $(document).ready(function(){
 
   $('#verlapanganini').on('click', function(){
     actionlapangan('view',$('#idpermohonan').val(),$('#initype').val())
+  })
+
+  $('[name=form-input]').on('change', function(){
+    
+    let vl = []
+    for (let index = 0; index < $('[name=form-input]').length; index++) {
+      let valn = $('[name=form-input]')[index].value
+      if(valn){
+        vl.push(valn)
+      }
+    }
+    
+    if(vl.length == 8){
+      $('#mohon_save').prop('disabled', false);
+    }else{
+      $('#mohon_save').prop('disabled', true);
+    }
   })
 
 });
