@@ -944,6 +944,7 @@ function save(formData){
                         // { 'mDataProp': 'size'},
                         { 'mDataProp': 'status'},
                         { 'mDataProp': 'created_date'},
+                        { 'mDataProp': 'updated_date'},
                         { 'mDataProp': 'keterangan'},
                         { 'mDataProp': 'id'},
                     ],
@@ -1002,6 +1003,13 @@ function save(formData){
                         },
                         aTargets: [ 3 ]
                     },
+                    {
+                      mRender: function ( data, type, row ) {
+                            var el = row.updated_date == row.created_date ? '-' : row.updated_date;
+                          return el;
+                      },
+                      aTargets: [ 5 ]
+                  },
                       {
                         mRender: function ( data, type, row ) {
       
@@ -1016,7 +1024,7 @@ function save(formData){
       
                             return el;
                         },
-                        aTargets: [ 5 ]
+                        aTargets: [ 6 ]
                     },
                       {
                           mRender: function ( data, type, row ) {
@@ -1044,7 +1052,7 @@ function save(formData){
         
                               return el;
                           },
-                          aTargets: [6]
+                          aTargets: [7]
                       },
                     ],
                     fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
@@ -1127,6 +1135,7 @@ function save(formData){
                       // { 'mDataProp': 'size'},
                       { 'mDataProp': 'status'},
                       { 'mDataProp': 'created_date'},
+                      { 'mDataProp': 'updated_date'},
                       { 'mDataProp': 'keterangan'},
                       { 'mDataProp': 'id'},
                   ],
@@ -1198,19 +1207,26 @@ function save(formData){
                     },
                     {
                       mRender: function ( data, type, row ) {
+                            var el = row.updated_date == row.created_date ? '-' : row.updated_date;
+                          return el;
+                      },
+                      aTargets: [ 5 ]
+                  },
+                    {
+                      mRender: function ( data, type, row ) {
 
                         if($('#role').val() == '10' || $('#role').val() == '100'){
                           if(data == null){
                             data = '';
                           }
-                        var el =`<textarea style="width:150px;" id="keterangan_1_`+row.id+`">`+data+`</textarea>`;
+                        var el =`<textarea style="width:150px;" id="keterangan_2_`+row.id+`">`+data+`</textarea>`;
                         }else{
                             var el = data;
                           }
 
                           return el;
                       },
-                      aTargets: [ 5 ]
+                      aTargets: [ 6 ]
                   },
                     {
                         mRender: function ( data, type, row ) {
@@ -1237,7 +1253,7 @@ function save(formData){
       
                             return el;
                         },
-                        aTargets: [6]
+                        aTargets: [7]
                     },
                   ],
                   fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
@@ -1490,6 +1506,41 @@ function save(formData){
       })
    }
 
+   function actionfilelapang(mode,id,type, path){
+     
+        bootbox.confirm({
+          message: "Anda Yakin <b>Hapus</b> data ini?",
+          buttons: {
+          confirm: {
+              label: '<i class="fa fa-check"></i> Ya',
+              className: 'btn-success btn-xs',
+          },
+          cancel: {
+              label: '<i class="fa fa-times"></i> Tidak',
+              className: 'btn-danger btn-xs',
+          }
+        },
+        callback : function(result) {
+        if(result) {
+            $.ajax({
+              type: 'post',
+              dataType: 'json',
+              url: 'deletedataungahan',
+              data : {
+                  param     : 'param_file_lapangan',
+                  id        : id,
+                  type      : type,
+                  path      : path,
+              },
+              success: function(result){
+                location.reload()
+              }
+            })
+          }
+        }
+      })
+   }
+
    function downloadatuh(path){
      window.open(path);
    }
@@ -1513,6 +1564,9 @@ function save(formData){
    function actionlapangan(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file_lapangan').modal('show');
+      $('#keterangan_lapangan').val('');
+      $('#doc_lapangan').val('');
+      $('.remove').trigger('click')
       loadstatus(id, 1);
       $.ajax({
           type: 'post',
@@ -1526,7 +1580,6 @@ function save(formData){
             let data = result.data;
             let code = result.code;
           
-
             $('#ini-ID-lapangan').val(id);
             if(code != '0'){
               var dt = $('#data-file-doc-lapangan').DataTable({
@@ -1583,6 +1636,10 @@ function save(formData){
                   //           <i class="ace-icon fa fa-check-square-o bigger-120"></i>
                   //         </button>`;
 
+                  el += `<button class="btn btn-xs btn-danger" onclick="actionfilelapang('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </button>`;
+
                 }
 
                     return el;
@@ -1609,7 +1666,7 @@ function save(formData){
                 }
             });
             }else{
-              var dt = $('#data-file-doc').DataTable();
+              var dt = $('#data-file-doc-lapangan').DataTable();
               dt.clear().draw();
             }
 
@@ -1679,7 +1736,7 @@ function save(formData){
           data : formData,
           success: function(result){
             // location.reload()
-            actionlapangan('view',$('#ini-ID-lapangan').val(),2)
+            actionlapangan('view',$('#ini-ID-lapangan').val(),1)
           }
         });
       };

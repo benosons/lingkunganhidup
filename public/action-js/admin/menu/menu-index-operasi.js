@@ -945,7 +945,7 @@ function save(formData){
   function action(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file').modal('show');
-      $('#modal_file > .modal-dialog').width($('#modal_file > .modal-dialog').width() + 100);
+      $('#modal_file > .modal-dialog').width('90%');
 
       loadstatus(id, 2);
       $.ajax({
@@ -998,6 +998,7 @@ function save(formData){
                     { 'mDataProp': 'filename'},
                     { 'mDataProp': 'status', 'width':'15%'},
                     { 'mDataProp': 'created_date'},
+                    { 'mDataProp': 'updated_date'},
                     { 'mDataProp': 'keterangan'},
                     { 'mDataProp': 'id'},
                 ],
@@ -1061,6 +1062,13 @@ function save(formData){
 
                       return el;
                   },
+                  aTargets: [ 6 ]
+              },
+                {
+                  mRender: function ( data, type, row ) {
+                        var el = row.updated_date == row.created_date ? '-' : row.updated_date;
+                      return el;
+                  },
                   aTargets: [ 5 ]
               },
               {
@@ -1090,7 +1098,7 @@ function save(formData){
 
                     return el;
                 },
-                aTargets: [6]
+                aTargets: [7]
             },
                 ],
                 fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
@@ -1176,6 +1184,9 @@ function save(formData){
     function actionlapangan(mode, id, type, keterangan, param){
     if(mode == 'view'){
       $('#modal_file_lapangan').modal('show');
+      $('#keterangan_lapangan').val('');
+      $('#doc_lapangan').val('');
+      $('.remove').trigger('click')
       loadstatus(id, 2);
       $.ajax({
           type: 'post',
@@ -1245,6 +1256,9 @@ function save(formData){
                   // el += `<button class="btn btn-xs btn-success" onclick="action('update','`+row.id+`','`+row.type+`')">
                   //           <i class="ace-icon fa fa-check-square-o bigger-120"></i>
                   //         </button>`;
+                  el += `<button class="btn btn-xs btn-danger" onclick="actionfilelapang('delete','`+row.id+`','`+row.type+`', '`+row.path+'/'+row.filename+`')">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                          </button>`;
 
                 }
 
@@ -1272,7 +1286,7 @@ function save(formData){
                 }
             });
             }else{
-              var dt = $('#data-file-doc').DataTable();
+              var dt = $('#data-file-doc-lapangan').DataTable();
               dt.clear().draw();
             }
 
@@ -1440,6 +1454,41 @@ function save(formData){
     }
   })
   }
+
+  function actionfilelapang(mode,id,type, path){
+     
+    bootbox.confirm({
+      message: "Anda Yakin <b>Hapus</b> data ini?",
+      buttons: {
+      confirm: {
+          label: '<i class="fa fa-check"></i> Ya',
+          className: 'btn-success btn-xs',
+      },
+      cancel: {
+          label: '<i class="fa fa-times"></i> Tidak',
+          className: 'btn-danger btn-xs',
+      }
+    },
+    callback : function(result) {
+    if(result) {
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'deletedataungahan',
+          data : {
+              param     : 'param_file_lapangan',
+              id        : id,
+              type      : type,
+              path      : path,
+          },
+          success: function(result){
+            location.reload()
+          }
+        })
+      }
+    }
+  })
+}
 
   function downloadatuh(path){
     window.open(path);
