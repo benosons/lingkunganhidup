@@ -101,13 +101,26 @@ function loadkepuasan(param){
                       { 'mDataProp': 'id', 'width':'10%'},
                       { 'mDataProp': 'user_fullname'},
                       { 'mDataProp': 'nilai'},
-                      { 'mDataProp': 'tingkat'},
+                      // { 'mDataProp': 'tingkat'},
                       { 'mDataProp': 'catatan'},
                   ],
                   order: [[0, 'ASC']],
                   fixedColumns: true,
                   aoColumnDefs:[
                     { width: 50, targets: 0 },
+                    {
+                      mRender: function ( data, type, row ) {
+                        var el = `<div class="rating">`;
+                        for (let index = 1; index <= data; index++) {
+                          el += '<i class="rating__star star-active fa fa-star"></i>'
+                        }
+                        
+                        el += `</div>`
+    
+                          return el;
+                      },
+                      aTargets: [2]
+                    },
                   ],
                   fnRowCallback: function(nRow, aData, iDisplayIndex, iDisplayIndexFull){
                       var index = iDisplayIndexFull + 1;
